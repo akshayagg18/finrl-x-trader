@@ -1,0 +1,7 @@
+{
+  "source": "Upstream data/finrl_trading.7z price_data table",
+  "upstream_commit": "4409abe925c904e570be78ebfb5e77ac3491dff8",
+  "symbol": "DUK",
+  "sha256": "67c219376ba67bd23d1727e38f9b75844a889bb89c5ae68f30a604e7667596dd",
+  "note": "Historical vendor snapshot; not certified point-in-time; raw OHLC used for fills, splits adjusted explicitly."
+}

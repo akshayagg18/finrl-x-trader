@@ -1,391 +1,116 @@
+# FinRL-X self-hosted trading console
 
-<div align="center">
+Working local application built alongside the actual FinRL-X upstream source at commit `4409abe925c904e570be78ebfb5e77ac3491dff8`. The original README, Docker files and environment example are preserved as `*.upstream.*` files. Upstream algorithms in `src/` are unchanged.
 
-# FinRL-X
+**Usable now:** $500 persistent local simulation, genuine historical data, Adaptive Rotation and Equal Weight, cost-aware backtests, out-of-sample reporting, strategy comparison, rolling ML research training, SQLite audit trail, configurable risk/capital sizing, calendar scheduler, professional local dashboard, broker SDK adapters. No credentials or paid AI subscription required.
 
-### An AI-Native Modular Infrastructure for Quantitative Trading
+**Status:** This is a functional local trading application, not a verified production brokerage deployment. See [VERIFICATION.md](VERIFICATION.md) for exact tests and unfinished features. In particular, DRL deployment and the published ensemble are unavailable, ML is research-only, and actual broker behavior awaits external verification. The published +19.76% is **not** an installation result.
 
-<img src="https://github.com/user-attachments/assets/80fe89bb-fb09-4267-b29a-76030512f8cf" width="420">
+## Start locally (Linux / macOS)
 
-[![Paper](https://img.shields.io/badge/Paper-arXiv_2603.21330-b31b1b?style=for-the-badge)](https://arxiv.org/abs/2603.21330)
-&nbsp;
-[![PyPI](https://img.shields.io/badge/PyPI-finrl--trading-3775A9?style=for-the-badge&logo=pypi&logoColor=white)](https://pypi.org/project/finrl-trading/)
+Python 3.12 recommended. `requirements-tested.txt` records the complete tested environment (including development tools) for reproducibility. Run from this repository's root:
 
-[![Python 3.11](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
-![License](https://img.shields.io/github/license/AI4Finance-Foundation/FinRL-Trading.svg?color=brightgreen)
-[![Downloads](https://static.pepy.tech/badge/finrl-trading)](https://pepy.tech/project/finrl-trading)
-[![Downloads](https://static.pepy.tech/badge/finrl-trading/week)](https://pepy.tech/project/finrl-trading)
-[![Join Discord](https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white)](https://discord.gg/trsr8SXpW5)
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-app.txt
+python -m trader init
+python -m trader serve
+```
 
-![](https://img.shields.io/github/issues-raw/AI4Finance-Foundation/FinRL-Trading?label=Issues)
-![](https://img.shields.io/github/issues-pr-raw/AI4Finance-Foundation/FinRL-Trading?label=PRs)
-![Visitors](https://api.visitorbadge.io/api/VisitorHit?user=AI4Finance-Foundation&repo=FinRL-Trading&countColor=%23B17A)
+Open **http://127.0.0.1:8765**. The backend, dashboard and persistent scheduler run in one process. No separate frontend build or scheduler service is needed. Use one Uvicorn worker. Automation is initially stopped; live execution is disabled. An `.env` file is optional; `.env.example` has blank broker credentials.
 
-*A deployment-consistent trading system that unifies data processing, strategy composition, backtesting, and broker execution through a weight-centric interface.*
+On Windows PowerShell:
 
-[Paper](https://arxiv.org/abs/2603.21330) | [Quick Start](#quick-start) | [Strategies](#strategies) | [Results](#results) | [Discord](https://discord.gg/trsr8SXpW5)
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements-app.txt
+python -m trader init
+python -m trader serve
+```
 
-</div>
+If script execution is restricted, invoke `.\.venv\Scripts\python.exe` directly. The OS process owns the scheduler; keep it running for automation. Ctrl+C stops the service, but does not cancel orders already submitted to an external broker.
 
----
+## First real-data offline run
 
-## About
+1. Open Settings → Broker. Local + simulation are the defaults.
+2. Capital defaults to $500. Risk settings, presets and simulated execution costs are editable and persisted.
+3. Return to Portfolio. Keep replay execution date **2025-01-06**, then preview or execute a simulated cycle.
+4. Inspect positions, fills and decision audit. Later replay dates must advance chronologically. Repeating an already completed date returns its saved cycle without duplicating orders.
+5. Research & backtests → run the default 2025-01-02 through 2025-10-07 backtest. Save a second run to compare settings under the same dates/capital.
 
-**FinRL-X** is a next-generation, **AI-native** quantitative trading infrastructure that redefines how researchers and practitioners build, test, and deploy algorithmic trading strategies. 
+Equivalent commands:
 
-Introduced in our paper *"FinRL-X: An AI-Native Modular Infrastructure for Quantitative Trading"* ([arXiv:2603.21330](https://arxiv.org/abs/2603.21330)), FinRL-X succeeds the original [FinRL](https://github.com/AI4Finance-Foundation/FinRL) framework with a fully modernized architecture designed for the LLM and agentic AI era.
+```sh
+python -m trader simulate --date 2025-01-06 --dry-run
+python -m trader simulate --date 2025-01-06
+python -m trader backtest --start 2025-01-02 --end 2025-10-07 --oos-start 2025-07-01
+python -m trader status
+```
 
-> FinRL-X is **not just a library** — it is a full-stack trading platform engineered around modularity, reproducibility, and production-readiness, supporting everything from ML-based stock selection and professional backtesting to live brokerage execution.
+The bundled snapshot spans 2020-12-01 through 2025-10-07, with 130 sessions required before a test starts. Stock/SPY/QQQ bars come from the upstream archived database. SPX/VIX came from Yahoo's historical chart service. Every price file has a provenance manifest and SHA-256. `sample_data/fundamentals.csv.gz` is the upstream fundamental CSV compressed without changing its records. It contains historical vendor data, not a certified vintage dataset.
 
-At its core is a **weight-centric architecture** — the target portfolio weight vector is the sole interface contract between strategy logic and downstream execution:
+Historical OHLC prices are normalized using vendor adjusted-close factors for consistent split/dividend research units. These units differ from actual historical raw share quantities and approximate reinvestment through adjusted prices. **They are never used as live execution quotes.** External trading requires separately fetched, fresh broker quotes and instrument eligibility. Corporate-action continuity in a live bot ledger is not automated: unexplained share/cash changes fail reconciliation and require investigation.
 
-$$w_t = \mathcal{R}_t\bigl(\mathcal{T}_t\bigl(\mathcal{A}_t\bigl(\mathcal{S}_t(\mathcal{X}_{\le t})\bigr)\bigr)\bigr)$$
+## Docker Compose
 
-where $\mathcal{S}$ denotes stock selection, $\mathcal{A}$ portfolio allocation, $\mathcal{T}$ timing adjustment, and $\mathcal{R}$ portfolio-level risk overlay. Each transformation is contract-preserving — you can swap any module (e.g. equal-weight $\to$ DRL allocator) without touching the rest of the pipeline, and the same weights flow identically through backtesting and live execution.
+```sh
+docker compose up --build -d
+docker compose logs -f console
+docker compose stop
+docker compose start
+```
 
----
+Same URL: **http://127.0.0.1:8765**. The named `trader-state` volume retains the SQLite database, market cache, models and backups. Do not run `docker compose down -v` unless you intend to delete all state. Containers run as an unprivileged user with a read-only application filesystem. Only the runtime volume and `/tmp` are writable.
+
+If building behind a corporate TLS proxy, pass a combined CA bundle as a BuildKit `proxy_ca` secret; do not disable certificate verification. Managed-environment verification uses `docker build --secret id=proxy_ca,src=/etc/ssl/certs/ca-certificates.crt -t finrl-console:local .`.
+
+## Automation and live activation
+
+For current-day operation, choose Data → Yahoo and download current bars. Cache mode deliberately rejects stale data for current cycles; historical replay remains available offline. Use broker paper trading before connecting live. Settings → Broker connects the adapter and identifies the account; **dedicated account is required**. The broker identity must match the selected ID. The bot never treats the whole broker cash balance as its allocation.
+
+- Start: schedule monitoring and one rebalance per configured strategy period during NYSE sessions.
+- Pause: stop new allocations; continue reconciliation and protective stop reductions. Existing open orders remain active until filled/canceled.
+- Stop: stop scheduler actions; open orders remain at the broker.
+- Kill: immediately block subsequent submissions; already in-flight orders may still fill. Cancel open orders separately.
+- Emergency liquidation: explicitly requested market reductions of owned positions only, constrained by order size/daily counts. May require multiple cycles and can fail. Cancel pending orders and reset kill before requesting it.
+
+The next operation is calendar-aware, including U.S. holidays, DST and early closes. State resumes after restart. An uncertain order submission leaves a durable intent; the bot reconciles by client ID and **never blindly retries it**. An interrupted cycle remains halted for operator review even when the broker confirms fills. Restore operations revoke activation and set kill.
+
+Live requires selecting live mode, using separate live credentials, and typing `ENABLE LIVE TRADING` once. Thereafter no per-order approval is required. Broker/account/capital/strategy changes revoke activation and stop automation. Loss-trigger halts latch until explicitly acknowledged. Risk defaults and presets are design assumptions, not optimized protection or guaranteed maximum loss.
 
 ## Architecture
 
-<div align="center">
-  <img src="https://github.com/AI4Finance-Foundation/FinRL-Trading/blob/master/figs/FinRL_X_Framework.png" width="880"/>
-</div>
+`trader/strategies.py` calls actual upstream weight generators. Central `risk.py` validates weights and order sizing. `ledger.py` transactionally applies cumulative fills to bot ownership. `brokers.py` exposes the common adapter, official Alpaca SDK and IBKR Gateway adapter. `service.py` coordinates reconciliation, orders, settings and controls. `backtest.py` evaluates t-1 signals at the next session open with the same sizing/risk/simulated fill modules. `scheduler.py` implements NYSE-aware persistent scheduling. `api.py` serves a FastAPI API plus a dependency-free browser UI with locally served Plotly charts. SQLite WAL contains accounts, positions, cycles, order intents, fills, equity, versioned configuration, models, research and audit events.
 
-<br/>
+The upstream `bt` backtester remains intact, but its large-capital/whole-share path is not used for the operational simulator. Historical research and local/broker-paper/live histories have separate scopes. Capital deposits/withdrawals are flows, excluded from time-weighted returns. Intraday marks are aggregated to daily observations for statistics. Short series display insufficient-data labels.
 
-| Layer | Role | Components |
-|:------|:-----|:-----------|
-| **Data** | Unified market data pipeline | FMP, Yahoo Finance, WRDS; LLM sentiment preprocessing; SQLite cache |
-| **Strategy** | Weight-centric signal generation | Stock selection, portfolio allocation, timing adjustment, risk overlay |
-| **Backtest** | Offline evaluation | `bt`-powered engine with multi-benchmark comparison and transaction costs |
-| **Execution** | Live/paper trading | Alpaca multi-account integration with pre-trade risk checks |
+## Tests
 
-```
-finrl-trading/
-├── src/
-│   ├── config/                     # ⚙️  Centralized configuration management
-│   │   └── settings.py             #     Pydantic-based settings + environment variables
-│   ├── data/                       # 🗄️  Data acquisition and processing
-│   │   ├── data_fetcher.py         #     Multi-source integration (Yahoo / FMP / WRDS)
-│   │   ├── data_processor.py       #     Feature engineering & data cleaning
-│   │   └── data_store.py           #     SQLite persistence with caching
-│   ├── backtest/                   # 📊  Backtesting engine
-│   │   └── backtest_engine.py      #     bt-powered engine with benchmark comparison
-│   ├── strategies/                 # 🤖  Trading strategies
-│   │   ├── base_strategy.py        #     Abstract strategy framework
-│   │   └── ml_strategy.py          #     Random Forest stock selection
-│   ├── trading/                    # 💰  Live trading execution
-│   │   ├── alpaca_manager.py       #     Alpaca API integration (multi-account)
-│   │   ├── trade_executor.py       #     Order management & risk controls
-│   │   └── performance_analyzer.py #     Real-time P&L tracking
-│   └── main.py                     # 🚀  CLI entry point
-├── examples/
-│   ├── FinRL_Full_Workflow.ipynb   # 📓  Complete workflow tutorial (start here!)
-│   └── README.md
-├── data/                           # Runtime data storage (gitignored)
-├── logs/                           # Application logs (gitignored)
-├── requirements.txt
-└── setup.py
+```sh
+pip install -r requirements-dev.txt
+python -m playwright install chromium
+python -m pytest -q
 ```
 
----
+Browser tests launch a temporary local server, isolated SQLite database and real Chromium. No actual broker is contacted by automated tests. See [VERIFICATION.md](VERIFICATION.md).
 
-## Strategies
+## State, logs, backups and restore
 
-FinRL-X implements three use cases from the paper, each demonstrating different compositions of the weight-centric pipeline.
+Default state: `runtime/trader.db` plus `runtime/market/`, `runtime/models/` and `runtime/backups/`. Set `TRADER_DB` to change it. SQLite initializes automatically; migrations reject newer schema versions. Settings are stored as validated versions in SQLite, not silently overridden by `.env`. API credentials live only in backend environment variables. Use disk encryption and filesystem access controls for private trade history.
 
-### Use Case 1 — Portfolio Allocation Paradigms
+Audit logs: dashboard → Decision audit, persisted in `events`; process/HTTP logs go to stdout (Compose: `docker compose logs console`). CSV exports are available for orders, equity, events and research. Historical result fills/equity export separately.
 
-Compares heterogeneous allocation methods under a unified interface:
-
-| Method | Type | Description |
-|:-------|:-----|:------------|
-| Equal Weight | Classical | Uniform 1/N allocation |
-| Mean-Variance | Classical | Markowitz optimization |
-| Minimum Variance | Classical | Minimize portfolio volatility |
-| DRL Allocator | Learning | PPO/SAC continuous weight generation |
-| KAMA Timing | Signal | Kaufman adaptive trend overlay |
-
-All methods output the same weight vector, making them directly composable with timing and risk overlays.
-
-<div align="center">
-  <img src="https://github.com/AI4Finance-Foundation/FinRL-Trading/blob/master/figs/DRL_Timing_Backtest.png" width="900"/>
-</div>
-
-### Use Case 2 — Rolling Stock Selection + DRL
-
-Quarterly selection of top-25% NASDAQ-100 stocks via ML fundamental scoring, combined with DRL-based portfolio allocation. Strict no-lookahead semantics prevent data leakage.
-
-### Use Case 3 — Adaptive Multi-Asset Rotation
-
-A research-grade, walk-forward-safe rotation strategy with daily risk monitoring:
-
-| Component | Detail |
-|:----------|:-------|
-| **Asset Groups** | Growth Tech, Real Assets, Defensive — max 2 active per week |
-| **Group Selection** | Information Ratio relative to QQQ benchmark |
-| **Intra-Group Ranking** | Residual momentum with robust Z-score exception handling |
-| **Market Regime** | Slow regime (26-week trend + VIX) + Fast Risk-Off (3-day shock) |
-| **Risk Controls** | Trailing stop-loss, absolute stop-loss, cooldown periods |
-| **Rebalance** | Weekly (full) + daily monitoring (fast risk-off, stop-loss adjustments) |
-
-```bash
-# Run the adaptive rotation backtest
-./deploy.sh --strategy adaptive_rotation --mode backtest --start 2023-01-01 --end 2024-12-31
-
-# Paper trade with Alpaca
-./deploy.sh --strategy adaptive_rotation --mode paper --dry-run
+```sh
+python -m trader backup /safe/location/trader-backup.db
+# Stop service first; restore to a NEW path (never overwrite a running database).
+python -m trader --db runtime/restored.db restore /safe/location/trader-backup.db
+# Set TRADER_DB=runtime/restored.db before restarting.
 ```
 
----
+Copy market cache and model artifacts separately alongside the database backup. In Docker, use the Settings backup button, then `docker compose cp console:/app/runtime/backups ./backups`. A database backup is transactionally consistent; copying an active `.db` without its WAL is not a substitute.
 
-## Results
+Local access is intentional. Host validation and same-origin/custom-header checks restrict browser mutations; secrets are never returned to the browser. There is no remote-user authentication layer. Do not expose the port publicly. For remote access use an SSH tunnel to the loopback port or add a private authenticated TLS reverse proxy with an explicit host policy change. No withdrawal or transfer API is implemented.
 
-### Historical Backtest (Jan 2018 – Oct 2025)
-
-<div align="center">
-  <img src="https://github.com/AI4Finance-Foundation/FinRL-Trading/blob/master/figs/All_Backtests_v2.png" width="900"/>
-</div>
-
-| Metric | Rolling Strategy | Adaptive Rotation | QQQ | SPY |
-|:-------|:---:|:---:|:---:|:---:|
-| Cumulative Return | 5.98x | 4.80x | 4.02x | 2.80x |
-| Annualized Return | 25.85% | 22.32% | 19.56% | 14.14% |
-| Annualized Volatility | 27.85% | 20.30% | 24.20% | 19.61% |
-| **Sharpe Ratio** | 0.93 | **1.10** | 0.81 | 0.72 |
-| Max Drawdown | -38.95% | **-21.46%** | -35.12% | -33.72% |
-| **Calmar Ratio** | 0.66 | **1.04** | 0.56 | 0.42 |
-| Win Rate | 54.36% | 54.77% | 56.25% | 55.28% |
-
-### Paper Trading (Oct 2025 – Mar 2026)
-
-<div align="center">
-  <img src="https://github.com/AI4Finance-Foundation/FinRL-Trading/blob/master/figs/Paper_Trading.png" width="900"/>
-</div>
-
-Ensemble of Rolling Selection + Adaptive Rotation deployed on Alpaca paper trading:
-
-| Metric | Strategy | SPY | QQQ |
-|:-------|:---:|:---:|:---:|
-| Cumulative Return | **1.20x** | 0.97x | 0.95x |
-| Total Return | **+19.76%** | -2.51% | -4.79% |
-| Annualized Return | **62.16%** | -6.60% | -12.32% |
-| Annualized Volatility | 31.75% | 11.96% | 16.79% |
-| **Sharpe Ratio** | **1.96** | -0.55 | -0.73 |
-| Max Drawdown | -12.22% | -5.35% | -7.88% |
-| **Calmar Ratio** | **5.09** | -1.23 | -1.56 |
-| Win Rate | **64.89%** | 52.13% | 54.02% |
-
-### Dynamic Sector Rotation
-
-<div align="center">
-  <img src="https://github.com/AI4Finance-Foundation/FinRL-Trading/blob/master/figs/Sector_Rotation_Standalone.png" width="900"/>
-</div>
-
-The Adaptive Rotation strategy dynamically shifts capital across three asset groups — **Growth Tech**, **Real Assets**, and **Defensive** — based on market regime signals. During risk-on regimes, the portfolio tilts toward high-momentum growth and commodity plays; when regime detection flags risk-off or fast risk-off conditions, capital rotates into bonds and utilities with an automatic cash buffer. Weekly rebalancing is complemented by daily stop-loss and fast risk-off monitoring, enabling rapid de-risking without waiting for the next scheduled rebalance.
-
----
-
-## Quick Start
-
-### Option A — One-Command Deploy
-
-`deploy.sh` handles everything automatically: dependency check, data download, and strategy execution.
-
-```bash
-git clone https://github.com/AI4Finance-Foundation/FinRL-Trading.git
-cd FinRL-Trading
-
-# Backtest (downloads data + runs strategy)
-./deploy.sh --strategy adaptive_rotation --mode backtest
-
-# Custom date range
-./deploy.sh --strategy adaptive_rotation --mode backtest --start 2020-01-01 --end 2025-12-31
-
-# Single date signal
-./deploy.sh --strategy adaptive_rotation --mode single --date 2024-12-31
-
-# Paper trading (requires Alpaca credentials in .env)
-./deploy.sh --strategy adaptive_rotation --mode paper --dry-run   # preview
-./deploy.sh --strategy adaptive_rotation --mode paper              # execute
-
-# See all options
-./deploy.sh --help
-```
-
-### Option B — Manual Setup with venv
-
-```bash
-# 1. Clone
-git clone https://github.com/AI4Finance-Foundation/FinRL-Trading.git
-cd FinRL-Trading
-
-# 2. Create and activate virtual environment
-python3 -m venv venv
-source venv/bin/activate        # Linux / macOS
-# venv\Scripts\activate         # Windows
-
-# 3. Install dependencies
-pip install -r requirements.txt
-
-# 4. (Optional) Configure API keys for paper trading
-cp .env.example .env
-# Edit .env — set APCA_API_KEY, APCA_API_SECRET, etc.
-```
-
-#### Running Strategies via Python
-
-```bash
-# Backtest — Adaptive Rotation (2023-01-01 to 2024-12-31)
-python src/strategies/run_adaptive_rotation_strategy.py \
-    --config src/strategies/AdaptiveRotationConf_v1.2.1.yaml \
-    --backtest --start 2023-01-01 --end 2024-12-31
-
-# Single date signal
-python src/strategies/run_adaptive_rotation_strategy.py \
-    --config src/strategies/AdaptiveRotationConf_v1.2.1.yaml \
-    --date 2024-12-31
-
-# Full workflow tutorial (Jupyter)
-jupyter notebook examples/FinRL_Full_Workflow.ipynb
-```
-
-> **Note:** Data files (`{SYMBOL}_daily.csv`) must exist under `data/fmp_daily/` before running.
-> `deploy.sh` downloads them automatically; for manual setup, either run `deploy.sh --strategy adaptive_rotation --mode backtest` once, or prepare CSV files with columns `date,open,high,low,close,volume`.
-
-### Configuration
-
-```bash
-cp .env.example .env
-```
-
-```bash
-# Alpaca (required for paper/live trading)
-APCA_API_KEY=your_key
-APCA_API_SECRET=your_secret
-APCA_BASE_URL=https://paper-api.alpaca.markets
-
-# Data source (optional; Yahoo Finance is the free default)
-FMP_API_KEY=your_fmp_key
-```
-
-### Python API
-
-```python
-# Data
-from src.data.data_fetcher import get_data_manager
-manager = get_data_manager()
-prices = manager.get_price_data(['AAPL', 'MSFT'], '2020-01-01', '2024-12-31')
-
-# Strategy
-from src.strategies.ml_strategy import MLStockSelectorStrategy
-strategy = MLStockSelectorStrategy(config)
-result = strategy.generate_weights(data)
-
-# Backtest
-from src.backtest.backtest_engine import BacktestEngine, BacktestConfig
-engine = BacktestEngine(BacktestConfig(start_date='2020-01-01', end_date='2024-12-31'))
-result = engine.run_backtest("My Strategy", weights, prices)
-
-# Live trade
-from src.trading.alpaca_manager import create_alpaca_account_from_env, AlpacaManager
-alpaca = AlpacaManager([create_alpaca_account_from_env()])
-alpaca.execute_portfolio_rebalance(target_weights={'AAPL': 0.3, 'MSFT': 0.7})
-```
-
----
-
-## Evolution from FinRL
-
-| | FinRL (2020) | FinRL-X (2026) |
-|:---|:---|:---|
-| **Paradigm** | DRL-only | AI-Native (ML + DRL + LLM-ready) |
-| **Architecture** | Coupled monolith | Decoupled modular layers |
-| **Interface** | Gym state/action spaces | Weight-centric contract |
-| **Data** | 14 manual processors | Auto-select: Yahoo / FMP / WRDS |
-| **Backtesting** | Hand-rolled loops | `bt` engine + multi-benchmark |
-| **Live Trading** | Basic Alpaca | Multi-account + risk controls |
-| **Config** | `config.py` | Pydantic + `.env` |
-| **Paper** | [arXiv:2011.09607](https://arxiv.org/abs/2011.09607) | [arXiv:2603.21330](https://arxiv.org/abs/2603.21330) |
-
-### Migration from FinRL
-
-```
-FinRL                                →  FinRL-X
-─────────────────────────────────────────────────────────────
-finrl/meta/data_processor.py         →  src/data/data_fetcher.py
-finrl/train.py                       →  strategy.generate_weights()
-finrl/trade.py                       →  TradeExecutor.execute_portfolio_rebalance()
-config.py + config_tickers.py        →  src/config/settings.py (Pydantic + .env)
-gym.Env subclassing                  →  BaseStrategy.generate_weights()
-```
-
----
-
-## Comparison with Existing Platforms
-
-| Feature | FinRL-X | [Qlib](https://github.com/microsoft/qlib) | [TradingAgents](https://github.com/TauricResearch/TradingAgents) | [Zipline](https://github.com/quantopian/zipline)/[Backtrader](https://github.com/mementum/backtrader) | [QuantConnect Lean](https://github.com/QuantConnect/Lean) |
-|:--------|:-------:|:----:|:-------------:|:------------------:|:-----------------:|
-| Primary Orientation | End-to-End System | ML Research | Agent-Based Trading | Backtesting | End-to-End Platform |
-| Broker Integration | Yes | - | - | - | Yes |
-| Deployment-Consistent Interface | Yes | - | - | - | Partial |
-| Reinforcement Learning Support | Yes | Limited | Yes | - | Partial |
-| Modular Strategy Pipeline | Yes | - | - | - | Partial |
-| Portfolio-Level Risk Overlay | Yes | - | - | - | Partial |
-| Open Source License | Apache 2.0 | MIT | Apache 2.0 | Apache 2.0 | Apache 2.0 |
-
----
-
-## Contributing
-
-```bash
-git checkout -b feature/your-feature
-pip install -r requirements.txt
-# make changes, add tests
-git commit -m "Add: your feature"
-git push origin feature/your-feature
-# open a Pull Request
-```
-
-Adding a custom strategy:
-
-```python
-from src.strategies.base_strategy import BaseStrategy, StrategyConfig, StrategyResult
-
-class MyStrategy(BaseStrategy):
-    def generate_weights(self, data, **kwargs) -> StrategyResult:
-        # your alpha logic — return portfolio weights
-        pass
-```
-
----
-
-## Citation
-
-```bibtex
-@inproceedings{yang2026finrlx,
-  title     = {FinRL-X: An AI-Native Modular Infrastructure for Quantitative Trading},
-  author    = {Yang, Hongyang and Zhang, Boyu and She, Yang and Liao, Xinyu and Zhang, Xiaoli},
-  booktitle = {Proceedings of the 2nd International Workshop on Decision Making and Optimization in Financial Technologies (DMO-FinTech)},
-  year      = {2026},
-  note      = {Workshop at PAKDD 2026}
-}
-```
-
-## License
-
-Apache License 2.0 — see [LICENSE](LICENSE).
-
-## Disclaimer
-
-This software is for **educational and research purposes only**. Not financial advice. Always consult qualified professionals before making investment decisions. Past performance does not guarantee future results.
-
----
-
-<div align="center">
-
-**[AI4Finance Foundation](https://github.com/AI4Finance-Foundation)**
-
-<img src="https://github.com/AI4Finance-Foundation/FinGPT/assets/31713746/e0371951-1ce1-488e-aa25-0992dafcc139" width="200"/>
-
-</div>
+Additional references: [CONFIGURATION.md](CONFIGURATION.md), [BROKER_SETUP.md](BROKER_SETUP.md), [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md), and [README.upstream.md](README.upstream.md).

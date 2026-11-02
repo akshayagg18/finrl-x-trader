@@ -1,0 +1,7 @@
+{
+  "source": "Upstream data/finrl_trading.7z price_data table",
+  "upstream_commit": "4409abe925c904e570be78ebfb5e77ac3491dff8",
+  "symbol": "FCX",
+  "sha256": "28a74d3ab14c8d4edd4a2c5b8ddecbce09f3b6aeaa3d59e3aeafc4e108ea4dae",
+  "note": "Historical vendor snapshot; not certified point-in-time; raw OHLC used for fills, splits adjusted explicitly."
+}

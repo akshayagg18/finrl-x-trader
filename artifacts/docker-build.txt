@@ -1,0 +1,53 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 914B done
+#1 DONE 0.0s
+
+#2 resolve image config for docker-image://docker.io/docker/dockerfile:1
+#2 DONE 0.4s
+
+#3 docker-image://docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e
+#3 CACHED
+
+#4 [internal] load metadata for docker.io/library/python:3.12-slim
+#4 DONE 0.3s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 496B done
+#5 DONE 0.0s
+
+#6 [stage-0 1/8] FROM docker.io/library/python:3.12-slim@sha256:aa943ce411423c7582288f18707ff66eddcbaeb510502d747a72aeb34f30d159
+#6 DONE 0.0s
+
+#7 [internal] load build context
+#7 transferring context: 144.24kB done
+#7 DONE 0.0s
+
+#8 [stage-0 2/8] WORKDIR /app
+#8 CACHED
+
+#9 [stage-0 3/8] COPY requirements-app.txt ./
+#9 CACHED
+
+#10 [stage-0 4/8] RUN --mount=type=secret,id=proxy_ca     if [ -f /run/secrets/proxy_ca ]; then PIP_CERT=/run/secrets/proxy_ca pip install --no-cache-dir -r requirements-app.txt; else pip install --no-cache-dir -r requirements-app.txt; fi
+#10 CACHED
+
+#11 [stage-0 5/8] COPY src ./src
+#11 CACHED
+
+#12 [stage-0 6/8] COPY trader ./trader
+#12 DONE 3.9s
+
+#13 [stage-0 7/8] COPY sample_data ./sample_data
+#13 DONE 3.3s
+
+#14 [stage-0 8/8] RUN chmod -R a+rX /app && useradd --create-home --uid 10001 trader && mkdir -p /app/runtime && chown -R trader:trader /app/runtime
+#14 DONE 1.9s
+
+#15 exporting to image
+#15 exporting layers
+#15 exporting layers 0.9s done
+#15 writing image sha256:f41be4646a0b5138d89193734255dd3f26742171aa7e4484d03a700e50c742ce done
+#15 naming to docker.io/library/finrl-console:local done
+#15 DONE 0.9s

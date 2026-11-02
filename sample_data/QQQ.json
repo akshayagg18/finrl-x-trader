@@ -1,0 +1,7 @@
+{
+  "source": "Upstream data/finrl_trading.7z price_data table",
+  "upstream_commit": "4409abe925c904e570be78ebfb5e77ac3491dff8",
+  "symbol": "QQQ",
+  "sha256": "064657c88413c2a335cbfda5b77cd46afd127a5f6abb8938e4cd24c7d2800d02",
+  "note": "Historical vendor snapshot; not certified point-in-time; raw OHLC used for fills, splits adjusted explicitly."
+}

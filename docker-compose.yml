@@ -1,68 +1,31 @@
-version: '3.8'
-
 services:
-  finrl-trading:
+  console:
     build: .
-    container_name: finrl-trading-app
     ports:
-      - "8501:8501"
-    volumes:
-      - ./data:/app/data
-      - ./logs:/app/logs
-      - ./.env:/app/.env
+      - "127.0.0.1:8765:8765"
     environment:
-      - ENVIRONMENT=production
-      - WEB_HOST=0.0.0.0
-      - WEB_PORT=8501
-      - PYTHONPATH=/app/src:/app
+      TRADER_DB: /app/runtime/trader.db
+      ALPACA_PAPER_KEY: ${ALPACA_PAPER_KEY:-}
+      ALPACA_PAPER_SECRET: ${ALPACA_PAPER_SECRET:-}
+      ALPACA_LIVE_KEY: ${ALPACA_LIVE_KEY:-}
+      ALPACA_LIVE_SECRET: ${ALPACA_LIVE_SECRET:-}
+      IBKR_HOST: ${IBKR_HOST:-host.docker.internal}
+      IBKR_PORT: ${IBKR_PORT:-4002}
+      IBKR_CLIENT_ID: ${IBKR_CLIENT_ID:-31}
+      IBKR_ACCOUNT: ${IBKR_ACCOUNT:-}
+      IBKR_CONNECTED_VERIFIED: ${IBKR_CONNECTED_VERIFIED:-false}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - trader-state:/app/runtime
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "python", "-c", "import sys; sys.path.insert(0, '/app/src'); import config; print('OK')"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-    networks:
-      - finrl-network
-
-  # Optional: PostgreSQL database for production use
-  postgres:
-    image: postgres:15-alpine
-    container_name: finrl-postgres
-    environment:
-      POSTGRES_DB: finrl_trading
-      POSTGRES_USER: finrl_user
-      POSTGRES_PASSWORD: finrl_password
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./init-db:/docker-entrypoint-initdb.d
-    ports:
-      - "5432:5432"
-    profiles:
-      - production
-    networks:
-      - finrl-network
-
-  # Optional: Redis for advanced caching
-  redis:
-    image: redis:7-alpine
-    container_name: finrl-redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-    command: redis-server --appendonly yes
-    profiles:
-      - production
-    networks:
-      - finrl-network
-
+    init: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp
 volumes:
-  postgres_data:
-    driver: local
-  redis_data:
-    driver: local
-
-networks:
-  finrl-network:
-    driver: bridge
+  trader-state:

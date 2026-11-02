@@ -1,0 +1,7 @@
+{
+  "source": "Upstream data/finrl_trading.7z price_data table",
+  "upstream_commit": "4409abe925c904e570be78ebfb5e77ac3491dff8",
+  "symbol": "CVX",
+  "sha256": "1bc9aee796c66c69ac8e5167bfc7a9640558f8a16180747e89714e40cf4aa3a7",
+  "note": "Historical vendor snapshot; not certified point-in-time; raw OHLC used for fills, splits adjusted explicitly."
+}

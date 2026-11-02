@@ -1,0 +1,14 @@
+{
+  "image": "finrl-console:local",
+  "image_id": "sha256:b0aa3d0b4f1e6e9c27c7c14010b8c9299c1c269a2ab4b50ca771527f53c2d974",
+  "health_url": "http://127.0.0.1:8766/api/health",
+  "health_status": "ok",
+  "no_credentials": true,
+  "local_replay_orders": 3,
+  "local_replay_positions": 3,
+  "after_restart_orders": 3,
+  "after_restart_positions": 3,
+  "live_activated": false,
+  "real_orders": 0,
+  "security": "uid10001, read-only root, writable named volume and tmpfs, cap-drop ALL, no-new-privileges"
+}

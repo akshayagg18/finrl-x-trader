@@ -1,0 +1,10 @@
+{
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/^VIX",
+  "downloaded_at": "2026-11-02T07:36:59.304061+00:00",
+  "sha256": "f6ab30f55e57abb8c62c9a20ecd71c6891dca59d49d12835da0d3bd16e9b7c9a",
+  "adjustment": "raw OHLCV, Yahoo historical revisions possible",
+  "bundled_interval": [
+    "2020-12-01",
+    "2025-10-07"
+  ]
+}

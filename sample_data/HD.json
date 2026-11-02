@@ -1,0 +1,7 @@
+{
+  "source": "Upstream data/finrl_trading.7z price_data table",
+  "upstream_commit": "4409abe925c904e570be78ebfb5e77ac3491dff8",
+  "symbol": "HD",
+  "sha256": "d2ad10c553992e7c3d28e5c2e00ad72bfba26b88e6bce064a637ee1efb51c864",
+  "note": "Historical vendor snapshot; not certified point-in-time; raw OHLC used for fills, splits adjusted explicitly."
+}

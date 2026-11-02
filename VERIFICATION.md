@@ -1,0 +1,83 @@
+# Verification and readiness
+
+Tested 2026-11-02 in this Linux/Python 3.12 workspace. Source: actual upstream commit `4409abe925c904e570be78ebfb5e77ac3491dff8`. No broker credentials were requested, supplied or used. **No real or brokerage-paper orders were submitted.**
+
+This installation is a working local application. It does **not** meet every requested production criterion; the gaps below are explicitly unfinished, not implied to be solved by entering API keys.
+
+## Executed verification
+
+- `python -m pytest -q --junitxml=artifacts/test-results.xml`: **39 passed in 42.49 seconds**. See [raw test output](artifacts/tests.txt) and [JUnit report](artifacts/test-results.xml). The suite uses broker doubles only for external orders and a real Chromium browser for UI verification.
+- `ruff check trader tests scripts --select F`: passed. Formatting applied to new Python code. `git diff --check`: passed.
+- Application started without credentials; `/`, `/api/health`, settings, overview and locally hosted chart assets responded. Local server: `http://127.0.0.1:8765`.
+- Chromium tested: changing a risk setting, save/validation, full reload and persisted setting; executing a real-data local cycle; resulting orders and holdings; symbol search; running an actual backtest and rendering its results. Desktop and mobile screenshots saved under `artifacts/`.
+- Docker image `finrl-console:local` built successfully; Compose configuration validated. Unprivileged, read-only container started on loopback port 8766 and returned health status `ok`. Disk exhaustion during the first container-start attempt was resolved by deleting this task's temporary extraction and superseded build cache, then retrying. The current Docker image and local source are retained. A genuine three-order local replay also ran inside the container; all three orders and positions persisted across a container restart. See artifacts/docker-verification.json.
+- A local replay and full default historical backtest were generated and saved in `runtime/trader.db`, not hardcoded in the UI. `scripts/verify.py` reproduces the record; [verification.json](artifacts/verification.json) has exact targets, fills, metrics, data hash and assumptions. This replay database contains virtual history, not a real account.
+
+### Genuine $500 historical replay
+
+Execution date 2025-01-06; signal uses completed data through 2025-01-03. Actual upstream Adaptive Rotation produced NVDA/AMZN/JPM/GS target weights of 25% each. Central risk reduced weights according to volatility/deployment limits. Turnover and per-order constraints limited execution to three fractional buys:
+
+| Symbol | Simulated filled quantity | Simulated fill price, adjusted research basis |
+|---|---:|---:|
+| AMZN | 0.439768 | $226.938746 |
+| GS | 0.173105 | $576.529222 |
+| JPM | 0.210689 | $240.043184 |
+
+Cash remaining: **$249.825052**. Simulated immediate mark-to-market is slightly below $500 because adverse spread/slippage are included. Commissions are configured to zero, not asserted to always be zero at brokers. Holdings, orders and cash survived re-opening the database. Repeating the cycle returned the prior cycle without duplicate orders. No NVDA order was fabricated when turnover capacity was exhausted.
+
+### Genuine historical evaluation
+
+Default Adaptive Rotation, $500, configured universe, 2025-01-02 through 2025-10-07:
+
+- 191 daily observations; 145 simulated order records.
+- Total time-weighted return **+0.7367%**.
+- Maximum drawdown **-11.9389%**.
+- Sharpe **+0.1453** with zero risk-free rate.
+- Out-of-sample boundary 2025-07-01; subsequent interval return **+4.3655%**.
+- 5 bp adverse slippage + half a 4 bp spread per side; zero configured commissions. Fractional adjusted research units. Fully invested SPY/QQQ benchmark entry costs included.
+- Annualized return omitted because there are fewer than 252 observations. Win rate is based on realized sale fills, not a fabricated count of complete round trips.
+
+An earlier run before the final conservative holdings-cap fix returned −1.1229%; that prior research run remains saved as run #1. The figures above are the final implementation’s run #2. This illustrates the sensitivity to execution constraints, not a strategy optimization claim.
+
+These are estimates from this installation's specific settings and historical vendor snapshot. The fixed selected universe, vendor revisions, adjusted-price normalization, approximate dividends, execution assumptions and lack of certified vintage data limit interpretation. This is not evidence of expected live profitability. The upstream published **+19.76%** was not reproduced or relabeled as our result; exact deployed ensemble artifacts and fills are absent.
+
+## Automated coverage
+
+| Area | What was exercised |
+|---|---|
+| Configuration | Defaults, validation, invalid modes/ranges/NaN, unknown keys, settings versions and persistence |
+| Credentials | Missing Alpaca paper/live keys; paper credentials do not enable live |
+| Local execution | Fractional rounding, $1 minimum behavior, filled/rejected/partial orders, commissions, cash and ownership |
+| Portfolio/risk | Position/sector/volatility caps, budget isolation from larger account cash, daily/capital/drawdown triggers, protective stops, insufficient cash and unowned sell rejection |
+| Market data | Genuine bundled bars, invalid/missing/stale data, common-session warmup, future-price perturbation leaves earlier strategy weights unchanged |
+| Recovery | Settings/positions survive service reconstruction, duplicate cycle IDs, cumulative partial fills applied once, timeout leaves durable intent, interrupted cycle cannot blindly retry |
+| External brokers | Alpaca SDK request contract, DAY fractional orders, partial/rejected status normalization, market-closed check and timeout propagation; IBKR mode guards and commission/fill normalization |
+| Account isolation | Broker/ledger switching keeps ownership separate; unowned holdings and ambiguous orders halt reconciliation |
+| Scheduler | Persistent start/pause state, market sessions/holiday/DST/early close, paused monitoring request and next-operation state |
+| Performance | Time-weighted cash-flow correction, drawdown, short-sample labels, daily aggregation of intraday observations |
+| Backtesting | Deterministic repeated runs, shared cost/sizing/risk modules, costs deducted, OOS reporting, benchmarks and research/trading history separation |
+| Models | Actual upstream RF/GBM rolling training, model artifact and feature metadata saved, uncertified research model refused for deployment |
+| API/browser | Local host/origin/header guards, secret-bearing exceptions not returned/audited, settings save/reload, simulation, fills/holdings/search, backtest rendering, backup/export |
+
+Warnings: dependency deprecation messages from NumPy/Pandas/exchange-calendars, Starlette TestClient/httpx and websockets; no test failures. The dependency ranges and tested versions should be revalidated before upgrades.
+
+## Requires external credentials/session verification
+
+- **Alpaca**: real connection permissions, IEX quote availability, instrument flags, account restrictions, actual order acceptance, partial-fill/cancellation races, rate limits, outages, execution quality and overnight reconciliation. The official SDK adapter and mock contracts exist; successful live/paper execution has not been claimed.
+- **IBKR**: authenticated Gateway/TWS, socket reachability, client ID, account summary fields, contract/order permissions, market data entitlement, commission timing, reconnect and completed-order recovery. Whole-share adapter only. `IBKR_CONNECTED_VERIFIED` defaults false until external verification. A $500 account may produce no permissible whole-share trades.
+- **Long-running operations**: multi-day unattended stability, broker maintenance windows and emergency liquidation during real market stress have not been established by short automated tests.
+
+## Unfinished implementation and important limits
+
+1. **DRL deployment/training**: upstream research scripts are preserved and identified, but the custom FinRL environment/dependency/observation pipeline is not integrated as a working dashboard strategy. No trained DRL artifact is supplied. This is implementation work, not merely missing credentials.
+2. **Published ensemble**: exact deployed Rolling + Rotation ensemble combiner/artifacts are not provided upstream. No imitation combiner is presented as equivalent. It is unavailable.
+3. **ML deployment and automated retraining**: real upstream RF/GBM research training and artifact persistence work. Optional LightGBM/XGBoost require their libraries. The bundled fundamentals have accepted dates but not certified vintage provenance/historical membership. Broker deployment, rolling inference evaluation and scheduled retraining are blocked/unfinished. The UI says research-only and refuses promotion. Deterministic Adaptive Rotation/Equal Weight snapshots can be deployed and rolled back.
+4. **Exact live net accounting**: Alpaca order objects lack full account-activity fees. The adapter currently records zero fee on its fills; regulatory/activity fees and dividends are not attributed. Actual broker net performance is therefore not fully implemented. IBKR uses reported commission data but delayed commissions after an already terminal order are not automatically revisited. Broker statement reconciliation remains necessary.
+5. **Corporate actions / deposits**: splits and dividends are approximated through adjusted historical research units in local/backtests. Live split/share changes halt on mismatch; automatic live corporate-action handling is unfinished. Automatic external deposit/withdrawal detection is not implemented; enabling external `include_deposits` fails validation. Explicit allocated-budget changes are supported and accounted as flows. Percentage allocation is captured at initial binding with a dollar cap, not continuously recalculated from external equity.
+6. **Shared accounts**: unsupported by design. Dedicated account required; manual holdings/orders are never sold/imported. Unexpected broker changes fail closed. Cash reconciliation is a conservative available-cash check, not a complete independent broker cash-flow audit.
+7. **Historical fidelity**: static universe causes selection/survivorship bias; vendor-adjusted/revised prices are not vintage-certified. OOS reporting and t-1 execution eliminate direct future-bar use but do not prove the dataset is free of every revision bias. Adaptive upstream exception persistence has a singleton-history TODO; the bridge corrects ranker lookback and supplies daily fast-risk-off data but does not pretend to restore missing historical exception state.
+8. **Order/scheduler limits**: market DAY orders only. Stops are monitored by the application, not guaranteed broker-native protective orders. Protective reductions bypass turnover but still obey per-order and daily order-count limits. Minimum-order dust can remain. An unresolved crash/submission intentionally requires operator review; there is no unsafe automatic retry. Local historical replay is manual; autonomous local operation requires fresh current data. Scheduler loop does not run when the process is stopped.
+9. **Infrastructure**: single-host, one-worker SQLite application. Local-only host/origin guards, not a remote authentication product. No external alert delivery, HA failover, independent watchdog, penetration audit or Windows runtime execution was performed. Windows instructions are provided but unverified here. Dashboard comparisons use cached benchmarks and may be absent outside cached coverage.
+10. **Research UI**: common deployed risk/cost/universe settings can be changed and used by a backtest; independent per-run settings are retained with each result. Interactive price-level position charts and full entry/exit price charts per instrument are not implemented; backtests show trade markers on portfolio equity and the dashboard shows per-position P&L. The plugin interface is defined, with no paid AI signals registered.
+
+The application is ready for local research/simulation and later adapter connection work. It should not be described as a fully verified production autonomous money manager while these gaps remain.

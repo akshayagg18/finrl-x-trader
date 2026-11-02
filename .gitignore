@@ -160,3 +160,9 @@ ehthumbs.db
 Thumbs.db
 
 TODO
+# Operational state and private brokerage history
+runtime/
+*.db-wal
+*.db-shm
+*.joblib
+artifacts/private/

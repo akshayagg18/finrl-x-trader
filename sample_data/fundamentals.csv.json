@@ -1,0 +1,6 @@
+{
+  "source": "Upstream data/fundamental_data_full.csv",
+  "upstream_commit": "4409abe925c904e570be78ebfb5e77ac3491dff8",
+  "sha256": "16b184b6ec0c4b85d06f9bd200a0317452886734e9d1d8d225b3683a3ba18997",
+  "note": "Vendor snapshot; accepted-date filtered for research training, not certified vintage data"
+}

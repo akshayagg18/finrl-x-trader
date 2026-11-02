@@ -1,0 +1,10 @@
+{
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/^GSPC",
+  "downloaded_at": "2026-11-02T07:36:59.050356+00:00",
+  "sha256": "d593d6bae6c6315db0af84a1e6be2696650f47b7ac952c1fdb36d044df4a72f5",
+  "adjustment": "raw OHLCV, Yahoo historical revisions possible",
+  "bundled_interval": [
+    "2020-12-01",
+    "2025-10-07"
+  ]
+}

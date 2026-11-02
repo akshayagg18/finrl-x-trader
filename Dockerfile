@@ -1,52 +1,15 @@
-# FinRL Trading Platform Dockerfile
-FROM python:3.11-slim
-
-# Set environment variables
-ENV PYTHONUNBUFFERED=1
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONPATH=/app/src
-ENV PYTHONPATH=/app:$PYTHONPATH
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    curl \
-    sqlite3 \
-    && rm -rf /var/lib/apt/lists/*
-
-# Create app directory
+# syntax=docker/dockerfile:1
+FROM python:3.12-slim
 WORKDIR /app
-
-# Copy requirements first for better caching
-COPY requirements.txt .
-
-# Install Python dependencies
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
-
-# Copy application code
-COPY src/ ./src/
-COPY setup.py .
-COPY README.md .
-COPY .env* ./
-
-# Install the package in development mode
-RUN pip install -e .
-
-# Create necessary directories
-RUN mkdir -p data logs
-
-# Create non-root user
-RUN useradd --create-home --shell /bin/bash app \
-    && chown -R app:app /app
-USER app
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-    CMD python -c "import sys; sys.path.insert(0, '/app/src'); import config; print('Health check passed')" || exit 1
-
-# Expose port for web interface
-EXPOSE 8501
-
-# Default command - use the main CLI
-CMD ["python", "src/main.py", "dashboard"]
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 TRADER_DB=/app/runtime/trader.db
+COPY requirements-app.txt ./
+RUN --mount=type=secret,id=proxy_ca \
+    if [ -f /run/secrets/proxy_ca ]; then PIP_CERT=/run/secrets/proxy_ca pip install --no-cache-dir -r requirements-app.txt; else pip install --no-cache-dir -r requirements-app.txt; fi
+COPY src ./src
+COPY trader ./trader
+COPY sample_data ./sample_data
+RUN chmod -R a+rX /app && useradd --create-home --uid 10001 trader && mkdir -p /app/runtime && chown -R trader:trader /app/runtime
+USER trader
+EXPOSE 8765
+HEALTHCHECK --interval=30s --timeout=5s CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8765/api/health',timeout=3)"
+CMD ["python", "-m", "uvicorn", "trader.api:app", "--host", "0.0.0.0", "--port", "8765", "--workers", "1"]
