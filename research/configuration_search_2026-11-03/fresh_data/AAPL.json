@@ -1,0 +1,6 @@
+{
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/AAPL",
+  "downloaded_at": "2026-11-02T19:57:26.237913+00:00",
+  "sha256": "424ed6fd8d1a7d93bc8999ea7c70e6939a7645b481267d2415fbcb6d85c86cb6",
+  "adjustment": "raw OHLCV, Yahoo historical revisions possible"
+}

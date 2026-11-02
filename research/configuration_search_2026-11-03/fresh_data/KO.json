@@ -1,0 +1,6 @@
+{
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/KO",
+  "downloaded_at": "2026-11-02T19:57:28.050418+00:00",
+  "sha256": "3480a4c0742acd6cecc101524d98a82a25443e620efd3a5c5aa1a4dcd142b967",
+  "adjustment": "raw OHLCV, Yahoo historical revisions possible"
+}

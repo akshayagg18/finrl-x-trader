@@ -1,0 +1,6 @@
+{
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/XOM",
+  "downloaded_at": "2026-11-02T19:57:29.813752+00:00",
+  "sha256": "4928e616bb155dc807a27d8a708d3d9afa9ce8f1da0f95bfb1143e5905b4d516",
+  "adjustment": "raw OHLCV, Yahoo historical revisions possible"
+}

@@ -1,0 +1,6 @@
+{
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/GS",
+  "downloaded_at": "2026-11-02T19:57:27.136393+00:00",
+  "sha256": "d2e7607a8d7e819b946a1e65ba309127995d3230a18cf3cfab2af3871639794c",
+  "adjustment": "raw OHLCV, Yahoo historical revisions possible"
+}

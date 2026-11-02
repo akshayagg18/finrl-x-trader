@@ -1,0 +1,6 @@
+{
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT",
+  "downloaded_at": "2026-11-02T19:57:28.297151+00:00",
+  "sha256": "58c51f7a908eabe7fe89ed1bf1fb6ef75351f1033aeba395d6a5d4b8cb2772ae",
+  "adjustment": "raw OHLCV, Yahoo historical revisions possible"
+}

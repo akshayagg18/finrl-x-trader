@@ -6,6 +6,12 @@ Working local application built alongside the actual FinRL-X upstream source at 
 
 **Status:** This is a functional local trading application, not a verified production brokerage deployment. See [VERIFICATION.md](VERIFICATION.md) for exact tests and unfinished features. In particular, DRL deployment and the published ensemble are unavailable, ML is research-only, and actual broker behavior awaits external verification. The published +19.76% is **not** an installation result.
 
+## Historical configuration experiment
+
+The [completed configuration search](research/configuration_search_2026-11-03/REPORT.md) compares 61 configurations across 136 real-data backtests. The training/validation-selected candidate lost 2.82% in the untouched October 2025–October 2026 test, versus +1.67% for existing defaults and +13.89% for SPY. It is **not recommended for deployment** on this evidence. Deployed settings remain unchanged. The report includes exact settings, all results, frozen data, cost stresses and an interactive offline chart.
+
+Recompute without credentials or network: `python -m scripts.search_configurations --output runtime/reproduced-search`.
+
 ## Start locally (Linux / macOS)
 
 Python 3.12 recommended. `requirements-tested.txt` records the complete tested environment (including development tools) for reproducibility. Run from this repository's root:

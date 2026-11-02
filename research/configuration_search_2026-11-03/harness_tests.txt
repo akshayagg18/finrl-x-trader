@@ -1,0 +1,12 @@
+..                                                                       [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/exchange_calendars/exchange_calendar.py:65
+  /workspace/FinRL-Trading/.venv/lib/python3.12/site-packages/exchange_calendars/exchange_calendar.py:65: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    ONE_HOUR = pd.Timedelta("1h")
+
+tests/test_configuration_search.py: 160 warnings
+  /workspace/FinRL-Trading/.venv/lib/python3.12/site-packages/pandas/core/resample.py:2359: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    + Timedelta(days=1, unit=edges_dti.unit).as_unit(edges_dti.unit)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2 passed, 161 warnings in 0.99s

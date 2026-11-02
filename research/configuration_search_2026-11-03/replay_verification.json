@@ -1,0 +1,12 @@
+{
+  "verified_price_files": 16,
+  "replay": "uncached upstream strategy; frozen snapshot; no network",
+  "exact_matches": [
+    "data_hash",
+    "equity",
+    "orders",
+    "metrics",
+    "decisions"
+  ],
+  "ending_equity": 485.87970436377066
+}

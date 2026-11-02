@@ -1,0 +1,6 @@
+{
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/JPM",
+  "downloaded_at": "2026-11-02T19:57:27.687141+00:00",
+  "sha256": "54b7647c4d6cb433158dfca4c539612b3989e19151c365066b3390a031644297",
+  "adjustment": "raw OHLCV, Yahoo historical revisions possible"
+}

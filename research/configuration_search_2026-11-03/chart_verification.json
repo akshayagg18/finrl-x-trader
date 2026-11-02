@@ -1,0 +1,6 @@
+{
+  "browser": "Chromium",
+  "network": "offline",
+  "rendered_traces": 8,
+  "javascript_errors": []
+}

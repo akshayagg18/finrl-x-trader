@@ -1,0 +1,6 @@
+{
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/NVDA",
+  "downloaded_at": "2026-11-02T19:57:28.779444+00:00",
+  "sha256": "61f77ee4b5dda1b5a1aa1ddeb3c40ed4349279edf96e1164a705f3ed8723ac90",
+  "adjustment": "raw OHLCV, Yahoo historical revisions possible"
+}

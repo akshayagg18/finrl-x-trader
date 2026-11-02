@@ -1,0 +1,6 @@
+{
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/^GSPC",
+  "downloaded_at": "2026-11-02T19:57:30.002451+00:00",
+  "sha256": "d29a51b2c68bda6f6cb580b1da5b53942531402c5dc41b524515b25d948766ec",
+  "adjustment": "raw OHLCV, Yahoo historical revisions possible"
+}

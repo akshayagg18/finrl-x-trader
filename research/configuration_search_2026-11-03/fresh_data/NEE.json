@@ -1,0 +1,6 @@
+{
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/NEE",
+  "downloaded_at": "2026-11-02T19:57:28.551310+00:00",
+  "sha256": "5b68ef7b32fca9c2a8edc666f633a96802c237b190d3e57be090d368c6c6674b",
+  "adjustment": "raw OHLCV, Yahoo historical revisions possible"
+}

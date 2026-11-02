@@ -1,0 +1,6 @@
+{
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/AMZN",
+  "downloaded_at": "2026-11-02T19:57:26.497314+00:00",
+  "sha256": "c8e7947be4982b6096560881c03b3d08a2885b2dd4162ab1e516b218c5c6269f",
+  "adjustment": "raw OHLCV, Yahoo historical revisions possible"
+}

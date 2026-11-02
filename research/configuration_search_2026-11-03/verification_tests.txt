@@ -1,0 +1,48 @@
+........................................                                 [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/exchange_calendars/exchange_calendar.py:65
+  /workspace/FinRL-Trading/.venv/lib/python3.12/site-packages/exchange_calendars/exchange_calendar.py:65: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    ONE_HOUR = pd.Timedelta("1h")
+
+.venv/lib/python3.12/site-packages/pandas_market_calendars/market_calendar.py:100: 7 warnings
+tests/test_core.py: 98 warnings
+  /workspace/FinRL-Trading/.venv/lib/python3.12/site-packages/pandas_market_calendars/market_calendar.py:100: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    return pd.Timedelta(days=day_offset, hours=t.hour, minutes=t.minute, seconds=t.second)
+
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /workspace/FinRL-Trading/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+tests/test_configuration_search.py: 160 warnings
+tests/test_core.py: 112 warnings
+tests/test_api.py: 16 warnings
+  /workspace/FinRL-Trading/.venv/lib/python3.12/site-packages/pandas/core/resample.py:2359: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    + Timedelta(days=1, unit=edges_dti.unit).as_unit(edges_dti.unit)
+
+tests/test_core.py::test_calendar_dst_holidays_early_close
+  /workspace/FinRL-Trading/trader/scheduler.py:23: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    days = schedule(at.date(), (at + pd.Timedelta(days=14)).date())
+
+tests/test_core.py::test_calendar_dst_holidays_early_close
+tests/test_core.py::test_calendar_dst_holidays_early_close
+  /workspace/FinRL-Trading/trader/scheduler.py:25: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    due = row.market_open + pd.Timedelta(minutes=minutes)
+
+tests/test_core.py::test_scheduler_persisted_resume
+  /workspace/FinRL-Trading/trader/scheduler.py:56: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    due = days.iloc[0].market_open + pd.Timedelta(
+
+tests/test_core.py::test_scheduler_persisted_resume
+  /workspace/FinRL-Trading/trader/scheduler.py:72: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    (at + pd.Timedelta(seconds=s.automation.monitor_seconds)).isoformat(),
+
+tests/test_core.py::test_alpaca_sdk_contract
+  /workspace/FinRL-Trading/.venv/lib/python3.12/site-packages/websockets/legacy/__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+    warnings.warn(  # deprecated in 14.0 - 2024-11-09
+
+tests/test_api.py::test_ml_training_saves_research_artifact
+  /workspace/FinRL-Trading/trader/research_ml.py:27: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    maturity = df.datadate + pd.offsets.QuarterEnd(1) + pd.Timedelta(days=1)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+40 passed, 402 warnings in 47.74s

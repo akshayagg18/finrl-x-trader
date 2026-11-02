@@ -1,0 +1,6 @@
+{
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/JNJ",
+  "downloaded_at": "2026-11-02T19:57:27.441061+00:00",
+  "sha256": "001e134a9f6c4078de50be907a1301ab8fc8df599f84034e79a81604b5e17599",
+  "adjustment": "raw OHLCV, Yahoo historical revisions possible"
+}

@@ -1,0 +1,6 @@
+{
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/PG",
+  "downloaded_at": "2026-11-02T19:57:29.126117+00:00",
+  "sha256": "fdc5f2a75292ac1c69ac2fedbcaca676e07b451d4af2885f8b629fad61cbd040",
+  "adjustment": "raw OHLCV, Yahoo historical revisions possible"
+}
