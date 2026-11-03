@@ -1,8 +1,11 @@
 # FinRL-X Trader — handoff and current state
 
-**Updated:** 3 November 2026, Asia/Singapore.  
-**Code baseline reviewed:** `b365174` (before this documentation-only handoff).  
-**Repository:** https://github.com/akshayagg18/finrl-x-trader — branch `main`.  
+**Updated:** 3 November 2026, Asia/Singapore.
+
+**Code baseline reviewed:** `b365174` (before this documentation-only handoff).
+
+**Repository:** https://github.com/akshayagg18/finrl-x-trader — branch `main`.
+
 **Upstream:** https://github.com/AI4Finance-Foundation/FinRL-Trading — foundation commit `4409abe925c904e570be78ebfb5e77ac3491dff8`.
 
 ## 1. Read this first
