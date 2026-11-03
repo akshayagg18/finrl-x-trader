@@ -1,5 +1,7 @@
 # FinRL-X self-hosted trading console
 
+**New contributor or agent? Start with [HANDOFF_CURRENT_STATE.md](HANDOFF_CURRENT_STATE.md)** for the consolidated current state, actual results, setup, known gaps and prioritized next steps.
+
 Working local application built alongside the actual FinRL-X upstream source at commit `4409abe925c904e570be78ebfb5e77ac3491dff8`. The original README, Docker files and environment example are preserved as `*.upstream.*` files. Upstream algorithms in `src/` are unchanged.
 
 **Usable now:** $500 persistent local simulation, genuine historical data, Adaptive Rotation and Equal Weight, cost-aware backtests, out-of-sample reporting, strategy comparison, rolling ML research training, SQLite audit trail, configurable risk/capital sizing, calendar scheduler, professional local dashboard, broker SDK adapters. No credentials or paid AI subscription required.
