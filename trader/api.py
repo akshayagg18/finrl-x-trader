@@ -41,6 +41,8 @@ def create_app(path=None, with_scheduler=True):
             raise
     else:
         app.include_router(intraday_router(service.db))
+        from .growth.api import router as growth_router
+        app.include_router(growth_router(service.db))
 
     @app.middleware("http")
     async def local_guard(request: Request, call_next):

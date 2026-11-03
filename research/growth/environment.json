@@ -1,0 +1,7 @@
+{
+  "nautilus_trader": "1.231.0",
+  "scikit-learn": "1.9.1",
+  "numpy": "2.5.4",
+  "pandas": "2.3.3",
+  "requests": "2.34.2"
+}

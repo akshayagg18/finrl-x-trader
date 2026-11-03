@@ -146,3 +146,33 @@ def test_intraday_continuous_replay_ui(browser_app):
         )
         assert len(service.db.rows("SELECT * FROM intraday_fills")) == 2
         browser.close()
+
+
+def test_growth_research_and_forward_configuration_ui(browser_app):
+    url, service = browser_app
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True, args=["--no-sandbox"])
+        page = browser.new_page()
+        page.goto(url)
+        page.locator('[data-page="research"]').click()
+        page.wait_for_function(
+            "document.querySelector('#growth-qualification').textContent.includes('qualified')"
+        )
+        page.locator("#growth-configure").click()
+        page.wait_for_function(
+            "document.querySelector('#growth-forward').textContent.includes('\"active\": false')"
+        )
+        page.locator("#growth-start").click()
+        page.wait_for_function(
+            "document.querySelector('#growth-forward').textContent.includes('\"active\": true')"
+        )
+        page.reload()
+        page.locator('[data-page="research"]').click()
+        page.wait_for_function(
+            "document.querySelector('#growth-forward').textContent.includes('\"active\": true')"
+        )
+        page.locator("#growth-stop").click()
+        page.wait_for_function(
+            "document.querySelector('#growth-forward').textContent.includes('\"active\": false')"
+        )
+        browser.close()

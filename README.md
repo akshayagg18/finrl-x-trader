@@ -141,3 +141,11 @@ Install/update `pip install -r requirements-intraday.txt`, then `python -m trade
 Reproduce the ML study with `python -m scripts.benchmark_ml`, then `python -m scripts.report_ml`. [Actual ML results](research/intraday_ml/REPORT.md) show **no qualified live strategy**. Model artifacts live in `runtime/intraday_models/` and are excluded from Git; training reproduces them. Back up that directory, the market snapshots and the SQLite database together. Restore the same package versions recorded in `research/intraday_ml/environment.json` when reproducing results.
 
 The OKX CCXT transport is implemented and mock-tested, but is not wired into intraday live scheduling. Regional eligibility and private-account verification, fractional equity execution, and full multi-market live capital/risk routing remain outstanding. Earlier sections describing ML/replay as unfinished are superseded by this update; these external execution limitations remain.
+
+## Growth research and forward observation
+
+The [growth evaluation](research/growth/REPORT.md) implements longer 4/24/72-hour forecasts, net-return labels, chronological residual calibration, sparse-sample rejection, a continuous BTC/ETH portfolio and weekly statistics. Run `python -m scripts.evaluate_growth` to reproduce it. All 288 candidate trials are retained. The resulting policy lost 3.35%; **no strategy qualified**.
+
+Research & backtests → Growth research shows comparison charts and the qualification reasons. Forward local simulation collects **new public quotes hourly** and persists them separately from historical replay. Configure $500 and click Start observation; the account stays cash while no model is qualified. Stop suspends observation; the global kill switch also stops it. The initial verification recorded genuine quotes with no trades. Twelve weeks of forward evidence remain a real elapsed-time requirement.
+
+Monthly research produces model versions; a forward candidate must have passed historical qualification and remain freshly validated. Missing/overdue validation or stale data stops simulation. No automatic promotion to real-money trading is implemented or implied.

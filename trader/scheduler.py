@@ -41,6 +41,10 @@ class Scheduler:
         self.thread.start()
 
     def tick(self, at=None):
+        if self.service.db.state("growth_forward_enabled", False):
+            from .growth.forward import tick as forward_tick
+            forward_tick(self.service.db)
+
         # One central scheduler; intraday sessions own isolated virtual accounts only.
         if self.service.db.state("intraday_enabled", False):
             from .intraday.replay import tick as intraday_tick

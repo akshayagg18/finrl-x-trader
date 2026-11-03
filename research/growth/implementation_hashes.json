@@ -1,0 +1,10 @@
+{
+  "trader/growth/portfolio.py": "62dd3a6d3659a28012a21d098b5af8450955500b8489c73a3449c981441a434c",
+  "trader/growth/config.py": "d81b655ad4da3933397ba87a41f8cf0153c5e617111dc9883676155b0c485570",
+  "trader/growth/forward.py": "7a150c4d24c88a554969f3de5ffd493c3bb045fc533f91af67a5c653962eea86",
+  "trader/growth/models.py": "43f33e4eb5faadf4b5d1dd4fe987fea25ec98b66b913fce18666b99624ec400f",
+  "trader/growth/api.py": "e53af8f4ae389474794ee0d87363911f0f7814dfe5e6c94556183c266940990e",
+  "trader/growth/__init__.py": "fec1d10f183e28634c0f28821b2afed5e26eb83b18ae6b38d51fa6a2f6b08951",
+  "trader/growth/weekly.py": "32291fc77848e2cbb575bb9d4293661e212b033c48abf506506dc87c002c53ed",
+  "scripts/evaluate_growth.py": "f5dcb0a6cef5a2b4b33cd3adcdd31259f993862aefd7cb6606b038c9d4ca498e"
+}
