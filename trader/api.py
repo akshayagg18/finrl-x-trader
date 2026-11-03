@@ -33,6 +33,14 @@ def create_app(path=None, with_scheduler=True):
 
     app = FastAPI(title="FinRL-X Trading Console", lifespan=lifespan)
     app.state.service = service
+    # Optional research engine; the original console starts without its extra dependencies.
+    try:
+        from .intraday.api import router as intraday_router
+    except ModuleNotFoundError as exc:
+        if not exc.name.startswith("nautilus_trader"):
+            raise
+    else:
+        app.include_router(intraday_router(service.db))
 
     @app.middleware("http")
     async def local_guard(request: Request, call_next):

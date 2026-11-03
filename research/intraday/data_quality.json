@@ -1,0 +1,42 @@
+{
+  "BTC-USDT": {
+    "bars": 70080,
+    "first": "2024-11-01 00:00:00+00:00",
+    "last": "2026-10-31 23:45:00+00:00",
+    "gaps_over_15min": 0,
+    "gap_interpretation": "Crypto missing intervals require review; equity overnight/weekend gaps are expected",
+    "duplicates": 0
+  },
+  "ETH-USDT": {
+    "bars": 70080,
+    "first": "2024-11-01 00:00:00+00:00",
+    "last": "2026-10-31 23:45:00+00:00",
+    "gaps_over_15min": 0,
+    "gap_interpretation": "Crypto missing intervals require review; equity overnight/weekend gaps are expected",
+    "duplicates": 0
+  },
+  "AAPL": {
+    "bars": 1560,
+    "first": "2026-08-10 13:30:00+00:00",
+    "last": "2026-11-02 20:45:00+00:00",
+    "gaps_over_15min": 59,
+    "gap_interpretation": "Crypto missing intervals require review; equity overnight/weekend gaps are expected",
+    "duplicates": 0
+  },
+  "SPY": {
+    "bars": 1560,
+    "first": "2026-08-10 13:30:00+00:00",
+    "last": "2026-11-02 20:45:00+00:00",
+    "gaps_over_15min": 59,
+    "gap_interpretation": "Crypto missing intervals require review; equity overnight/weekend gaps are expected",
+    "duplicates": 0
+  },
+  "QQQ": {
+    "bars": 1560,
+    "first": "2026-08-10 13:30:00+00:00",
+    "last": "2026-11-02 20:45:00+00:00",
+    "gaps_over_15min": 59,
+    "gap_interpretation": "Crypto missing intervals require review; equity overnight/weekend gaps are expected",
+    "duplicates": 0
+  }
+}

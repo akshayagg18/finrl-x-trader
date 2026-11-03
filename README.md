@@ -120,3 +120,11 @@ Copy market cache and model artifacts separately alongside the database backup. 
 Local access is intentional. Host validation and same-origin/custom-header checks restrict browser mutations; secrets are never returned to the browser. There is no remote-user authentication layer. Do not expose the port publicly. For remote access use an SSH tunnel to the loopback port or add a private authenticated TLS reverse proxy with an explicit host policy change. No withdrawal or transfer API is implemented.
 
 Additional references: [CONFIGURATION.md](CONFIGURATION.md), [BROKER_SETUP.md](BROKER_SETUP.md), [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md), and [README.upstream.md](README.upstream.md).
+
+## Intraday research extension (partial implementation)
+
+Install `pip install -r requirements-intraday.txt`, then launch the same console with `python -m trader serve` at http://127.0.0.1:8765. Research & backtests → Intraday lab runs actual NautilusTrader cash-account backtests on bundled 15-minute bars with $500 default capital. Settings and research results persist in SQLite; existing deployed settings are separate. No credentials are needed.
+
+Run `python -m scripts.benchmark_intraday` and `python -m scripts.report_intraday` to reproduce the preliminary comparison. Saved development trials are resumed; use a separate copy/remove only generated results when changing experiment code. Read [actual results](research/BACKTEST_RESULTS.md) and [limitations](research/FINAL_RECOMMENDATION.md).
+
+This extension is historical research, **not yet autonomous intraday paper/live trading**. The original swing-trading scheduler and adapters are unchanged. Five-minute/ML comparisons, continuous intraday simulation, cross-market account ownership and Singapore exchange execution remain unfinished.

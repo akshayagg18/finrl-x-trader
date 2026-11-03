@@ -41,3 +41,7 @@ Dedicated means there are no positions/orders outside this installation's ledger
 Before changing accounts, pause/stop, cancel and reconcile known open orders. Switching accounts does not liquidate or move the old account, and does not allow one scheduler to operate multiple accounts. An existing filled portfolio can remain on a previous broker after switching; you remain responsible for monitoring it. Use a separate controlled instance only after carefully isolating account ownership.
 
 For an uncertain submission, inspect the durable order ID and broker records. Do not delete the order row, edit quantities, or reset the database to force a retry. Reconcile the account before acknowledging an interrupted cycle. Automated repair of an unresolvable submission is intentionally absent. Keep backups and consult logs; emergency liquidation cannot guarantee liquidity or fill success.
+
+## Intraday extension status
+
+No crypto credentials are required or consumed. OKX access currently uses public history and instrument metadata only. No private crypto adapter is operational; do not supply keys expecting live execution. Singapore eligibility, regional endpoint, pairs, tariff and trade-only permissions require verification before that integration is completed. Existing Alpaca/IBKR credentials do not activate intraday research strategies. This is an implementation limitation in addition to unavailable credentials.

@@ -1,0 +1,1 @@
+{"selected": {"symbol": "SPY", "allocation": 0.8, "fee_bps": 1, "friction_bps": 2, "strategy": "momentum", "lookback": 16}, "training_eligible": false, "test_not_used": true}

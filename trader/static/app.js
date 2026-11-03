@@ -52,3 +52,20 @@ bind('compare',async()=>{let ids=[...document.querySelectorAll('[data-run]:check
 bind('train-ml',async()=>{let r=await api('models/train-ml',{asof:$('ml-asof').value});$('ml-result').hidden=false;$('ml-result').textContent=JSON.stringify(r,null,2);notify('Upstream ML model trained and saved for research. Deployment remains blocked pending verified vintage data.');await research();});
 bind('snapshot',async()=>{let r=await api('models/snapshot',{});notify('Strategy configuration version #'+r.id+' saved.');await research();});bind('backup',async()=>{let r=await api('backup',{});notify('Backup created: '+r.file);});
 (async()=>{try{await loadSettings();await refresh();await research();}catch(e){notify(e.message,true);}})();
+
+bind('in-run',async()=>{
+const config={symbol:$('in-symbol').value,strategy:$('in-strategy').value,capital:Number($('in-capital').value),allocation:Number($('in-allocation').value),fee_bps:Number($('in-fee').value),friction_bps:Number($('in-friction').value),stop_loss:Number($('in-stop').value),max_drawdown:Number($('in-drawdown').value)};
+await api('intraday/settings',config,'PUT');
+const r=await api('intraday/backtest',{settings:config,start:$('in-start').value,end:$('in-end').value});
+plot('in-chart',[{x:r.equity.map(p=>p.timestamp),y:r.equity.map(p=>p.equity),name:'Historical simulation',type:'scatter'}]);
+$('in-result').textContent=JSON.stringify({id:r.id,net_return:r.net_return,ending_equity:r.ending_equity,max_drawdown:r.max_drawdown,fills:r.fills.length,blocked:r.blocked.length,assumptions:r.assumptions},null,2);
+notify('Intraday research saved; deployed settings unchanged.');
+});
+(async()=>{
+try {
+ const c=await api('intraday/settings');
+ for(const [id,key] of Object.entries({'in-symbol':'symbol','in-strategy':'strategy','in-capital':'capital','in-allocation':'allocation','in-fee':'fee_bps','in-friction':'friction_bps','in-stop':'stop_loss','in-drawdown':'max_drawdown'})) $(id).value=c[key];
+ const runs=await api('intraday/runs');
+ if(runs.length){const r=runs[runs.length-1];$('in-result').textContent=JSON.stringify({saved_run:r.id,net_return:r.net_return,ending_equity:r.ending_equity,fills:r.fills.length},null,2);}
+} catch(e) {$('in-result').textContent='Optional intraday engine unavailable. Install requirements-intraday.txt and restart.';}
+})();

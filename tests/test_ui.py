@@ -80,3 +80,27 @@ def test_configuration_simulation_backtest_ui(browser_app, tmp_path):
         page.screenshot(path=str(tmp_path / "mobile.png"), full_page=True)
         assert not errors, errors
         browser.close()
+
+
+def test_intraday_lab_persistence(browser_app):
+    url, service = browser_app
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True, args=["--no-sandbox"])
+        page = browser.new_page()
+        page.goto(url)
+        page.wait_for_function(
+            "document.querySelector('#in-allocation').value === '0.5'"
+        )
+        page.locator('[data-page="research"]').click()
+        page.locator("#in-symbol").select_option("AAPL")
+        page.locator("#in-strategy").select_option("hold")
+        page.locator("#in-allocation").fill("0.8")
+        page.locator("#in-run").click()
+        page.wait_for_function(
+            "document.querySelector('#in-result').textContent.includes('ending_equity')"
+        )
+        assert len(service.db.state("intraday_runs")[0]["fills"]) == 2
+        page.reload()
+        page.wait_for_function("document.querySelector('#in-symbol').value === 'AAPL'")
+        assert service.db.state("intraday_settings")["allocation"] == 0.8
+        browser.close()

@@ -81,3 +81,15 @@ Warnings: dependency deprecation messages from NumPy/Pandas/exchange-calendars, 
 10. **Research UI**: common deployed risk/cost/universe settings can be changed and used by a backtest; independent per-run settings are retained with each result. Interactive price-level position charts and full entry/exit price charts per instrument are not implemented; backtests show trade markers on portfolio equity and the dashboard shows per-position P&L. The plugin interface is defined, with no paid AI signals registered.
 
 The application is ready for local research/simulation and later adapter connection work. It should not be described as a fully verified production autonomous money manager while these gaps remain.
+
+## Intraday research extension — 2026-11-03
+
+**Partial implementation, not completed autonomous intraday trading.** Added NautilusTrader 1.231.0 historical cash-account execution, real 15-minute datasets, configurable momentum/reversion/cash/hold experiments, cost sensitivity, persisted API results and an intraday panel in the existing dashboard. No real orders or broker paper-account orders were submitted. Original FinRL-X functionality remains separate.
+
+Executed 90 unique development/test scenarios. BTC and ETH each have 70,080 consecutive 15-minute bars (2024-11-01–2026-10-31), no duplicate timestamps or missing intervals. AAPL/SPY/QQQ each have 1,560 regular-session bars after calendar filtering, approximately 60 trading sessions. Source/download/hash manifests accompany raw CSVs. Crypto instruments use retrieved lot/tick/minimum metadata; current equity engine integration enforces whole shares. Candle-based modeled quotes are not historical observed quotes. USDT/USD parity is an assumption.
+
+Tests: `PLAYWRIGHT_BROWSERS_PATH=/workspace/pw-browsers .venv/bin/pytest tests/test_intraday.py tests/test_core.py tests/test_api.py tests/test_ui.py -q` — **45 passed, 880 dependency deprecation warnings, 45.39 seconds**. Includes original application regression/browser workflows plus intraday configuration persistence, real-data order fills, no future-bar signal influence, fees, capital isolation and whole-share affordability. Browser test executes the intraday research workflow and reloads saved settings. Full output: `research/intraday/verification_tests.txt`.
+
+Remaining implementation, not merely credential verification: continuous intraday simulation and scheduler recovery; shared intraday/portfolio risk enforcement; a true settled-funds ledger; fractional equity instrument handling; private crypto execution; ML/FreqAI training/model versions; 5-minute and walk-forward evaluation; full regime/trade analytics; intraday broker failure/partial-fill/reconciliation tests. No claim of production readiness. External blockers: Singapore account eligibility and regional exchange API/fees, broker transition policies, credentials and better equity/quote data.
+
+`research/FINAL_RECOMMENDATION.md` explicitly reports **NO QUALIFIED LIVE STRATEGY**. Existing live settings were not activated or changed.

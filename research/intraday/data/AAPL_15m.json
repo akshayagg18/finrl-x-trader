@@ -1,0 +1,13 @@
+{
+  "source": "https://query2.finance.yahoo.com/v8/finance/chart/AAPL",
+  "acquired": "2026-11-03T04:26:10.687596+00:00",
+  "first": "2026-08-10 13:30:00+00:00",
+  "last": "2026-11-02 21:00:00+00:00",
+  "bars": 1561,
+  "convention": "UTC bar opening timestamps; completed bars only",
+  "sha256": "3bf1f14354fed256d14a76a0a9d87d617766b15cc783d9062b073c255f6a3800",
+  "metadata": {
+    "adjustment": "vendor intraday OHLC; corporate-action vintage not certified",
+    "coverage_limit": "60 days; insufficient for long-term qualification"
+  }
+}

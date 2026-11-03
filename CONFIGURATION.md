@@ -96,3 +96,9 @@ Broker/account/capital/strategy changes stop automation and revoke live activati
 The bridge corrects upstream ranker lookback from top_n_per_group to configured zscore_window, feeds completed weekly data to slow signals and actual daily data to fast-risk-off. The upstream exception-persistence singleton-history TODO remains; historical persistence triggers cannot be claimed. Centralized operational stops act on persisted holdings, independently of upstream stops. See IMPLEMENTATION_PLAN.md.
 
 Backtests use an unchanged present-day user universe, adjusted historical prices and estimated costs. They do not claim a survivorship-free institutional data set. OOS boundary reporting does not prove that a user has never tuned parameters to that interval. Benchmark comparisons are initially fully invested and can differ in cash exposure from risk-constrained strategies.
+
+## Intraday research settings
+
+The optional lab uses a separate `intraday_settings` SQLite state key, not deployed trading settings. Validated fields: symbol (supported dataset), strategy (momentum/reversion/cash/hold), capital >0, allocation (0,0.8], lookback 4–256 bars, threshold >0, stop_loss and max_drawdown fractions (0,1), fees/adverse execution 0–100 bps per side, maximum daily entries 1–30. Quote friction is an assumption, not measured historical spread. Exit orders may exceed the entry limit for protection. Hold benchmarks bypass stops/drawdown and liquidate only at the end. All quantities pass through Nautilus instrument precision; current equity research is whole shares only.
+
+The API is `/api/intraday/settings` GET/PUT, `/api/intraday/backtest` POST and `/api/intraday/runs` GET. Mutation requests require the existing local-origin guard and X-Trader-Intent: console. Research results are isolated from real trading performance.

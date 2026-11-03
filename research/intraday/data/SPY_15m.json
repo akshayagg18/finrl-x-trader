@@ -1,0 +1,13 @@
+{
+  "source": "https://query2.finance.yahoo.com/v8/finance/chart/SPY",
+  "acquired": "2026-11-03T04:25:08.592648+00:00",
+  "first": "2026-08-10 13:30:00+00:00",
+  "last": "2026-11-02 21:00:00+00:00",
+  "bars": 1561,
+  "convention": "UTC bar opening timestamps; completed bars only",
+  "sha256": "308767119974bf8dc77d71e702bdd596de7e8ede7cb27abba6e53e958c5b1fe1",
+  "metadata": {
+    "adjustment": "vendor intraday OHLC; corporate-action vintage not certified",
+    "coverage_limit": "60 days; insufficient for long-term qualification"
+  }
+}
