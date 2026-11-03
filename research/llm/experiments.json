@@ -1,0 +1,18 @@
+{
+  "created": "2026-11-03T00:00:00+08:00",
+  "status": "engineering_verified_prospective_evaluation_required",
+  "real_llm_decisions": 0,
+  "historical_llm_decisions": 0,
+  "mock_provider_response_fixtures": 4,
+  "mock_decisions_are_performance_evidence": false,
+  "point_in_time_historical_news_available": false,
+  "variants": {
+    "quantitative_baseline": {"measured": true, "net_profit_usd": 13.168934265357962, "net_return": 0.026337868530715847},
+    "llm_trade_veto": {"measured": false, "reason": "No genuine timestamp-safe news/model-output archive"},
+    "llm_features": {"measured": false, "reason": "No genuine timestamp-safe news/model-output archive"},
+    "llm_agent": {"measured": false, "reason": "No genuine timestamp-safe news/model-output archive"},
+    "non_llm_sentiment": {"measured": false, "reason": "Adapter verified; no point-in-time corpus for a trading comparison"}
+  },
+  "incremental_net_value_usd": null,
+  "adoption_decision": "retain_quantitative_baseline"
+}

@@ -33,6 +33,10 @@ def create_app(path=None, with_scheduler=True):
 
     app = FastAPI(title="FinRL-X Trading Console", lifespan=lifespan)
     app.state.service = service
+    # Credential-optional, research-only LLM endpoints. This router has no
+    # broker/order dependency and remains usable when the intraday engine is absent.
+    from .llm.api import router as llm_router
+    app.include_router(llm_router(service.db))
     # Optional research engine; the original console starts without its extra dependencies.
     try:
         from .intraday.api import router as intraday_router

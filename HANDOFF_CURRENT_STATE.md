@@ -1,5 +1,18 @@
 # FinRL-X Trader — handoff and current state
 
+## 0A. Optional LLM research update — 3 November 2026
+
+Provider-independent LLM research was added on the `development` branch without altering the frozen quantitative baseline or enabling live trading.
+
+- Frozen positive control: deterministic BTC 24-hour momentum, +2.6338% / +$13.17, 29 exits, -8.19% drawdown, $27.19 costs. It remains unqualified because BTC hold returned +13.75%.
+- Supported protocols: OpenAI Responses structured output, Anthropic Messages schema tool, OpenAI-compatible Chat Completions, and local Ollama.
+- Variants: baseline, entry-only veto, structured features, constrained research agent, and zero-cost non-LLM sentiment control; optional local-files-only FinBERT adapter.
+- All LLM analysis defaults disabled, uses server-only keys, requires explicit paid-budget authorization, and is forbidden in paper/live mode.
+- No point-in-time historical news archive or provider credentials were available. Real/historical LLM decisions: zero. Mock decisions verify engineering only and are not performance evidence.
+- Recommendation: retain the quantitative baseline and collect prospective shadow decisions. Do not claim LLM incremental value yet.
+
+Read `research/LLM_TRADING_RESEARCH.md`, `research/BASELINE_SNAPSHOT.md`, `research/LLM_EXPERIMENTS.md`, `research/LLM_PERFORMANCE_COMPARISON.md`, `research/LLM_FINAL_RECOMMENDATION.md`, and `docs/LLM_RESEARCH.md`.
+
 ## 0. Cost-aware profitability research update — 3 November 2026
 
 A new expected-return XGBoost workflow, paper-mechanism replication, regime/sizing ablations, raw signal diagnostics, and long-only equity ORB pilot were added without changing broker routing or live controls.

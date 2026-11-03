@@ -31,6 +31,11 @@ CREATE TABLE IF NOT EXISTS equity(id INTEGER PRIMARY KEY AUTOINCREMENT, scope TE
 CREATE TABLE IF NOT EXISTS cycles(id TEXT PRIMARY KEY, scope TEXT, created TEXT, status TEXT, result TEXT);
 CREATE TABLE IF NOT EXISTS research(id INTEGER PRIMARY KEY AUTOINCREMENT, created TEXT, kind TEXT, config TEXT, result TEXT);
 CREATE TABLE IF NOT EXISTS models(id INTEGER PRIMARY KEY AUTOINCREMENT, created TEXT, strategy TEXT, body TEXT, deployed INTEGER DEFAULT 0);
+CREATE TABLE IF NOT EXISTS llm_requests(id INTEGER PRIMARY KEY AUTOINCREMENT, created TEXT NOT NULL, cycle_id TEXT NOT NULL, provider TEXT NOT NULL, model TEXT NOT NULL, prompt_version TEXT NOT NULL, input_refs TEXT NOT NULL, request_hash TEXT NOT NULL, output TEXT NOT NULL, input_tokens INTEGER NOT NULL, output_tokens INTEGER NOT NULL, cost_usd REAL NOT NULL, latency_ms REAL NOT NULL, status TEXT NOT NULL, cached INTEGER NOT NULL DEFAULT 0, request_id TEXT);
+CREATE INDEX IF NOT EXISTS ix_llm_requests_hash ON llm_requests(request_hash,status);
+CREATE TABLE IF NOT EXISTS news_events(id INTEGER PRIMARY KEY AUTOINCREMENT, source_id TEXT UNIQUE NOT NULL, publisher TEXT NOT NULL, source_url TEXT NOT NULL, published_at TEXT NOT NULL, updated_at TEXT, available_at TEXT NOT NULL, retrieved_at TEXT NOT NULL, assets TEXT NOT NULL, title TEXT NOT NULL, content TEXT NOT NULL, content_hash TEXT NOT NULL);
+CREATE INDEX IF NOT EXISTS ix_news_available ON news_events(available_at);
+CREATE TABLE IF NOT EXISTS llm_shadow(id INTEGER PRIMARY KEY AUTOINCREMENT, created TEXT NOT NULL, decision_time TEXT NOT NULL, variant TEXT NOT NULL, asset TEXT NOT NULL, baseline_action TEXT NOT NULL, llm_output TEXT, effective_action TEXT NOT NULL, settled_pnl REAL, status TEXT NOT NULL);
 """
 
 

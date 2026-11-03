@@ -2,6 +2,16 @@
 
 **New contributor or agent? Start with [HANDOFF_CURRENT_STATE.md](HANDOFF_CURRENT_STATE.md)** for the consolidated current state, actual results, setup, known gaps and prioritized next steps.
 
+## Optional LLM research layer
+
+The `development` branch includes a provider-independent, research-only LLM layer for OpenAI, Anthropic, OpenAI-compatible endpoints, and local Ollama. It defaults disabled, requires no credentials to start the application, never receives order tools, and cannot run in paper/live mode. Genuine LLM profitability has **not** been measured because no trustworthy point-in-time historical news archive is available; the system records prospective shadow decisions instead.
+
+See `docs/LLM_RESEARCH.md`, `research/LLM_TRADING_RESEARCH.md`, and `research/LLM_FINAL_RECOMMENDATION.md`. Run focused verification with:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_llm_research.py -q --basetemp=runtime\pytest-llm
+```
+
 ## Cost-aware profitability research (November 2026)
 
 The repository now includes a leakage-controlled XGBoost workflow for expected-return forecasting, cost-aware execution, regime/sizing ablations, cost stress, and a constrained long-only opening-range-breakout comparison. It uses the existing frozen market snapshots and never routes orders to a broker.
