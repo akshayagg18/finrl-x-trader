@@ -54,7 +54,7 @@ bind('snapshot',async()=>{let r=await api('models/snapshot',{});notify('Strategy
 (async()=>{try{await loadSettings();await refresh();await research();}catch(e){notify(e.message,true);}})();
 
 bind('in-run',async()=>{
-const config={symbol:$('in-symbol').value,strategy:$('in-strategy').value,capital:Number($('in-capital').value),allocation:Number($('in-allocation').value),fee_bps:Number($('in-fee').value),friction_bps:Number($('in-friction').value),stop_loss:Number($('in-stop').value),max_drawdown:Number($('in-drawdown').value)};
+const config=intradayConfig();
 await api('intraday/settings',config,'PUT');
 const r=await api('intraday/backtest',{settings:config,start:$('in-start').value,end:$('in-end').value});
 plot('in-chart',[{x:r.equity.map(p=>p.timestamp),y:r.equity.map(p=>p.equity),name:'Historical simulation',type:'scatter'}]);
@@ -69,3 +69,13 @@ try {
  if(runs.length){const r=runs[runs.length-1];$('in-result').textContent=JSON.stringify({saved_run:r.id,net_return:r.net_return,ending_equity:r.ending_equity,fills:r.fills.length},null,2);}
 } catch(e) {$('in-result').textContent='Optional intraday engine unavailable. Install requirements-intraday.txt and restart.';}
 })();
+
+let intradaySession=null;
+function intradayConfig(){return {symbol:$('in-symbol').value,interval:Number($('in-interval').value),strategy:$('in-strategy').value,model_id:$('in-model').value||null,capital:Number($('in-capital').value),allocation:Number($('in-allocation').value),fee_bps:Number($('in-fee').value),friction_bps:Number($('in-friction').value),stop_loss:Number($('in-stop').value),max_drawdown:Number($('in-drawdown').value)};}
+async function intradayModels(){const models=await api('intraday/models');const prior=$('in-model').value;$('in-model').innerHTML='<option value="">Train/select a model</option>'+models.map(m=>`<option value="${esc(m.id)}">${esc(m.symbol)} ${m.interval}m ${esc(m.family)} · before ${esc(m.cutoff.slice(0,10))} · ${esc(m.id.slice(0,8))}</option>`).join('');if(models.some(m=>m.id===prior))$('in-model').value=prior;}
+bind('in-train',async()=>{const c=intradayConfig();const m=await api('intraday/models/train',{symbol:c.symbol,interval:c.interval,cutoff:$('in-cutoff').value,family:$('in-family').value,horizon:Number($('in-horizon').value)});await intradayModels();$('in-model').value=m.id;$('in-strategy').value='ml';$('in-model-result').textContent=JSON.stringify(m,null,2);notify('Model version saved for research. No profitability or live qualification implied.');});
+async function intradayStatus(){if(!intradaySession)return;const r=await api('intraday/sessions/'+intradaySession);$('in-session').textContent=JSON.stringify({id:r.id,mode:r.mode,active:r.active,cursor:r.cursor,next:r.next_operation,error:r.error,equity:r.result?.ending_equity,cash:r.result?.cash,quantity:r.result?.quantity,unsettled:r.result?.unsettled},null,2);if(r.result){table('in-fills',[['Time',x=>esc(x.ts_last)],['Side',x=>esc(x.side)],['Quantity',x=>esc(x.filled_qty)],['Fill',x=>money(x.avg_px)],['Fees',x=>esc(x.commissions.join(', '))]],r.result.fills);}}
+bind('in-create',async()=>{const r=await api('intraday/sessions',{settings:intradayConfig(),start:$('in-start').value,end:$('in-end').value});intradaySession=r.id;await intradayStatus();notify('Isolated virtual session created. Start explicitly to advance historical time.');});
+for(const [id,action] of Object.entries({'in-replay-start':'start','in-pause':'pause','in-replay-stop':'stop','in-step':'step','in-liquidate':'liquidate'})){bind(id,async()=>{if(!intradaySession)throw Error('Create a simulation session first');await api('intraday/sessions/'+intradaySession+'/'+action,{});await intradayStatus();});}
+(async()=>{try{await intradayModels();const c=await api('intraday/settings');$('in-interval').value=c.interval||15;if(c.model_id)$('in-model').value=c.model_id;const sessions=await api('intraday/sessions');if(sessions.length){intradaySession=sessions[0].id;await intradayStatus();}}catch(e){$('in-session').textContent=e.message;}})();
+setInterval(()=>intradayStatus().catch(e=>{$('in-session').textContent=e.message;}),10000);

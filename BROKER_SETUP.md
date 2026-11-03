@@ -45,3 +45,11 @@ For an uncertain submission, inspect the durable order ID and broker records. Do
 ## Intraday extension status
 
 No crypto credentials are required or consumed. OKX access currently uses public history and instrument metadata only. No private crypto adapter is operational; do not supply keys expecting live execution. Singapore eligibility, regional endpoint, pairs, tariff and trade-only permissions require verification before that integration is completed. Existing Alpaca/IBKR credentials do not activate intraday research strategies. This is an implementation limitation in addition to unavailable credentials.
+
+## OKX transport update
+
+`trader/intraday/exchange.py` uses maintained CCXT 4.5.91 for OKX spot balances, assets, instrument metadata, quotes, orders, cancellations and fills. Demo and live credentials are separate (`OKX_DEMO_*` and `OKX_LIVE_*`). Missing credentials and `OKX_REGION_VERIFIED=false` block private construction. Submission additionally requires explicit caller authorization; no dashboard endpoint grants it. Only BTC/USDT and ETH/USDT spot are allowlisted. No transfers/withdrawals or leverage are exposed.
+
+Do not set region verification merely to bypass a check: first verify the account's Singapore eligibility, available instruments, required regional API endpoint, demo availability and fees with OKX. This implementation uses CCXT's default OKX host; a regional account requiring another host needs adapter configuration/verification before use. Timeouts have unknown outcome and require order lookup by durable client identifier before retry. Mock tests are not external verification.
+
+This transport is not connected to autonomous intraday account execution. Completing live ownership/risk routing and broker reconciliation is still required. Do not provide keys expecting the replay scheduler to place orders.

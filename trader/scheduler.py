@@ -41,6 +41,11 @@ class Scheduler:
         self.thread.start()
 
     def tick(self, at=None):
+        # One central scheduler; intraday sessions own isolated virtual accounts only.
+        if self.service.db.state("intraday_enabled", False):
+            from .intraday.replay import tick as intraday_tick
+            intraday_tick(self.service.db)
+
         s = self.service.db.settings()
         db = self.service.db
         if not db.state("automation", False) or db.state("kill", False):

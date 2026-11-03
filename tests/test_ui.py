@@ -104,3 +104,45 @@ def test_intraday_lab_persistence(browser_app):
         page.wait_for_function("document.querySelector('#in-symbol').value === 'AAPL'")
         assert service.db.state("intraday_settings")["allocation"] == 0.8
         browser.close()
+
+
+def test_intraday_continuous_replay_ui(browser_app):
+    url, service = browser_app
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True, args=["--no-sandbox"])
+        page = browser.new_page()
+        page.goto(url)
+        page.wait_for_function(
+            "document.querySelector('#in-allocation').value === '0.5'"
+        )
+        ids = page.locator("[id]").evaluate_all("els=>els.map(e=>e.id)")
+        assert len(ids) == len(set(ids))
+        page.locator('[data-page="research"]').click()
+        page.locator("#in-symbol").select_option("AAPL")
+        page.locator("#in-strategy").select_option("hold")
+        page.locator("#in-allocation").fill("0.8")
+        page.locator("#in-create").click()
+        page.wait_for_function(
+            "document.querySelector('#in-session').textContent.includes('local historical simulation')"
+        )
+        page.locator("#in-replay-start").click()
+        page.wait_for_function(
+            "document.querySelector('#in-session').textContent.includes('\"active\": true')"
+        )
+        page.locator("#in-step").click()
+        page.wait_for_function(
+            "document.querySelector('#in-session').textContent.includes('\"quantity\": 1')"
+        )
+        page.reload()
+        page.locator('[data-page="research"]').click()
+        page.wait_for_function(
+            "document.querySelector('#in-session').textContent.includes('\"quantity\": 1')"
+        )
+        assert len(service.db.rows("SELECT * FROM intraday_fills")) == 1
+        page.locator("#in-liquidate").click()
+        page.locator("#in-step").click()
+        page.wait_for_function(
+            "document.querySelector('#in-session').textContent.includes('\"quantity\": 0')"
+        )
+        assert len(service.db.rows("SELECT * FROM intraday_fills")) == 2
+        browser.close()

@@ -1,0 +1,8 @@
+{
+  "nautilus_trader": "1.231.0",
+  "scikit-learn": "1.9.1",
+  "pandas": "2.3.3",
+  "numpy": "2.5.4",
+  "ccxt": "4.5.91",
+  "joblib": "1.6.0"
+}

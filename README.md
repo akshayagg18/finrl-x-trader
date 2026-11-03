@@ -128,3 +128,16 @@ Install `pip install -r requirements-intraday.txt`, then launch the same console
 Run `python -m scripts.benchmark_intraday` and `python -m scripts.report_intraday` to reproduce the preliminary comparison. Saved development trials are resumed; use a separate copy/remove only generated results when changing experiment code. Read [actual results](research/BACKTEST_RESULTS.md) and [limitations](research/FINAL_RECOMMENDATION.md).
 
 This extension is historical research, **not yet autonomous intraday paper/live trading**. The original swing-trading scheduler and adapters are unchanged. Five-minute/ML comparisons, continuous intraday simulation, cross-market account ownership and Singapore exchange execution remain unfinished.
+
+## ML and continuous replay update
+
+Install/update `pip install -r requirements-intraday.txt`, then `python -m trader serve`. At **http://127.0.0.1:8765**, open Research & backtests → Intraday lab.
+
+- Train random forest or gradient-boosted models with a cutoff before your evaluation dates; select any saved model version to compare or roll back. Five- and fifteen-minute BTC/ETH datasets are bundled.
+- Configure the $500 virtual budget, risk and execution costs; run a backtest or create a continuous local simulation session. Click Start to advance 16 historical bars every scheduler tick. Pause blocks entries while exits/stops continue. Stop freezes replay. Liquidate sells at the next replay bar.
+- Sessions and fills persist in the existing SQLite database. Restarting reconstructs the Nautilus execution state and resumes the saved cursor without duplicate fills or forced cycle-end sales. Datasets and session configurations are frozen for reproducibility.
+- This is accelerated **historical local simulation**, not broker paper trading or a streaming live-feed simulator. Existing swing-trading accounts stay separate.
+
+Reproduce the ML study with `python -m scripts.benchmark_ml`, then `python -m scripts.report_ml`. [Actual ML results](research/intraday_ml/REPORT.md) show **no qualified live strategy**. Model artifacts live in `runtime/intraday_models/` and are excluded from Git; training reproduces them. Back up that directory, the market snapshots and the SQLite database together. Restore the same package versions recorded in `research/intraday_ml/environment.json` when reproducing results.
+
+The OKX CCXT transport is implemented and mock-tested, but is not wired into intraday live scheduling. Regional eligibility and private-account verification, fractional equity execution, and full multi-market live capital/risk routing remain outstanding. Earlier sections describing ML/replay as unfinished are superseded by this update; these external execution limitations remain.

@@ -102,3 +102,13 @@ Backtests use an unchanged present-day user universe, adjusted historical prices
 The optional lab uses a separate `intraday_settings` SQLite state key, not deployed trading settings. Validated fields: symbol (supported dataset), strategy (momentum/reversion/cash/hold), capital >0, allocation (0,0.8], lookback 4–256 bars, threshold >0, stop_loss and max_drawdown fractions (0,1), fees/adverse execution 0–100 bps per side, maximum daily entries 1–30. Quote friction is an assumption, not measured historical spread. Exit orders may exceed the entry limit for protection. Hold benchmarks bypass stops/drawdown and liquidate only at the end. All quantities pass through Nautilus instrument precision; current equity research is whole shares only.
 
 The API is `/api/intraday/settings` GET/PUT, `/api/intraday/backtest` POST and `/api/intraday/runs` GET. Mutation requests require the existing local-origin guard and X-Trader-Intent: console. Research results are isolated from real trading performance.
+
+## ML and persistent intraday sessions
+
+`interval`: 5 or 15; `strategy`: also accepts `ml`; `model_id`: locally trained version identifier; `ml_buffer`: extra expected-return margin above round-trip modeled costs (default 0.001). Maximum daily loss defaults to 5%, peak drawdown 15%, initial-capital loss 20%. The same portfolio-loss function governs swing/intraday engines. Hold benchmarks intentionally bypass loss stops for comparison.
+
+Training families are `forest` and `boosted`, with horizon 8 or 16 bars. Features lag one bar and labels mature strictly before the UTC cutoff. Evaluation before cutoff is rejected. Model files must match their saved SHA-256. Only local generated artifacts are loaded; never replace these with untrusted pickle/joblib files.
+
+Continuous sessions use immutable saved settings and isolated virtual cash. To change model or risk settings, stop the session and create a new one. Only one virtual intraday session can run at a time. SQLite stores session state, atomic cycle checkpoints and stable fill identities. T+1 uses the next NYSE session, withholding only unsettled sell proceeds; new positions may use other settled cash. Crypto cash settles immediately in the model.
+
+Endpoints: `/api/intraday/models/train`, `/models`, `/sessions`, `/sessions/{id}` and POST `/sessions/{id}/{start|pause|resume|stop|step|liquidate}` under the same intraday prefix. The scheduler advances up to 16 bars per ten-second tick; actual timing depends on reconstruction time. Replay reconstruction trades speed for deterministic restart safety; long histories can become slow. It never resubmits orders to an external broker.

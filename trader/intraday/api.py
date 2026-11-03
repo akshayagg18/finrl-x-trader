@@ -1,6 +1,8 @@
 """Research API extension. No intraday live routing is exposed."""
 
+import json
 import threading
+from typing import Literal
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
@@ -14,6 +16,14 @@ class Request(BaseModel):
     settings: Experiment
     start: str
     end: str
+
+
+class TrainRequest(BaseModel):
+    symbol: Literal["BTC-USDT", "ETH-USDT", "AAPL", "SPY", "QQQ"]
+    interval: Literal[5, 15] = 15
+    cutoff: str
+    family: Literal["forest", "boosted"] = "boosted"
+    horizon: Literal[8, 16] = 16
 
 
 def router(db):
@@ -52,5 +62,50 @@ def router(db):
             return result
         finally:
             LOCK.release()
+
+    @routes.post("/models/train")
+    def train_model(request: TrainRequest):
+        from .ml import train
+
+        result = train(**request.model_dump())
+        db.event("intraday_research", "model_trained", result)
+        return result
+
+    @routes.get("/models")
+    def models():
+        from .ml import ROOT
+
+        return [
+            {"id": p.stem, **json.loads(p.read_text())}
+            for p in sorted(ROOT.glob("*.json"))
+        ]
+
+    @routes.post("/sessions")
+    def session_create(request: Request):
+        from .replay import create, inspect
+
+        sid = create(db, request.settings.model_dump(), request.start, request.end)
+        db.set_state("intraday_enabled", True)
+        return inspect(db, sid)
+
+    @routes.get("/sessions")
+    def session_list():
+        from .replay import sessions
+
+        return sessions(db)
+
+    @routes.get("/sessions/{sid}")
+    def session_status(sid: str):
+        from .replay import inspect
+
+        return inspect(db, sid)
+
+    @routes.post("/sessions/{sid}/{action}")
+    def session_control(sid: str, action: str):
+        from .replay import control, step
+
+        if action == "step":
+            return step(db, sid)
+        return control(db, sid, action)
 
     return routes

@@ -60,13 +60,15 @@ class RiskEngine:
 
     def loss_trigger(self, value, account, day_start):
         r = self.s.risk
-        if value <= day_start * (1 - r.max_daily_loss):
-            return "Maximum daily loss"
-        if value <= account["peak"] * (1 - r.max_drawdown):
-            return "Maximum drawdown"
-        if value <= account["contributions"] * (1 - r.max_capital_loss):
-            return "Maximum capital loss"
-        return None
+        return portfolio_loss(
+            value,
+            day_start,
+            account["peak"],
+            account["contributions"],
+            r.max_daily_loss,
+            r.max_drawdown,
+            r.max_capital_loss,
+        )
 
     def plan(
         self,
@@ -251,3 +253,20 @@ class RiskEngine:
                 )
                 if sector_value + cost > equity * self.s.risk.max_sector + 1e-6:
                     raise RiskBlocked("Final sector cap check failed")
+
+
+def portfolio_loss(
+    value, day_start, peak, initial, daily_limit, drawdown_limit, capital_limit
+):
+    """Shared portfolio-loss gate for daily and intraday execution."""
+    if not all(
+        math.isfinite(x) and x > 0 for x in (day_start, peak, initial)
+    ) or not math.isfinite(value):
+        return "Invalid portfolio valuation"
+    if value <= day_start * (1 - daily_limit):
+        return "Maximum daily loss"
+    if value <= peak * (1 - drawdown_limit):
+        return "Maximum drawdown"
+    if value <= initial * (1 - capital_limit):
+        return "Maximum capital loss"
+    return None

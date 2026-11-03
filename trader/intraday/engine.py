@@ -8,6 +8,7 @@ import json
 import math
 from decimal import Decimal
 from pathlib import Path
+from typing import Literal
 
 import numpy as np
 import pandas as pd
@@ -20,13 +21,21 @@ from nautilus_trader.model.identifiers import InstrumentId, Symbol, Venue
 from nautilus_trader.model.instruments import CurrencyPair, Equity
 from nautilus_trader.model.objects import Money, Price, Quantity
 from nautilus_trader.trading.strategy import Strategy
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
+
+from trader.risk import portfolio_loss
 
 
 class Experiment(BaseModel):
+    model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
+    interval: Literal[5, 15] = 15
+    model_id: str | None = None
+    ml_buffer: float = Field(default=0.001, ge=0, le=0.1)
+    max_daily_loss: float = Field(default=0.05, gt=0, lt=1)
+    max_capital_loss: float = Field(default=0.2, gt=0, lt=1)
     symbol: str = "BTC-USDT"
     strategy: str = Field(
-        default="momentum", pattern="^(momentum|reversion|cash|hold)$"
+        default="momentum", pattern="^(momentum|reversion|cash|hold|ml)$"
     )
     capital: float = Field(default=500, gt=0)
     allocation: float = Field(default=0.5, gt=0, le=0.8)
@@ -40,6 +49,8 @@ class Experiment(BaseModel):
 
 
 def load(symbol, interval=15):
+    if interval not in (5, 15):
+        raise ValueError("Only 5/15-minute candles supported")
     if symbol not in ("BTC-USDT", "ETH-USDT", "SPY", "QQQ", "AAPL"):
         raise ValueError("Unsupported research instrument")
     path = Path("research/intraday/data") / f"{symbol}_{interval}m.csv"
@@ -71,6 +82,10 @@ def load(symbol, interval=15):
 
 def signals(df, c):
     # All features lag one bar; orders are filled using the subsequent open.
+    if c.strategy == "ml":
+        from .ml import targets
+
+        return targets(df, c)
     past = df.close.shift(1)
     if c.strategy == "cash":
         return pd.Series(False, index=df.index)
@@ -83,8 +98,9 @@ def signals(df, c):
 
 
 class ResearchStrategy(Strategy):
-    def __init__(self, instrument, targets, config):
+    def __init__(self, instrument, targets, config, policies=None):
         super().__init__()
+        self.policies = policies or []
         self.instrument = instrument
         self.targets = targets
         self.c = config
@@ -95,7 +111,9 @@ class ResearchStrategy(Strategy):
         self.day = None
         self.count = 0
         self.entry = None
-        self.last_sale_day = None
+        self.unsettled = []
+        self.day_start = config.capital
+        self.new_day = True
 
     def on_start(self):
         self.subscribe_quote_ticks(self.instrument.id)
@@ -105,6 +123,7 @@ class ResearchStrategy(Strategy):
         if day != self.day:
             self.day = day
             self.count = 0
+            self.new_day = True
         account = self.cache.account_for_venue(self.instrument.id.venue)
         cash = float(account.balance_free(self.instrument.quote_currency).as_double())
         qty = float(self.portfolio.net_position(self.instrument.id))
@@ -112,8 +131,23 @@ class ResearchStrategy(Strategy):
         ask = float(tick.ask_price)
         equity = cash + qty * bid
         self.peak = max(self.peak, equity)
-        if self.c.strategy != "hold" and equity < self.peak * (1 - self.c.max_drawdown):
+        if self.new_day:
+            self.day_start = (
+                self.points[-1]["equity"] if self.points else self.c.capital
+            )
+            self.new_day = False
+        reason = portfolio_loss(
+            equity,
+            self.day_start,
+            self.peak,
+            self.c.capital,
+            self.c.max_daily_loss,
+            self.c.max_drawdown,
+            self.c.max_capital_loss,
+        )
+        if self.c.strategy != "hold" and reason:
             self.halted = True
+            self.blocks.append({"timestamp": tick.ts_event, "reason": reason})
         self.points.append(
             {
                 "timestamp": str(pd.Timestamp(tick.ts_event, tz="UTC")),
@@ -121,7 +155,15 @@ class ResearchStrategy(Strategy):
                 "cash": cash,
             }
         )
-        desired = self.targets.get(tick.ts_event, False) and not self.halted
+        mode = "trade"
+        for policy in self.policies:
+            if pd.Timestamp(policy["at"]).value <= tick.ts_event:
+                mode = policy["mode"]
+        desired = (
+            self.targets.get(tick.ts_event, False)
+            and not self.halted
+            and mode != "flatten"
+        )
         stop = (
             self.c.strategy != "hold"
             and qty > 0
@@ -130,16 +172,20 @@ class ResearchStrategy(Strategy):
         )
         if qty > 0 and (not desired or stop):
             self.close_all_positions(self.instrument.id)
-            self.last_sale_day = day
             self.entry = None
             self.count += 1
-        elif qty == 0 and desired and self.count < self.c.max_trades_day:
-            # Conservative settlement: no reuse of sale proceeds on the sale day.
-            # Bars only occur on trading sessions; subsequent session is T+1.
-            if isinstance(self.instrument, Equity) and self.last_sale_day == day:
-                return
+        elif (
+            qty == 0
+            and desired
+            and mode == "trade"
+            and self.count < self.c.max_trades_day
+        ):
+            self.unsettled = [
+                (due, amount) for due, amount in self.unsettled if due > day
+            ]
+            settled = max(0, cash - sum(amount for _, amount in self.unsettled))
             budget = min(
-                cash / (1 + self.c.fee_bps / 10000), equity * self.c.allocation
+                settled / (1 + self.c.fee_bps / 10000), equity * self.c.allocation
             )
             step = float(self.instrument.size_increment)
             units = math.floor(budget / ask / step) * step
@@ -165,20 +211,48 @@ class ResearchStrategy(Strategy):
             self.entry = ask
             self.count += 1
 
+    def on_order_filled(self, event):
+        if event.order_side == OrderSide.BUY:
+            self.entry = float(event.last_px)
+        elif isinstance(self.instrument, Equity):
+            from trader.scheduler import schedule
 
-def backtest(config, start, end):
+            day = pd.Timestamp(event.ts_event, tz="UTC").date()
+            sessions = schedule(day, pd.Timestamp(day) + pd.Timedelta(days=14))
+            next_day = next(d.date() for d in sessions.index if d.date() > day)
+            proceeds = float(event.last_qty) * float(event.last_px) - float(
+                event.commission.as_double()
+            )
+            self.unsettled.append((str(next_day), proceeds))
+
+
+def _backtest(config, start, end, *, liquidate=True, policies=None):
     c = Experiment.model_validate(config)
-    df = load(c.symbol)
+    df = load(c.symbol, c.interval)
     target = signals(df, c)
-    selected = df.loc[start:end]
-    if len(selected) < 2:
+    lo = pd.Timestamp(start)
+    hi = pd.Timestamp(end)
+    lo = lo.tz_localize("UTC") if lo.tzinfo is None else lo.tz_convert("UTC")
+    hi = hi.tz_localize("UTC") if hi.tzinfo is None else hi.tz_convert("UTC")
+    if len(str(end)) == 10:
+        hi += pd.Timedelta(days=1) - pd.Timedelta(nanoseconds=1)
+    selected = df.loc[lo:hi]
+    if len(selected) < (2 if liquidate else 1):
         raise ValueError("Insufficient data")
+    if c.strategy == "ml":
+        from .ml import prediction
+
+        _, meta = prediction(df, c.model_id, c.symbol, c.interval)
+        if selected.index[0] < pd.Timestamp(meta["cutoff"]):
+            raise ValueError("Evaluation starts before model training cutoff")
     venue = Venue("RESEARCH")
     iid = InstrumentId(Symbol(c.symbol), venue)
     crypto = "-" in c.symbol
     if crypto:
         meta = json.loads(
-            (Path("research/intraday/data") / f"{c.symbol}_15m.json").read_text()
+            (
+                Path("research/intraday/data") / f"{c.symbol}_{c.interval}m.json"
+            ).read_text()
         )
         details = meta["metadata"]["instrument"]["data"][0]
         tick = details["tickSz"]
@@ -239,7 +313,7 @@ def backtest(config, start, end):
             )
         )
     # A final mark also liquidates through the engine, charging exit fees/friction.
-    ts = selected.index[-1] + pd.Timedelta(minutes=15)
+    ts = selected.index[-1] + pd.Timedelta(minutes=c.interval)
     mid = selected.iloc[-1].close
     ticks.append(
         QuoteTick(
@@ -252,14 +326,19 @@ def backtest(config, start, end):
             ts.value,
         )
     )
-    strategy = ResearchStrategy(
-        ins, {ts.value: bool(target.loc[ts]) for ts in selected.index}, c
-    )
+    targets = {ts.value: bool(target.loc[ts]) for ts in selected.index}
+    if not liquidate:
+        # Final mark values the existing position without creating an entry or terminal exit.
+        ticks = ticks[:-1]
+    strategy = ResearchStrategy(ins, targets, c, policies)
     engine.add_data(ticks)
     engine.add_strategy(strategy)
     engine.run()
     account = engine.cache.account_for_venue(venue)
     final = float(account.balance_total(ins.quote_currency).as_double())
+    quantity = float(engine.portfolio.net_position(ins.id))
+    cash = final
+    final = cash + quantity * float(ticks[-1].bid_price)
     points = pd.DataFrame(strategy.points)
     points.loc[len(points) - 1, "equity"] = final
     values = pd.Series([c.capital, *points.equity.tolist()])
@@ -267,6 +346,10 @@ def backtest(config, start, end):
     fills = engine.trader.generate_order_fills_report()
     result = {
         "config": c.model_dump(),
+        "cash": cash,
+        "quantity": quantity,
+        "liquidated": liquidate,
+        "unsettled": strategy.unsettled,
         "start": start,
         "end": end,
         "engine": "NautilusTrader 1.231.0",
@@ -280,10 +363,21 @@ def backtest(config, start, end):
         "assumptions": [
             "Historical opens with modeled bid/ask, not observed quotes",
             "Immediate full market fills; no depth or queue simulation",
-            "Equities whole shares, conservative same-day sale cash lock",
+            "Equities whole shares; sell proceeds settle next exchange session; original settled cash remains usable",
             "Crypto USDT is assumed USD parity; conversion and depeg risk excluded",
             "Only bar-boundary stops; no intrabar protection",
         ],
     }
     engine.dispose()
+    from .analytics import analyze
+
+    result["metrics"] = analyze(result)
     return result
+
+
+def backtest(config, start, end, *, liquidate=True, policies=None):
+    from filelock import FileLock
+
+    Path("runtime").mkdir(exist_ok=True)
+    with FileLock("runtime/intraday-engine.lock", timeout=120):
+        return _backtest(config, start, end, liquidate=liquidate, policies=policies)

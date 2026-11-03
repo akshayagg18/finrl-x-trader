@@ -1,2 +1,3 @@
 -r requirements-app.txt
 nautilus_trader==1.231.0
+ccxt==4.5.91
