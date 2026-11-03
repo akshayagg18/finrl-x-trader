@@ -1,5 +1,21 @@
 # FinRL-X Trader — handoff and current state
 
+## 0. Cost-aware profitability research update — 3 November 2026
+
+A new expected-return XGBoost workflow, paper-mechanism replication, regime/sizing ablations, raw signal diagnostics, and long-only equity ORB pilot were added without changing broker routing or live controls.
+
+- Six crypto interval/horizon configurations plus four selected-strategy walk-forward folds were evaluated under $500 cash-account constraints.
+- The development selector fell back to hourly/one-hour forecasting but explicitly remained unqualified because its +3.22% came from one trade.
+- Final August-October strategy holdout: 0.00%, zero trades; 900 positive forecasts but none above the 0.4827% cost-plus-uncertainty hurdle.
+- Paper-style hourly mechanism: -5.55%, four trades, -8.22% drawdown, risk halt triggered.
+- Limited 15-minute AAPL/SPY/QQQ long-only ORB pilot: -1.18%, 25 trades; not a reproduction of the broad-universe paper.
+- Final comparator: 24-hour momentum +2.63% but -8.19% drawdown and materially below true 60%-deployed BTC buy-and-hold at +13.75%; ETH buy-and-hold returned +12.42%, while mean reversion lost 4.83%.
+- Conclusion remains **NO QUALIFIED PROFITABLE STRATEGY FOUND**. Live trading remains disabled.
+
+Reproduce with `.venv\Scripts\python.exe -m scripts.research_profitability`. Read `research/STRATEGY_FAILURE_ANALYSIS.md`, `research/PAPER_REPLICATION.md`, `research/STRATEGY_EXPERIMENTS.md`, `research/PROFITABILITY_RESEARCH_RESULTS.md`, and `research/FINAL_STRATEGY_RECOMMENDATION.md`.
+
+Verification for this update: 6 focused tests and 42 compatible non-native tests passed. The full suite was attempted, but this Windows host blocked `pyarrow.lib` under Application Control while collecting five Nautilus/API/UI modules; do not misstate that environmental collection failure as a complete pass.
+
 **Updated:** 3 November 2026, Asia/Singapore.
 
 **Code baseline reviewed:** `b365174` (before this documentation-only handoff).

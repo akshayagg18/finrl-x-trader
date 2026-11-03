@@ -1,0 +1,62 @@
+[
+  {
+    "diagnosis": "No signal reached order submission; zero execution blocks rule out quantity, minimum-notional, and portfolio-risk rejection after submission. The retained artifact cannot distinguish sub-threshold forecasts from model state/cooldown abstention.",
+    "execution_blocks": 0,
+    "family": "boosted",
+    "final_hurdle": 0.006,
+    "forecast_distribution_available": false,
+    "forecast_distribution_gap": "Historical JSON omitted forecasts and runtime model binaries are intentionally excluded from Git; exact reconstruction is blocked by this host's native-library application policy",
+    "horizon_bars": 16,
+    "interval_minutes": 5,
+    "ml_buffer": 0.003,
+    "recorded_fills": 0,
+    "recorded_net_return": 0.0,
+    "round_trip_cost": 0.003,
+    "symbol": "BTC-USDT"
+  },
+  {
+    "diagnosis": "No signal reached order submission; zero execution blocks rule out quantity, minimum-notional, and portfolio-risk rejection after submission. The retained artifact cannot distinguish sub-threshold forecasts from model state/cooldown abstention.",
+    "execution_blocks": 0,
+    "family": "boosted",
+    "final_hurdle": 0.006,
+    "forecast_distribution_available": false,
+    "forecast_distribution_gap": "Historical JSON omitted forecasts and runtime model binaries are intentionally excluded from Git; exact reconstruction is blocked by this host's native-library application policy",
+    "horizon_bars": 8,
+    "interval_minutes": 15,
+    "ml_buffer": 0.003,
+    "recorded_fills": 0,
+    "recorded_net_return": 0.0,
+    "round_trip_cost": 0.003,
+    "symbol": "BTC-USDT"
+  },
+  {
+    "diagnosis": "No signal reached order submission; zero execution blocks rule out quantity, minimum-notional, and portfolio-risk rejection after submission. The retained artifact cannot distinguish sub-threshold forecasts from model state/cooldown abstention.",
+    "execution_blocks": 0,
+    "family": "boosted",
+    "final_hurdle": 0.006,
+    "forecast_distribution_available": false,
+    "forecast_distribution_gap": "Historical JSON omitted forecasts and runtime model binaries are intentionally excluded from Git; exact reconstruction is blocked by this host's native-library application policy",
+    "horizon_bars": 8,
+    "interval_minutes": 5,
+    "ml_buffer": 0.003,
+    "recorded_fills": 0,
+    "recorded_net_return": 0.0,
+    "round_trip_cost": 0.003,
+    "symbol": "ETH-USDT"
+  },
+  {
+    "diagnosis": "No signal reached order submission; zero execution blocks rule out quantity, minimum-notional, and portfolio-risk rejection after submission. The retained artifact cannot distinguish sub-threshold forecasts from model state/cooldown abstention.",
+    "execution_blocks": 0,
+    "family": "boosted",
+    "final_hurdle": 0.004,
+    "forecast_distribution_available": false,
+    "forecast_distribution_gap": "Historical JSON omitted forecasts and runtime model binaries are intentionally excluded from Git; exact reconstruction is blocked by this host's native-library application policy",
+    "horizon_bars": 8,
+    "interval_minutes": 15,
+    "ml_buffer": 0.001,
+    "recorded_fills": 0,
+    "recorded_net_return": 0.0,
+    "round_trip_cost": 0.003,
+    "symbol": "ETH-USDT"
+  }
+]

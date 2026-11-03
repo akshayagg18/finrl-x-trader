@@ -1,0 +1,7 @@
+{
+  "horizon_bars": 1,
+  "interval_minutes": 60,
+  "name": "1h_to_1h",
+  "qualified_at_selection": false,
+  "selection_rule": "Positive development OOS and 1.5x cost with >=10 trades, then highest return; otherwise highest return with no qualification claim"
+}

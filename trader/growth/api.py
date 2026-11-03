@@ -28,6 +28,17 @@ def router(db):
             for k in ("protocol", "summary", "versions", "trials")
         }
 
+    @routes.get("/profitability")
+    def profitability():
+        """Read-only results; this endpoint never trains or submits orders."""
+        root = Path("research/profitability")
+        return {
+            name: json.loads((root / f"{name}.json").read_text())
+            if (root / f"{name}.json").exists()
+            else None
+            for name in ("protocol", "selection_locked", "screening", "summary")
+        }
+
     @routes.get("/forward")
     def status():
         return forward.status(db)

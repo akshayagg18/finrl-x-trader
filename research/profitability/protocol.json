@@ -1,0 +1,41 @@
+{
+  "capital": 500,
+  "costs_per_side_bps": {
+    "fee": 10,
+    "slippage_and_spread": 5
+  },
+  "created": "2026-11-03T14:44:31.543076+00:00",
+  "data": {
+    "bars": 210240,
+    "first": "2024-11-01 00:00:00+00:00",
+    "last": "2026-10-31 23:55:00+00:00",
+    "sha256": "207cbdcbd9729e08d1d71bcdb13d2e4915ea70f071db385539c27686ee5c6ea2",
+    "source": "OKX public spot candles"
+  },
+  "market": "BTC-USDT spot",
+  "risk": {
+    "daily_loss_pause": 0.02,
+    "drawdown_halt": 0.08,
+    "leverage": 0,
+    "max_exposure": 0.6
+  },
+  "screen": {
+    "development_oos": [
+      "2025-11-01 00:00:00+00:00",
+      "2026-08-01 00:00:00+00:00"
+    ],
+    "final_strategy_holdout": [
+      "2026-08-01 00:00:00+00:00",
+      "2026-11-01 00:00:00+00:00"
+    ],
+    "train": [
+      "2024-11-01 00:00:00+00:00",
+      "2025-08-01 00:00:00+00:00"
+    ],
+    "validation": [
+      "2025-08-01 00:00:00+00:00",
+      "2025-11-01 00:00:00+00:00"
+    ]
+  },
+  "warning": "All market dates were exposed to earlier repository research; final is untouched by this strategy's selection, not a pristine market holdout."
+}

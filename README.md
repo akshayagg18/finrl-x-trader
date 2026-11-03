@@ -2,6 +2,19 @@
 
 **New contributor or agent? Start with [HANDOFF_CURRENT_STATE.md](HANDOFF_CURRENT_STATE.md)** for the consolidated current state, actual results, setup, known gaps and prioritized next steps.
 
+## Cost-aware profitability research (November 2026)
+
+The repository now includes a leakage-controlled XGBoost workflow for expected-return forecasting, cost-aware execution, regime/sizing ablations, cost stress, and a constrained long-only opening-range-breakout comparison. It uses the existing frozen market snapshots and never routes orders to a broker.
+
+```powershell
+py -3.13 -m venv .venv
+.venv\Scripts\python.exe -m pip install -r requirements-dev.txt -r requirements-intraday.txt "xgboost>=2,<4" "matplotlib>=3.9,<4"
+.venv\Scripts\python.exe -m scripts.research_profitability
+.venv\Scripts\python.exe -m pytest tests/test_profitability.py -q
+```
+
+Results are shown in Research & backtests and retained under `research/profitability/`. The measured conclusion is **NO QUALIFIED PROFITABLE STRATEGY FOUND**. The final selected XGBoost candidate placed zero trades; the paper-style mechanism lost 5.55%; the limited equity ORB pilot lost 1.18%. See `research/PROFITABILITY_RESEARCH_RESULTS.md` and `research/FINAL_STRATEGY_RECOMMENDATION.md`. These are historical simulations, not paper-account or real-money returns.
+
 Working local application built alongside the actual FinRL-X upstream source at commit `4409abe925c904e570be78ebfb5e77ac3491dff8`. The original README, Docker files and environment example are preserved as `*.upstream.*` files. Upstream algorithms in `src/` are unchanged.
 
 **Usable now:** $500 persistent local simulation, genuine historical data, Adaptive Rotation and Equal Weight, cost-aware backtests, out-of-sample reporting, strategy comparison, rolling ML research training, SQLite audit trail, configurable risk/capital sizing, calendar scheduler, professional local dashboard, broker SDK adapters. No credentials or paid AI subscription required.

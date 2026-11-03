@@ -1,0 +1,16 @@
+{
+  "capital": 500,
+  "market": "BTC-USDT",
+  "interval_minutes": 60,
+  "forecast_horizon_bars": 1,
+  "fee_bps_per_side": 10,
+  "slippage_and_spread_bps_per_side": 5,
+  "maximum_exposure": 0.6,
+  "minimum_order_usd": 1,
+  "daily_loss_pause": 0.02,
+  "drawdown_halt": 0.08,
+  "threshold_multipliers_validation_grid": [1, 2, 3],
+  "sizing_validation_grid": ["fixed_percent", "volatility"],
+  "regime_validation_grid": ["all", "trending"],
+  "live_trading": false
+}
