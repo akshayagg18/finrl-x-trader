@@ -164,6 +164,12 @@ def test_growth_research_and_forward_configuration_ui(browser_app):
             "document.querySelector('#regime-qualification')?.textContent.includes('live_qualified')"
         )
         assert "false" in page.locator("#regime-qualification").inner_text()
+        page.wait_for_function(
+            "document.querySelector('#defensive-qualification')?.textContent.includes('historically_profitable')"
+        )
+        assert "not deployment qualified" in page.locator(
+            "#defensive-qualification"
+        ).inner_text().lower()
         page.locator("#growth-configure").click()
         page.wait_for_function(
             "document.querySelector('#growth-forward').textContent.includes('\"active\": false')"

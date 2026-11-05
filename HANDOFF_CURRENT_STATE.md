@@ -1,5 +1,28 @@
 # FinRL-X Trader — handoff and current state
 
+## Latest update — defensive trend candidate, 5 November 2026
+
+A fixed 81-configuration search found one validation-ranked rule that remained
+positive in every chronological partition and under doubled modeled costs while
+keeping evaluation drawdown just inside the user's 10% tolerance. It checks a
+100-day BTC trend and 90-day momentum each Monday, allocates no more than 10%
+to BTC and 10% to ETH, volatility-scales positions, and holds at least 80% cash.
+
+- Development 2019–2021: +6.98%, -1.23% maximum drawdown.
+- Validation 2022–2023: +4.73%, -3.28% maximum drawdown.
+- Evaluation 2024–October 2026: +2.84%, -9.67% maximum drawdown.
+- Doubled-cost evaluation: +2.31%, -9.86% maximum drawdown.
+- Independent two-month windows from January 2022: 10 positive, 9 negative, 10
+  flat; average +0.20% ($0.98), average maximum drawdown -1.23%.
+
+This is a **historically profitable candidate, not a deployment-qualified or
+consistently weekly-profitable strategy**. A same-risk passive comparison earned
+more (+8.20%) but had -22.51% drawdown. The candidate's weekly bootstrap lower
+bound is negative, and the final interval was viewed during exploratory work.
+It needs a newly elapsed 12-week paper observation and target-account execution
+evidence. Code and locked artifacts are in `trader/growth/defensive.py`,
+`scripts/evaluate_defensive_trend.py`, and `research/defensive_trend/`.
+
 ## 0. Cost-aware profitability research update — 3 November 2026
 
 A new expected-return XGBoost workflow, paper-mechanism replication, regime/sizing ablations, raw signal diagnostics, and long-only equity ORB pilot were added without changing broker routing or live controls.
@@ -28,9 +51,9 @@ Verification for this update: 6 focused tests and 42 compatible non-native tests
 
 This is a working self-hosted research and simulation application with an existing FinRL-X swing-trading console, additional NautilusTrader intraday research, ML experiments, persistent historical replay, a growth/weekly-consistency workflow, and a locked long-history regime experiment.
 
-**There is no qualified profitable strategy. Do not enable real trading based on the existing results.** The latest regime rule and every ML filter failed the untouched 2022 selection gate. The diagnostic ML result also lost money in the final evaluation and under cost stress. Software functionality does not establish an investment edge.
+**There is no deployment-qualified profitable strategy. Do not enable real trading based on the existing results.** The defensive rule is positive retrospectively but fails the weekly confidence and prospective-evidence gates. Earlier regime and ML candidates lost money or failed selection. Software functionality does not establish a durable investment edge.
 
-- Latest recorded complete regression run: **82 passed**, 4,970 dependency deprecation warnings, 60.70 seconds. Evidence: [verification log](research/strategy_v2/verification_tests.txt).
+- Latest recorded complete regression run: **88 passed**, 4,971 dependency deprecation warnings, 61.50 seconds. Evidence: [verification log](research/defensive_trend/verification_tests.txt).
 - No real-money orders or actual brokerage paper-account executions were submitted during development.
 - No brokerage credentials were supplied. The application starts without them.
 - Live trading defaults off. The original swing console has an explicit live activation mechanism; it is not a verified production deployment.

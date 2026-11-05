@@ -2,6 +2,29 @@
 
 **New contributor or agent? Start with [HANDOFF_CURRENT_STATE.md](HANDOFF_CURRENT_STATE.md)** for the consolidated current state, actual results, setup, known gaps and prioritized next steps.
 
+## Defensive trend candidate (5 November 2026)
+
+The latest locked search found a **historically profitable, low-exposure
+candidate** on BTC/ETH spot history. It is not qualified for broker deployment.
+The rule checks a lagged 100-day BTC trend and 90-day momentum each Monday,
+deploys at most 10% to BTC and 10% to ETH, volatility-scales those weights, and
+keeps at least 80% cash. Across separate 2019–2021 development, 2022–2023
+validation, and 2024–October 2026 evaluation partitions it returned +6.98%,
++4.73%, and +2.84% after modeled costs. Doubled evaluation costs produced
++2.31%; evaluation maximum drawdown was -9.67%.
+
+This is modest retrospective performance. The same-risk passive comparator
+returned +8.20% in the evaluation period but breached the risk tolerance with a
+-22.51% drawdown. The candidate's lower 95% weekly-mean bound is negative, only
+44 of 146 complete evaluation weeks gained, and the final interval had already
+been inspected during exploration. It therefore remains research only. Read the
+[full report](research/defensive_trend/REPORT.md) and reproduce it without
+credentials:
+
+```sh
+python -m scripts.evaluate_defensive_trend
+```
+
 ## Cost-aware profitability research (November 2026)
 
 The repository now includes a leakage-controlled XGBoost workflow for expected-return forecasting, cost-aware execution, regime/sizing ablations, cost stress, and a constrained long-only opening-range-breakout comparison. It uses the existing frozen market snapshots and never routes orders to a broker.
@@ -13,7 +36,7 @@ py -3.13 -m venv .venv
 .venv\Scripts\python.exe -m pytest tests/test_profitability.py -q
 ```
 
-Results are shown in Research & backtests and retained under `research/profitability/`. The measured conclusion is **NO QUALIFIED PROFITABLE STRATEGY FOUND**. The final selected XGBoost candidate placed zero trades; the paper-style mechanism lost 5.55%; the limited equity ORB pilot lost 1.18%. See `research/PROFITABILITY_RESEARCH_RESULTS.md` and `research/FINAL_STRATEGY_RECOMMENDATION.md`. These are historical simulations, not paper-account or real-money returns.
+Results are shown in Research & backtests and retained under `research/profitability/`. That specific ML experiment found **NO QUALIFIED PROFITABLE STRATEGY**. The final selected XGBoost candidate placed zero trades; the paper-style mechanism lost 5.55%; the limited equity ORB pilot lost 1.18%. See `research/PROFITABILITY_RESEARCH_RESULTS.md` and `research/FINAL_STRATEGY_RECOMMENDATION.md`. These are historical simulations, not paper-account or real-money returns.
 
 Working local application built alongside the actual FinRL-X upstream source at commit `4409abe925c904e570be78ebfb5e77ac3491dff8`. The original README, Docker files and environment example are preserved as `*.upstream.*` files. Upstream algorithms in `src/` are unchanged.
 

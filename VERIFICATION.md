@@ -155,3 +155,39 @@ CCXT/Nautilus require `cffi==2.0.0`/`tzdata>=2026.3`, while curl-cffi/ib-async
 declare `cffi>=2.1.1`/`tzdata<2026`. The recorded suite passed with the former
 versions. Treat IBKR and CCXT as separate externally verified deployment
 profiles until their pinned packages can share a clean resolver environment.
+
+## Defensive trend search — 5 November 2026
+
+The new low-exposure search evaluates 81 fixed BTC/ETH trend configurations on
+the hash-verified Binance hourly archive. Fourteen passed the development and
+validation gates. The validation-ranked rule is a weekly 100-day BTC trend plus
+90-day momentum gate, with no more than 10% in either asset, 20% total exposure,
+and volatility scaling toward a 30% annualized target.
+
+Measured after 15 bp per traded notional, the selected rule returned +6.98%
+with -1.23% drawdown in 2019–2021, +4.73% with -3.28% drawdown in 2022–2023,
+and +2.84% with -9.67% drawdown in 2024–October 2026. Doubling costs produced
++2.31% with -9.86% drawdown. A 10% BTC / 10% ETH passive comparison returned
++8.20% in the last period but drew down -22.51%.
+
+Across 29 independent two-month reset windows from January 2022 through
+October 2026, the rule averaged +0.20% ($0.98), with -1.23% average maximum
+drawdown: 10 windows gained, 9 lost and 10 were flat. Evaluation included 146
+complete weeks; 44 gained, 39 lost and 63 were flat. The lower 95% block-
+bootstrap weekly-mean bound was -0.10%, so weekly consistency is not
+established.
+
+The candidate is labeled historically profitable and deployment unqualified.
+The final interval was already inspected in exploratory work, the search has
+multiple-testing risk, account-specific costs/fills remain unverified, and no
+new 12-week paper observation exists. Artifacts and limitations are in
+`research/defensive_trend/`. No external order was submitted and live trading
+remains disabled.
+
+Final regression command:
+`PLAYWRIGHT_BROWSERS_PATH=/workspace/pw-browsers .venv/bin/pytest tests -q` —
+**88 passed, 4,971 dependency deprecation warnings in 61.50 seconds**. The log is
+`research/defensive_trend/verification_tests.txt`. Focused defensive tests cover
+feature causality, stable calendar cadence, allocation caps, BTC gating, cost
+monotonicity, protocol hashing and explicit deployment blocking. The browser
+test verifies that the dashboard renders the historical and deployment states.

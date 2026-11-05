@@ -1,0 +1,2432 @@
+[
+  {
+    "name": "trend_100_momentum_30_weekly_both",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 30,
+      "cadence": "weekly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 537.960993999351,
+      "net_return": 0.07592198799870209,
+      "same_trade_gross_return": 0.07719870578797727,
+      "max_drawdown": -0.012302265599881013,
+      "fill_count": 27,
+      "sell_count": 16,
+      "transaction_costs": 0.6383588946376898
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 507.33475525467475,
+      "net_return": 0.014669510509349504,
+      "same_trade_gross_return": 0.017461972435782958,
+      "max_drawdown": -0.06088118763468975,
+      "fill_count": 67,
+      "sell_count": 35,
+      "transaction_costs": 1.396230963216682
+    },
+    "eligible": true
+  },
+  {
+    "name": "trend_100_momentum_30_weekly_best",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 30,
+      "cadence": "weekly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 523.5452434629154,
+      "net_return": 0.04709048692583084,
+      "same_trade_gross_return": 0.04764499496633423,
+      "max_drawdown": -0.005751032456437377,
+      "fill_count": 14,
+      "sell_count": 8,
+      "transaction_costs": 0.277254020251707
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 503.107222542943,
+      "net_return": 0.006214445085886089,
+      "same_trade_gross_return": 0.008484755407998756,
+      "max_drawdown": -0.030924632725373713,
+      "fill_count": 43,
+      "sell_count": 21,
+      "transaction_costs": 1.1351551610563486
+    },
+    "eligible": true
+  },
+  {
+    "name": "trend_100_momentum_30_weekly_btc_gate",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 30,
+      "cadence": "weekly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 540.1320518099637,
+      "net_return": 0.08026410361992742,
+      "same_trade_gross_return": 0.08140457189674355,
+      "max_drawdown": -0.012302265599881013,
+      "fill_count": 26,
+      "sell_count": 15,
+      "transaction_costs": 0.5702341384080198
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 515.4158338530075,
+      "net_return": 0.030831667706014976,
+      "same_trade_gross_return": 0.033395565515532244,
+      "max_drawdown": -0.05453195245969711,
+      "fill_count": 62,
+      "sell_count": 33,
+      "transaction_costs": 1.2819489047587256
+    },
+    "eligible": true
+  },
+  {
+    "name": "trend_100_momentum_30_biweekly_both",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 30,
+      "cadence": "biweekly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 542.0741868279863,
+      "net_return": 0.0841483736559725,
+      "same_trade_gross_return": 0.08527232278460373,
+      "max_drawdown": -0.012302341186274823,
+      "fill_count": 18,
+      "sell_count": 11,
+      "transaction_costs": 0.561974564315618
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 496.96509677255585,
+      "net_return": -0.006069806454888305,
+      "same_trade_gross_return": -0.004284571381263369,
+      "max_drawdown": -0.040937899440607106,
+      "fill_count": 34,
+      "sell_count": 17,
+      "transaction_costs": 0.8926175368124274
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_100_momentum_30_biweekly_best",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 30,
+      "cadence": "biweekly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 524.1967258011451,
+      "net_return": 0.04839345160229036,
+      "same_trade_gross_return": 0.04893953778767757,
+      "max_drawdown": -0.005751061983770844,
+      "fill_count": 9,
+      "sell_count": 6,
+      "transaction_costs": 0.27304309269373495
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 491.3756716395893,
+      "net_return": -0.01724865672082132,
+      "same_trade_gross_return": -0.01581788831731079,
+      "max_drawdown": -0.030194351364037253,
+      "fill_count": 23,
+      "sell_count": 10,
+      "transaction_costs": 0.7153842017552583
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_100_momentum_30_biweekly_btc_gate",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 30,
+      "cadence": "biweekly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 542.0741868279863,
+      "net_return": 0.0841483736559725,
+      "same_trade_gross_return": 0.08527232278460373,
+      "max_drawdown": -0.012302341186274823,
+      "fill_count": 18,
+      "sell_count": 11,
+      "transaction_costs": 0.561974564315618
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 506.39327481575424,
+      "net_return": 0.012786549631508493,
+      "same_trade_gross_return": 0.014540956032527141,
+      "max_drawdown": -0.02345096057388063,
+      "fill_count": 30,
+      "sell_count": 16,
+      "transaction_costs": 0.877203200509307
+    },
+    "eligible": true
+  },
+  {
+    "name": "trend_100_momentum_30_monthly_both",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 30,
+      "cadence": "monthly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 536.1692811157453,
+      "net_return": 0.07233856223149071,
+      "same_trade_gross_return": 0.07315156150371926,
+      "max_drawdown": -0.024059566033355573,
+      "fill_count": 8,
+      "sell_count": 4,
+      "transaction_costs": 0.4064996361143442
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 485.4188331104667,
+      "net_return": -0.029162333779066518,
+      "same_trade_gross_return": -0.027498891243818768,
+      "max_drawdown": -0.0575810366817433,
+      "fill_count": 20,
+      "sell_count": 10,
+      "transaction_costs": 0.8317212676238778
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_100_momentum_30_monthly_best",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 30,
+      "cadence": "monthly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 518.2865034071357,
+      "net_return": 0.036573006814271336,
+      "same_trade_gross_return": 0.036973932702834444,
+      "max_drawdown": -0.012010470286518915,
+      "fill_count": 4,
+      "sell_count": 2,
+      "transaction_costs": 0.20046294428156564
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 493.0514774981115,
+      "net_return": -0.013897045003776975,
+      "same_trade_gross_return": -0.012964528074525639,
+      "max_drawdown": -0.025604295331153715,
+      "fill_count": 11,
+      "sell_count": 5,
+      "transaction_costs": 0.46625846462565834
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_100_momentum_30_monthly_btc_gate",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 30,
+      "cadence": "monthly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 536.1692811157453,
+      "net_return": 0.07233856223149071,
+      "same_trade_gross_return": 0.07315156150371926,
+      "max_drawdown": -0.024059566033355573,
+      "fill_count": 8,
+      "sell_count": 4,
+      "transaction_costs": 0.4064996361143442
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 485.4188331104667,
+      "net_return": -0.029162333779066518,
+      "same_trade_gross_return": -0.027498891243818768,
+      "max_drawdown": -0.0575810366817433,
+      "fill_count": 20,
+      "sell_count": 10,
+      "transaction_costs": 0.8317212676238778
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_100_momentum_90_weekly_both",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 90,
+      "cadence": "weekly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 535.3298594087869,
+      "net_return": 0.07065971881757371,
+      "same_trade_gross_return": 0.07151218413861105,
+      "max_drawdown": -0.012302265599880902,
+      "fill_count": 22,
+      "sell_count": 13,
+      "transaction_costs": 0.42623266051864545
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 515.7299302479381,
+      "net_return": 0.031459860495876235,
+      "same_trade_gross_return": 0.03392323185307,
+      "max_drawdown": -0.022232655171057214,
+      "fill_count": 61,
+      "sell_count": 33,
+      "transaction_costs": 1.2316856785969172
+    },
+    "eligible": true
+  },
+  {
+    "name": "trend_100_momentum_90_weekly_best",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 90,
+      "cadence": "weekly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 513.542443646486,
+      "net_return": 0.027084887292972093,
+      "same_trade_gross_return": 0.027663688131524644,
+      "max_drawdown": -0.005751032456437488,
+      "fill_count": 13,
+      "sell_count": 6,
+      "transaction_costs": 0.28940041927623045
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 506.8381678996695,
+      "net_return": 0.013676335799339023,
+      "same_trade_gross_return": 0.015188930064025108,
+      "max_drawdown": -0.019130316216125376,
+      "fill_count": 36,
+      "sell_count": 18,
+      "transaction_costs": 0.7562971323431139
+    },
+    "eligible": true
+  },
+  {
+    "name": "trend_100_momentum_90_weekly_btc_gate",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 90,
+      "cadence": "weekly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 534.9149047354289,
+      "net_return": 0.06982980947085782,
+      "same_trade_gross_return": 0.07068278892559254,
+      "max_drawdown": -0.012302265599881013,
+      "fill_count": 20,
+      "sell_count": 13,
+      "transaction_costs": 0.4264897273674331
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 523.6281164930771,
+      "net_return": 0.04725623298615411,
+      "same_trade_gross_return": 0.04936072436684125,
+      "max_drawdown": -0.03281155677879943,
+      "fill_count": 62,
+      "sell_count": 32,
+      "transaction_costs": 1.0522456903435429
+    },
+    "eligible": true
+  },
+  {
+    "name": "trend_100_momentum_90_biweekly_both",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 90,
+      "cadence": "biweekly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 536.1409640110496,
+      "net_return": 0.0722819280220992,
+      "same_trade_gross_return": 0.07293452891486751,
+      "max_drawdown": -0.012302341186274823,
+      "fill_count": 12,
+      "sell_count": 8,
+      "transaction_costs": 0.32630044638411393
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 512.2052180341082,
+      "net_return": 0.024410436068216246,
+      "same_trade_gross_return": 0.025675810908311503,
+      "max_drawdown": -0.02094392774316578,
+      "fill_count": 27,
+      "sell_count": 13,
+      "transaction_costs": 0.632687420047574
+    },
+    "eligible": true
+  },
+  {
+    "name": "trend_100_momentum_90_biweekly_best",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 90,
+      "cadence": "biweekly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 513.2064324703111,
+      "net_return": 0.026412864940622338,
+      "same_trade_gross_return": 0.02690050694428625,
+      "max_drawdown": -0.005751062046760236,
+      "fill_count": 8,
+      "sell_count": 4,
+      "transaction_costs": 0.24382100183201988
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 507.27365721433074,
+      "net_return": 0.014547314428661418,
+      "same_trade_gross_return": 0.015408649631575955,
+      "max_drawdown": -0.017211110776391925,
+      "fill_count": 16,
+      "sell_count": 7,
+      "transaction_costs": 0.43066760145725114
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_100_momentum_90_biweekly_btc_gate",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 90,
+      "cadence": "biweekly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 535.1845434342448,
+      "net_return": 0.07036908686848964,
+      "same_trade_gross_return": 0.07092653503740398,
+      "max_drawdown": -0.012302341186274934,
+      "fill_count": 10,
+      "sell_count": 7,
+      "transaction_costs": 0.27872408445712044
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 514.1167476964688,
+      "net_return": 0.028233495392937513,
+      "same_trade_gross_return": 0.029626911776316156,
+      "max_drawdown": -0.03225747906382448,
+      "fill_count": 30,
+      "sell_count": 14,
+      "transaction_costs": 0.6967081916892339
+    },
+    "eligible": true
+  },
+  {
+    "name": "trend_100_momentum_90_monthly_both",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 90,
+      "cadence": "monthly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 533.877683615866,
+      "net_return": 0.06775536723173192,
+      "same_trade_gross_return": 0.06838583948836008,
+      "max_drawdown": -0.02405956603335535,
+      "fill_count": 6,
+      "sell_count": 3,
+      "transaction_costs": 0.31523612831401854
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 515.1717147856219,
+      "net_return": 0.03034342957124392,
+      "same_trade_gross_return": 0.031533244613581646,
+      "max_drawdown": -0.022030657634639628,
+      "fill_count": 15,
+      "sell_count": 7,
+      "transaction_costs": 0.5949075211689298
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_100_momentum_90_monthly_best",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 90,
+      "cadence": "monthly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 518.2865034071357,
+      "net_return": 0.036573006814271336,
+      "same_trade_gross_return": 0.036973932702834444,
+      "max_drawdown": -0.012010470286518915,
+      "fill_count": 4,
+      "sell_count": 2,
+      "transaction_costs": 0.20046294428156564
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 506.17167438669804,
+      "net_return": 0.012343348773396157,
+      "same_trade_gross_return": 0.01295763163259056,
+      "max_drawdown": -0.016161221874265497,
+      "fill_count": 8,
+      "sell_count": 4,
+      "transaction_costs": 0.307141429597241
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_100_momentum_90_monthly_btc_gate",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 90,
+      "cadence": "monthly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 532.5862344606641,
+      "net_return": 0.06517246892132822,
+      "same_trade_gross_return": 0.06570653152781891,
+      "max_drawdown": -0.02405956603335524,
+      "fill_count": 4,
+      "sell_count": 2,
+      "transaction_costs": 0.2670313032453829
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 509.83586599932397,
+      "net_return": 0.019671731998647912,
+      "same_trade_gross_return": 0.020954928875260848,
+      "max_drawdown": -0.03205276065224272,
+      "fill_count": 16,
+      "sell_count": 7,
+      "transaction_costs": 0.6415984383064449
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_100_momentum_180_weekly_both",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 180,
+      "cadence": "weekly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 536.0047713917365,
+      "net_return": 0.07200954278347305,
+      "same_trade_gross_return": 0.07269681280384699,
+      "max_drawdown": -0.012302265599881013,
+      "fill_count": 18,
+      "sell_count": 12,
+      "transaction_costs": 0.3436350101869417
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 516.5913242162889,
+      "net_return": 0.03318264843257768,
+      "same_trade_gross_return": 0.035576390439925554,
+      "max_drawdown": -0.02284512220929802,
+      "fill_count": 56,
+      "sell_count": 27,
+      "transaction_costs": 1.1968710036739305
+    },
+    "eligible": true
+  },
+  {
+    "name": "trend_100_momentum_180_weekly_best",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 180,
+      "cadence": "weekly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 514.6273330375116,
+      "net_return": 0.029254666075023028,
+      "same_trade_gross_return": 0.02960274277042374,
+      "max_drawdown": -0.006857145862830705,
+      "fill_count": 10,
+      "sell_count": 6,
+      "transaction_costs": 0.17403834770029622
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 511.1150457632379,
+      "net_return": 0.022230091526475704,
+      "same_trade_gross_return": 0.02364390722815002,
+      "max_drawdown": -0.017154227997043914,
+      "fill_count": 32,
+      "sell_count": 15,
+      "transaction_costs": 0.7069078508370963
+    },
+    "eligible": true
+  },
+  {
+    "name": "trend_100_momentum_180_weekly_btc_gate",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 180,
+      "cadence": "weekly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 534.0698979978297,
+      "net_return": 0.06813979599565934,
+      "same_trade_gross_return": 0.06869882652368942,
+      "max_drawdown": -0.012302265599881013,
+      "fill_count": 16,
+      "sell_count": 11,
+      "transaction_costs": 0.2795152640149586
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 519.7670776789181,
+      "net_return": 0.03953415535783611,
+      "same_trade_gross_return": 0.04172682244010195,
+      "max_drawdown": -0.03281155677879943,
+      "fill_count": 58,
+      "sell_count": 27,
+      "transaction_costs": 1.0963335411327777
+    },
+    "eligible": true
+  },
+  {
+    "name": "trend_100_momentum_180_biweekly_both",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 180,
+      "cadence": "biweekly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 536.6540593471057,
+      "net_return": 0.07330811869421128,
+      "same_trade_gross_return": 0.07399266369867807,
+      "max_drawdown": -0.012302341186274934,
+      "fill_count": 12,
+      "sell_count": 8,
+      "transaction_costs": 0.34227250223340117
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 504.958485137886,
+      "net_return": 0.009916970275771986,
+      "same_trade_gross_return": 0.011644021199067822,
+      "max_drawdown": -0.026964148342667804,
+      "fill_count": 29,
+      "sell_count": 12,
+      "transaction_costs": 0.8635254616479094
+    },
+    "eligible": true
+  },
+  {
+    "name": "trend_100_momentum_180_biweekly_best",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 180,
+      "cadence": "biweekly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 514.3567516326077,
+      "net_return": 0.02871350326521549,
+      "same_trade_gross_return": 0.029061852381707443,
+      "max_drawdown": -0.006857154273370747,
+      "fill_count": 7,
+      "sell_count": 4,
+      "transaction_costs": 0.174174558246012
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 501.129431157906,
+      "net_return": 0.0022588623158119603,
+      "same_trade_gross_return": 0.0032439501448158214,
+      "max_drawdown": -0.018873100717602842,
+      "fill_count": 17,
+      "sell_count": 7,
+      "transaction_costs": 0.49254391450185225
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_100_momentum_180_biweekly_btc_gate",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 180,
+      "cadence": "biweekly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 535.1845434342448,
+      "net_return": 0.07036908686848964,
+      "same_trade_gross_return": 0.07092653503740398,
+      "max_drawdown": -0.012302341186274934,
+      "fill_count": 10,
+      "sell_count": 7,
+      "transaction_costs": 0.27872408445712044
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 511.164788796148,
+      "net_return": 0.022329577592296035,
+      "same_trade_gross_return": 0.024045486311503828,
+      "max_drawdown": -0.03225747906382437,
+      "fill_count": 30,
+      "sell_count": 12,
+      "transaction_costs": 0.8579543596038818
+    },
+    "eligible": true
+  },
+  {
+    "name": "trend_100_momentum_180_monthly_both",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 180,
+      "cadence": "monthly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 532.5862344606641,
+      "net_return": 0.06517246892132822,
+      "same_trade_gross_return": 0.06570653152781891,
+      "max_drawdown": -0.02405956603335524,
+      "fill_count": 4,
+      "sell_count": 2,
+      "transaction_costs": 0.2670313032453829
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 511.3551467654755,
+      "net_return": 0.02271029353095111,
+      "same_trade_gross_return": 0.02401837426152653,
+      "max_drawdown": -0.021854898895493857,
+      "fill_count": 15,
+      "sell_count": 7,
+      "transaction_costs": 0.6540403652877521
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_100_momentum_180_monthly_best",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 180,
+      "cadence": "monthly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 515.5534651718837,
+      "net_return": 0.031106930343767214,
+      "same_trade_gross_return": 0.031335921439581194,
+      "max_drawdown": -0.013330971605441277,
+      "fill_count": 2,
+      "sell_count": 1,
+      "transaction_costs": 0.11449554790697442
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 501.31785838374566,
+      "net_return": 0.002635716767491303,
+      "same_trade_gross_return": 0.003374829728966189,
+      "max_drawdown": -0.016827472414772893,
+      "fill_count": 9,
+      "sell_count": 4,
+      "transaction_costs": 0.36955648073743347
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_100_momentum_180_monthly_btc_gate",
+    "spec": {
+      "slow_days": 100,
+      "momentum_days": 180,
+      "cadence": "monthly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 532.5862344606641,
+      "net_return": 0.06517246892132822,
+      "same_trade_gross_return": 0.06570653152781891,
+      "max_drawdown": -0.02405956603335524,
+      "fill_count": 4,
+      "sell_count": 2,
+      "transaction_costs": 0.2670313032453829
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 511.6823764198615,
+      "net_return": 0.023364752839722946,
+      "same_trade_gross_return": 0.024631373123242817,
+      "max_drawdown": -0.03205276065224283,
+      "fill_count": 14,
+      "sell_count": 6,
+      "transaction_costs": 0.6333101417598666
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_30_weekly_both",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 30,
+      "cadence": "weekly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 525.1619361294274,
+      "net_return": 0.05032387225885482,
+      "same_trade_gross_return": 0.05247513006557458,
+      "max_drawdown": -0.025664077913320815,
+      "fill_count": 51,
+      "sell_count": 30,
+      "transaction_costs": 1.0756289033598792
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_30_weekly_best",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 30,
+      "cadence": "weekly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 507.28150315101755,
+      "net_return": 0.014563006302034998,
+      "same_trade_gross_return": 0.016692618306905826,
+      "max_drawdown": -0.020582268356070466,
+      "fill_count": 34,
+      "sell_count": 18,
+      "transaction_costs": 1.0648060024353156
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_30_weekly_btc_gate",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 30,
+      "cadence": "weekly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 529.6336271227517,
+      "net_return": 0.0592672542455035,
+      "same_trade_gross_return": 0.06161676754949785,
+      "max_drawdown": -0.016674622511964277,
+      "fill_count": 52,
+      "sell_count": 32,
+      "transaction_costs": 1.1747566519971984
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_30_biweekly_both",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 30,
+      "cadence": "biweekly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 498.0771637049341,
+      "net_return": -0.003845672590131799,
+      "same_trade_gross_return": -0.0021015118711649183,
+      "max_drawdown": -0.03603356410934189,
+      "fill_count": 30,
+      "sell_count": 16,
+      "transaction_costs": 0.8720803594834212
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_30_biweekly_best",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 30,
+      "cadence": "biweekly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 492.4756919282765,
+      "net_return": -0.015048616143446991,
+      "same_trade_gross_return": -0.013661763375237945,
+      "max_drawdown": -0.02578663853842944,
+      "fill_count": 19,
+      "sell_count": 9,
+      "transaction_costs": 0.6934263841045324
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_30_biweekly_btc_gate",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 30,
+      "cadence": "biweekly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 499.29484616799493,
+      "net_return": -0.0014103076640101797,
+      "same_trade_gross_return": 0.00048362172164795325,
+      "max_drawdown": -0.034043296750470464,
+      "fill_count": 30,
+      "sell_count": 16,
+      "transaction_costs": 0.946964692829022
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_30_monthly_both",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 30,
+      "cadence": "monthly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 509.9421079168022,
+      "net_return": 0.019884215833604335,
+      "same_trade_gross_return": 0.021095097688931252,
+      "max_drawdown": -0.03778142730100986,
+      "fill_count": 15,
+      "sell_count": 8,
+      "transaction_costs": 0.6054409276634951
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_30_monthly_best",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 30,
+      "cadence": "monthly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 507.04307057981464,
+      "net_return": 0.014086141159629362,
+      "same_trade_gross_return": 0.014971640550947463,
+      "max_drawdown": -0.026154685733731475,
+      "fill_count": 10,
+      "sell_count": 5,
+      "transaction_costs": 0.44274969565905453
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_30_monthly_btc_gate",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 30,
+      "cadence": "monthly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 519.258807788896,
+      "net_return": 0.038517615577791986,
+      "same_trade_gross_return": 0.03964649105043749,
+      "max_drawdown": -0.03986447824071093,
+      "fill_count": 14,
+      "sell_count": 8,
+      "transaction_costs": 0.5644377363228578
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_90_weekly_both",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 90,
+      "cadence": "weekly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 536.3974613875662,
+      "net_return": 0.07279492277513233,
+      "same_trade_gross_return": 0.07394130981240732,
+      "max_drawdown": -0.02100387955895,
+      "fill_count": 40,
+      "sell_count": 25,
+      "transaction_costs": 0.5731935186374262
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_90_weekly_best",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 90,
+      "cadence": "weekly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 522.2037963298458,
+      "net_return": 0.04440759265969163,
+      "same_trade_gross_return": 0.04522513049860111,
+      "max_drawdown": -0.011618176252954915,
+      "fill_count": 22,
+      "sell_count": 13,
+      "transaction_costs": 0.4087689194547874
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_90_weekly_btc_gate",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 90,
+      "cadence": "weekly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 542.2820131471152,
+      "net_return": 0.08456402629423043,
+      "same_trade_gross_return": 0.0857457416757581,
+      "max_drawdown": -0.02100387955895,
+      "fill_count": 42,
+      "sell_count": 26,
+      "transaction_costs": 0.5908576907639245
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_90_biweekly_both",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 90,
+      "cadence": "biweekly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 520.6671455068798,
+      "net_return": 0.04133429101375974,
+      "same_trade_gross_return": 0.042082564557233804,
+      "max_drawdown": -0.02094392774316578,
+      "fill_count": 21,
+      "sell_count": 11,
+      "transaction_costs": 0.374136771737034
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_90_biweekly_best",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 90,
+      "cadence": "biweekly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 514.331606573084,
+      "net_return": 0.028663213146167932,
+      "same_trade_gross_return": 0.02923341122387657,
+      "max_drawdown": -0.011655555665497364,
+      "fill_count": 12,
+      "sell_count": 6,
+      "transaction_costs": 0.2850990388543565
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_90_biweekly_btc_gate",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 90,
+      "cadence": "biweekly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 526.1795131426492,
+      "net_return": 0.05235902628529843,
+      "same_trade_gross_return": 0.05318416662779035,
+      "max_drawdown": -0.02094392774316578,
+      "fill_count": 22,
+      "sell_count": 12,
+      "transaction_costs": 0.4125701712459529
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_90_monthly_both",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 90,
+      "cadence": "monthly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 524.4392618801076,
+      "net_return": 0.048878523760215176,
+      "same_trade_gross_return": 0.049598775297807984,
+      "max_drawdown": -0.022030657634639628,
+      "fill_count": 10,
+      "sell_count": 5,
+      "transaction_costs": 0.36012576879652597
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_90_monthly_best",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 90,
+      "cadence": "monthly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 513.4214193334601,
+      "net_return": 0.026842838666920166,
+      "same_trade_gross_return": 0.027167247090102764,
+      "max_drawdown": -0.012453267057272566,
+      "fill_count": 5,
+      "sell_count": 3,
+      "transaction_costs": 0.16220421159125417
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_90_monthly_btc_gate",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 90,
+      "cadence": "monthly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 524.4392618801076,
+      "net_return": 0.048878523760215176,
+      "same_trade_gross_return": 0.049598775297807984,
+      "max_drawdown": -0.022030657634639628,
+      "fill_count": 10,
+      "sell_count": 5,
+      "transaction_costs": 0.36012576879652597
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_180_weekly_both",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 180,
+      "cadence": "weekly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 526.4968990208613,
+      "net_return": 0.05299379804172255,
+      "same_trade_gross_return": 0.054545119566423494,
+      "max_drawdown": -0.022247323297163724,
+      "fill_count": 39,
+      "sell_count": 22,
+      "transaction_costs": 0.7756607623503611
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_180_weekly_best",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 180,
+      "cadence": "weekly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 517.2739135328633,
+      "net_return": 0.034547827065726455,
+      "same_trade_gross_return": 0.035674439787151346,
+      "max_drawdown": -0.014036995879363134,
+      "fill_count": 23,
+      "sell_count": 13,
+      "transaction_costs": 0.5633063607124849
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_180_weekly_btc_gate",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 180,
+      "cadence": "weekly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 532.8655707672561,
+      "net_return": 0.06573114153451232,
+      "same_trade_gross_return": 0.06711047069634613,
+      "max_drawdown": -0.02224732334829116,
+      "fill_count": 38,
+      "sell_count": 21,
+      "transaction_costs": 0.6896645809168656
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_180_biweekly_both",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 180,
+      "cadence": "biweekly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 513.3006923773929,
+      "net_return": 0.026601384754785906,
+      "same_trade_gross_return": 0.02781865038458764,
+      "max_drawdown": -0.026964148342667804,
+      "fill_count": 23,
+      "sell_count": 10,
+      "transaction_costs": 0.608632814900967
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_180_biweekly_best",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 180,
+      "cadence": "biweekly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 508.1018928597737,
+      "net_return": 0.016203785719547392,
+      "same_trade_gross_return": 0.016901262749392965,
+      "max_drawdown": -0.018873100717602842,
+      "fill_count": 13,
+      "sell_count": 6,
+      "transaction_costs": 0.34873851492274366
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_180_biweekly_btc_gate",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 180,
+      "cadence": "biweekly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 523.1582921768911,
+      "net_return": 0.046316584353782275,
+      "same_trade_gross_return": 0.04746747996318712,
+      "max_drawdown": -0.022389460962702,
+      "fill_count": 22,
+      "sell_count": 10,
+      "transaction_costs": 0.5754478047024747
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_180_monthly_both",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 180,
+      "cadence": "monthly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 520.5540367057524,
+      "net_return": 0.0411080734115048,
+      "same_trade_gross_return": 0.041950069324158124,
+      "max_drawdown": -0.021854898895493857,
+      "fill_count": 10,
+      "sell_count": 5,
+      "transaction_costs": 0.4209979563266833
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_180_monthly_best",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 180,
+      "cadence": "monthly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 508.4980835809434,
+      "net_return": 0.016996167161886788,
+      "same_trade_gross_return": 0.01744818537109638,
+      "max_drawdown": -0.016827472414772893,
+      "fill_count": 6,
+      "sell_count": 3,
+      "transaction_costs": 0.22600910460482534
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_150_momentum_180_monthly_btc_gate",
+    "spec": {
+      "slow_days": 150,
+      "momentum_days": 180,
+      "cadence": "monthly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 526.338662504076,
+      "net_return": 0.05267732500815181,
+      "same_trade_gross_return": 0.05337896109170859,
+      "max_drawdown": -0.010985319586955478,
+      "fill_count": 8,
+      "sell_count": 4,
+      "transaction_costs": 0.3508180417782843
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_30_weekly_both",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 30,
+      "cadence": "weekly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 538.75730550882,
+      "net_return": 0.0775146110176399,
+      "same_trade_gross_return": 0.07894184926902148,
+      "max_drawdown": -0.010597457024684398,
+      "fill_count": 41,
+      "sell_count": 25,
+      "transaction_costs": 0.7136191256907637
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_30_weekly_best",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 30,
+      "cadence": "weekly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 517.7150181098751,
+      "net_return": 0.03543003621975016,
+      "same_trade_gross_return": 0.03699046145407969,
+      "max_drawdown": -0.006083990805160755,
+      "fill_count": 26,
+      "sell_count": 14,
+      "transaction_costs": 0.7802126171647158
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_30_weekly_btc_gate",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 30,
+      "cadence": "weekly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 542.4189829594471,
+      "net_return": 0.08483796591889425,
+      "same_trade_gross_return": 0.08630532868254304,
+      "max_drawdown": -0.010597457024684398,
+      "fill_count": 42,
+      "sell_count": 26,
+      "transaction_costs": 0.733681381824396
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_30_biweekly_both",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 30,
+      "cadence": "biweekly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 514.7541277897146,
+      "net_return": 0.029508255579429266,
+      "same_trade_gross_return": 0.030550427221779364,
+      "max_drawdown": -0.013701993636439647,
+      "fill_count": 22,
+      "sell_count": 12,
+      "transaction_costs": 0.5210858211750383
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_30_biweekly_best",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 30,
+      "cadence": "biweekly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 504.8192981497189,
+      "net_return": 0.009638596299437863,
+      "same_trade_gross_return": 0.01045889746105555,
+      "max_drawdown": -0.007338830924202067,
+      "fill_count": 13,
+      "sell_count": 6,
+      "transaction_costs": 0.4101505808088748
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_30_biweekly_btc_gate",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 30,
+      "cadence": "biweekly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 514.7541277897146,
+      "net_return": 0.029508255579429266,
+      "same_trade_gross_return": 0.030550427221779364,
+      "max_drawdown": -0.013701993636439647,
+      "fill_count": 22,
+      "sell_count": 12,
+      "transaction_costs": 0.5210858211750383
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_30_monthly_both",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 30,
+      "cadence": "monthly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 512.6838182573366,
+      "net_return": 0.02536763651467333,
+      "same_trade_gross_return": 0.02603646950244176,
+      "max_drawdown": -0.011728045237304974,
+      "fill_count": 8,
+      "sell_count": 4,
+      "transaction_costs": 0.3344164938842959
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_30_monthly_best",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 30,
+      "cadence": "monthly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 504.8728360991123,
+      "net_return": 0.009745672198224531,
+      "same_trade_gross_return": 0.010226728746078662,
+      "max_drawdown": -0.006899344543960018,
+      "fill_count": 5,
+      "sell_count": 2,
+      "transaction_costs": 0.24052827392706377
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_30_monthly_btc_gate",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 30,
+      "cadence": "monthly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 512.6838182573366,
+      "net_return": 0.02536763651467333,
+      "same_trade_gross_return": 0.02603646950244176,
+      "max_drawdown": -0.011728045237304974,
+      "fill_count": 8,
+      "sell_count": 4,
+      "transaction_costs": 0.3344164938842959
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_90_weekly_both",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 90,
+      "cadence": "weekly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 536.3974613875662,
+      "net_return": 0.07279492277513233,
+      "same_trade_gross_return": 0.07394130981240732,
+      "max_drawdown": -0.02100387955895,
+      "fill_count": 40,
+      "sell_count": 25,
+      "transaction_costs": 0.5731935186374262
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_90_weekly_best",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 90,
+      "cadence": "weekly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 522.2037963298458,
+      "net_return": 0.04440759265969163,
+      "same_trade_gross_return": 0.04522513049860111,
+      "max_drawdown": -0.011618176252954915,
+      "fill_count": 22,
+      "sell_count": 13,
+      "transaction_costs": 0.4087689194547874
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_90_weekly_btc_gate",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 90,
+      "cadence": "weekly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 542.2820131471152,
+      "net_return": 0.08456402629423043,
+      "same_trade_gross_return": 0.0857457416757581,
+      "max_drawdown": -0.02100387955895,
+      "fill_count": 42,
+      "sell_count": 26,
+      "transaction_costs": 0.5908576907639245
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_90_biweekly_both",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 90,
+      "cadence": "biweekly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 520.6671455068798,
+      "net_return": 0.04133429101375974,
+      "same_trade_gross_return": 0.042082564557233804,
+      "max_drawdown": -0.02094392774316578,
+      "fill_count": 21,
+      "sell_count": 11,
+      "transaction_costs": 0.374136771737034
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_90_biweekly_best",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 90,
+      "cadence": "biweekly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 514.331606573084,
+      "net_return": 0.028663213146167932,
+      "same_trade_gross_return": 0.02923341122387657,
+      "max_drawdown": -0.011655555665497364,
+      "fill_count": 12,
+      "sell_count": 6,
+      "transaction_costs": 0.2850990388543565
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_90_biweekly_btc_gate",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 90,
+      "cadence": "biweekly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 526.1795131426492,
+      "net_return": 0.05235902628529843,
+      "same_trade_gross_return": 0.05318416662779035,
+      "max_drawdown": -0.02094392774316578,
+      "fill_count": 22,
+      "sell_count": 12,
+      "transaction_costs": 0.4125701712459529
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_90_monthly_both",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 90,
+      "cadence": "monthly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 524.4392618801076,
+      "net_return": 0.048878523760215176,
+      "same_trade_gross_return": 0.049598775297807984,
+      "max_drawdown": -0.022030657634639628,
+      "fill_count": 10,
+      "sell_count": 5,
+      "transaction_costs": 0.36012576879652597
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_90_monthly_best",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 90,
+      "cadence": "monthly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 513.4214193334601,
+      "net_return": 0.026842838666920166,
+      "same_trade_gross_return": 0.027167247090102764,
+      "max_drawdown": -0.012453267057272566,
+      "fill_count": 5,
+      "sell_count": 3,
+      "transaction_costs": 0.16220421159125417
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_90_monthly_btc_gate",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 90,
+      "cadence": "monthly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 524.4392618801076,
+      "net_return": 0.048878523760215176,
+      "same_trade_gross_return": 0.049598775297807984,
+      "max_drawdown": -0.022030657634639628,
+      "fill_count": 10,
+      "sell_count": 5,
+      "transaction_costs": 0.36012576879652597
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_180_weekly_both",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 180,
+      "cadence": "weekly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 529.2044718985238,
+      "net_return": 0.05840894379704764,
+      "same_trade_gross_return": 0.05981054105434769,
+      "max_drawdown": -0.022247323297163613,
+      "fill_count": 37,
+      "sell_count": 21,
+      "transaction_costs": 0.7007986286499587
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_180_weekly_best",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 180,
+      "cadence": "weekly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 519.9340561114968,
+      "net_return": 0.03986811222299358,
+      "same_trade_gross_return": 0.04084281656152,
+      "max_drawdown": -0.014036995879363245,
+      "fill_count": 21,
+      "sell_count": 12,
+      "transaction_costs": 0.4873521692632215
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_180_weekly_btc_gate",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 180,
+      "cadence": "weekly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 532.8655707672561,
+      "net_return": 0.06573114153451232,
+      "same_trade_gross_return": 0.06711047069634613,
+      "max_drawdown": -0.02224732334829116,
+      "fill_count": 38,
+      "sell_count": 21,
+      "transaction_costs": 0.6896645809168656
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_180_biweekly_both",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 180,
+      "cadence": "biweekly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 517.6775754896216,
+      "net_return": 0.035355150979243355,
+      "same_trade_gross_return": 0.03642962114391901,
+      "max_drawdown": -0.022389460962702,
+      "fill_count": 21,
+      "sell_count": 9,
+      "transaction_costs": 0.537235082337917
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_180_biweekly_best",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 180,
+      "cadence": "biweekly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 512.4344461315201,
+      "net_return": 0.024868892263040232,
+      "same_trade_gross_return": 0.025419141622662345,
+      "max_drawdown": -0.012037863165939577,
+      "fill_count": 11,
+      "sell_count": 5,
+      "transaction_costs": 0.27512467981116473
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_180_biweekly_btc_gate",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 180,
+      "cadence": "biweekly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 523.1582921768911,
+      "net_return": 0.046316584353782275,
+      "same_trade_gross_return": 0.04746747996318712,
+      "max_drawdown": -0.022389460962702,
+      "fill_count": 22,
+      "sell_count": 10,
+      "transaction_costs": 0.5754478047024747
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_180_monthly_both",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 180,
+      "cadence": "monthly",
+      "mode": "both"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 526.338662504076,
+      "net_return": 0.05267732500815181,
+      "same_trade_gross_return": 0.05337896109170859,
+      "max_drawdown": -0.010985319586955478,
+      "fill_count": 8,
+      "sell_count": 4,
+      "transaction_costs": 0.3508180417782843
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_180_monthly_best",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 180,
+      "cadence": "monthly",
+      "mode": "best"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 514.1487383166076,
+      "net_return": 0.028297476633215135,
+      "same_trade_gross_return": 0.02860480140927346,
+      "max_drawdown": -0.0059020261282285436,
+      "fill_count": 4,
+      "sell_count": 2,
+      "transaction_costs": 0.1536623880291215
+    },
+    "eligible": false
+  },
+  {
+    "name": "trend_200_momentum_180_monthly_btc_gate",
+    "spec": {
+      "slow_days": 200,
+      "momentum_days": 180,
+      "cadence": "monthly",
+      "mode": "btc_gate"
+    },
+    "development": {
+      "initial": 500.0,
+      "ending_equity": 500.0,
+      "net_return": 0.0,
+      "same_trade_gross_return": 0.0,
+      "max_drawdown": 0.0,
+      "fill_count": 0,
+      "sell_count": 0,
+      "transaction_costs": 0.0
+    },
+    "validation": {
+      "initial": 500.0,
+      "ending_equity": 526.338662504076,
+      "net_return": 0.05267732500815181,
+      "same_trade_gross_return": 0.05337896109170859,
+      "max_drawdown": -0.010985319586955478,
+      "fill_count": 8,
+      "sell_count": 4,
+      "transaction_costs": 0.3508180417782843
+    },
+    "eligible": false
+  }
+]

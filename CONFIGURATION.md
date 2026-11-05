@@ -143,3 +143,25 @@ There is deliberately no endpoint to promote this experiment: the base rule and
 ML filter both failed the 2022 selection gate. `historical_qualified` and
 `live_qualified` remain false. Protective-stop exits require the base regime to
 reset before another entry, preventing immediate stop/re-entry churn.
+
+## Defensive trend research configuration
+
+`trader/growth/defensive.py` implements the selected research rule. Its fixed
+parameters are a 100-day BTC trend, 90-day BTC momentum, Monday 00:00 UTC
+rebalance, 10% maximum allocation per asset, 20% maximum total deployment, 80%
+minimum cash, and a 30% annualized volatility target. Features use the previous
+completed daily close and orders use the following daily open. Fractional
+quantities and 15 bp adverse cost per traded notional are modeled; evaluation
+also runs at 30 bp.
+
+The evaluator searches 81 combinations of lookback, momentum, cadence and
+allocation mode while keeping the conservative risk limits fixed. Selection
+uses 2019–2021 development and 2022–2023 validation only. Run
+`python -m scripts.evaluate_defensive_trend`; artifacts are written under
+`research/defensive_trend/`, and `GET /api/growth/defensive` exposes the locked
+protocol, selection and summary to the local dashboard.
+
+These are research constants rather than active broker settings. There is no
+promotion or execution endpoint for this candidate. Historical profitability
+does not bypass the prospective paper, verified-cost and execution-readiness
+requirements.

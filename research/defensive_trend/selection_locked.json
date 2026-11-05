@@ -1,0 +1,34 @@
+{
+  "protocol_sha256": "f767c273e6364b09852f20af8326891408d0b083a7eeb9e92aeea81073bb6e84",
+  "selected": {
+    "slow_days": 100,
+    "momentum_days": 90,
+    "cadence": "weekly",
+    "mode": "btc_gate"
+  },
+  "name": "trend_100_momentum_90_weekly_btc_gate",
+  "eligible_candidates": 14,
+  "selection_metric": "highest validation net return among eligible candidates",
+  "development": {
+    "initial": 500.0,
+    "ending_equity": 534.9149047354289,
+    "net_return": 0.06982980947085782,
+    "same_trade_gross_return": 0.07068278892559254,
+    "max_drawdown": -0.012302265599881013,
+    "fill_count": 20,
+    "sell_count": 13,
+    "transaction_costs": 0.4264897273674331
+  },
+  "validation": {
+    "initial": 500.0,
+    "ending_equity": 523.6281164930771,
+    "net_return": 0.04725623298615411,
+    "same_trade_gross_return": 0.04936072436684125,
+    "max_drawdown": -0.03281155677879943,
+    "fill_count": 62,
+    "sell_count": 32,
+    "transaction_costs": 1.0522456903435429
+  },
+  "evaluation_opened_after_formal_lock": true,
+  "evaluation_previously_inspected_during_exploration": true
+}

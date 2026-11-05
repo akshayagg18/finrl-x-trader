@@ -49,6 +49,17 @@ def router(db):
             for key in ("protocol", "selection_locked", "summary")
         }
 
+    @routes.get("/defensive")
+    def defensive():
+        """Return reproducible low-exposure research artifacts only."""
+        root = Path("research/defensive_trend")
+        return {
+            key: json.loads((root / f"{key}.json").read_text())
+            if (root / f"{key}.json").exists()
+            else None
+            for key in ("protocol", "selection_locked", "summary")
+        }
+
     @routes.get("/forward")
     def status():
         return forward.status(db)

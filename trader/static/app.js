@@ -105,3 +105,19 @@ async function refreshRegimeResearch(){
 }
 refreshRegimeResearch().catch(e=>{let host=$('regime-qualification');if(host)host.textContent=e.message;});
 $('growth-refresh').addEventListener('click',()=>refreshRegimeResearch());
+
+async function refreshDefensiveResearch(){
+  let host=$('defensive-research');
+  if(!host){
+    host=document.createElement('div');host.id='defensive-research';host.className='panel-inset';
+    host.innerHTML='<h3>Defensive BTC/ETH trend candidate</h3><p class="caption">Weekly lagged trend allocation, limited to 10% per asset and 20% total. Results use Binance history and modeled costs. Historical profitability does not qualify the rule for broker deployment.</p><div id="defensive-summary" class="table-wrap"></div><pre id="defensive-qualification"></pre><p class="caption"><a href="/api/growth/defensive">Raw locked research JSON</a></p>';
+    $('regime-research').insertAdjacentElement('afterend',host);
+  }
+  const r=await api('growth/defensive');
+  if(!r.summary){$('defensive-qualification').textContent='Evaluation unavailable. Run python -m scripts.evaluate_defensive_trend.';return;}
+  const periods=Object.entries(r.summary.periods).map(([name,value])=>({name,...value}));
+  table('defensive-summary',[['Partition',x=>esc(x.name.replaceAll('_',' '))],['Net',x=>pct(x.net_return)],['Ending value',x=>money(x.ending_equity)],['Drawdown',x=>pct(x.max_drawdown)],['Fills',x=>x.fill_count]],periods);
+  $('defensive-qualification').textContent=JSON.stringify({conclusion:r.summary.conclusion,selected:r.summary.selected_spec,risk:r.summary.risk,historically_profitable:r.summary.qualification.historically_profitable,deployment_qualified:r.summary.qualification.deployment_qualified,deployment_reasons:r.summary.qualification.deployment_reasons,two_month_windows:r.summary.two_month_windows,same_risk_hold_evaluation:r.summary.same_risk_hold_evaluation},null,2);
+}
+refreshDefensiveResearch().catch(e=>{let host=$('defensive-qualification');if(host)host.textContent=e.message;});
+$('growth-refresh').addEventListener('click',()=>refreshDefensiveResearch());
