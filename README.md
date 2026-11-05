@@ -8,7 +8,7 @@ The repository now includes a leakage-controlled XGBoost workflow for expected-r
 
 ```powershell
 py -3.13 -m venv .venv
-.venv\Scripts\python.exe -m pip install -r requirements-dev.txt -r requirements-intraday.txt "xgboost>=2,<4" "matplotlib>=3.9,<4"
+.venv\Scripts\python.exe -m pip install -r requirements-dev.txt -r requirements-intraday.txt
 .venv\Scripts\python.exe -m scripts.research_profitability
 .venv\Scripts\python.exe -m pytest tests/test_profitability.py -q
 ```

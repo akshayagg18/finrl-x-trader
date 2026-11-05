@@ -1,5 +1,5 @@
-........................................................................ [ 94%]
-....                                                                     [100%]
+........................................................................ [ 87%]
+..........                                                               [100%]
 =============================== warnings summary ===============================
 .venv/lib/python3.12/site-packages/exchange_calendars/exchange_calendar.py:65
   /workspace/FinRL-Trading/.venv/lib/python3.12/site-packages/exchange_calendars/exchange_calendar.py:65: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
@@ -138,5 +138,9 @@ tests/test_ui.py::test_intraday_continuous_replay_ui
   /workspace/FinRL-Trading/trader/intraday/engine.py:221: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
     sessions = schedule(day, pd.Timestamp(day) + pd.Timedelta(days=14))
 
+tests/test_profitability.py: 20 warnings
+  /workspace/FinRL-Trading/tests/test_profitability.py:86: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    pd.Timestamp(day.date()).tz_localize("America/New_York") + pd.Timedelta("9h30min"),
+
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-76 passed, 4950 warnings in 60.92s (0:01:00)
+82 passed, 4970 warnings in 60.70s (0:01:00)

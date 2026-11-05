@@ -42,7 +42,6 @@ def opening_range_backtest(
             open_volumes = opening_history[symbol]
             prior = history[-14:]
             if len(prior) >= 14 and len(open_volumes) >= 14:
-                previous_close = prior[-1]["close"]
                 true_ranges = [
                     max(x["high"] - x["low"], abs(x["high"] - x["previous_close"]), abs(x["low"] - x["previous_close"]))
                     for x in prior

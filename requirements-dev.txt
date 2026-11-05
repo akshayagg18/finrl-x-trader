@@ -3,3 +3,5 @@ pytest>=8,<10
 httpx>=0.27,<1
 playwright>=1.49,<2
 py7zr>=1,<2
+xgboost-cpu==2.1.4
+matplotlib>=3.9,<4

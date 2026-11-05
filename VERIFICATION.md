@@ -146,6 +146,12 @@ annual-refit history continuity, and dashboard rendering.
 
 Final regression command:
 `PLAYWRIGHT_BROWSERS_PATH=/workspace/pw-browsers .venv/bin/pytest tests -q` —
-**76 passed, 4,950 dependency deprecation warnings in 60.92 seconds**. The saved
+**82 passed, 4,970 dependency deprecation warnings in 60.70 seconds**. The saved
 output is `research/strategy_v2/verification_tests.txt`. Ruff, whitespace, and
 credential-pattern checks passed.
+
+The combined optional stack has unresolved declared dependency bounds:
+CCXT/Nautilus require `cffi==2.0.0`/`tzdata>=2026.3`, while curl-cffi/ib-async
+declare `cffi>=2.1.1`/`tzdata<2026`. The recorded suite passed with the former
+versions. Treat IBKR and CCXT as separate externally verified deployment
+profiles until their pinned packages can share a clean resolver environment.

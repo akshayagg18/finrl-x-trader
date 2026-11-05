@@ -319,7 +319,6 @@ def baselines(base, interval, horizon, selected):
     df = resample_ohlcv(base, interval)
     eth = resample_ohlcv(load_local("ETH-USDT", 5), interval)
     regimes = regime_frame(df, df.index[df.index < FINAL_START])
-    index = df.index
     momentum = df.close.pct_change(max(1, int(24 * 60 / interval))).fillna(0)
     common = dict(
         start=FINAL_START,

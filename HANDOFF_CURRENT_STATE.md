@@ -30,7 +30,7 @@ This is a working self-hosted research and simulation application with an existi
 
 **There is no qualified profitable strategy. Do not enable real trading based on the existing results.** The latest regime rule and every ML filter failed the untouched 2022 selection gate. The diagnostic ML result also lost money in the final evaluation and under cost stress. Software functionality does not establish an investment edge.
 
-- Latest recorded complete regression run: **76 passed**, 4,950 dependency deprecation warnings, 60.92 seconds. Evidence: [verification log](research/strategy_v2/verification_tests.txt).
+- Latest recorded complete regression run: **82 passed**, 4,970 dependency deprecation warnings, 60.70 seconds. Evidence: [verification log](research/strategy_v2/verification_tests.txt).
 - No real-money orders or actual brokerage paper-account executions were submitted during development.
 - No brokerage credentials were supplied. The application starts without them.
 - Live trading defaults off. The original swing console has an explicit live activation mechanism; it is not a verified production deployment.
@@ -275,7 +275,7 @@ In the existing development workspace, browser binaries were stored separately:
 PLAYWRIGHT_BROWSERS_PATH=/workspace/pw-browsers .venv/bin/pytest tests -q
 ```
 
-That path is environment-specific; do not copy it onto an unrelated PC. The latest **recorded** full run is 76 passing tests in 60.92 seconds. Browser tests use isolated databases and actual Chromium. Broker calls in automated tests use mocks.
+That path is environment-specific; do not copy it onto an unrelated PC. The latest **recorded** full run is 82 passing tests in 60.70 seconds. Browser tests use isolated databases and actual Chromium. Broker calls in automated tests use mocks.
 
 ### Docker caveat discovered during this handoff
 
