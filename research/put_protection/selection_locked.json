@@ -1,0 +1,111 @@
+{
+  "protocol_sha256": "5c03d6bae199bb2c5d75738ee360b317f00326c6c4151f3b48df2f97cd21375a",
+  "evaluation_previously_inspected": true,
+  "tiers": {
+    "drawdown_10": {
+      "selected_name": "put_trend_100_momentum_90_otm_15_coverage_50_tenor_28",
+      "selected_spec": {
+        "slow_days": 100,
+        "momentum_days": 90,
+        "strike_otm": 0.15,
+        "coverage": 0.5,
+        "tenor_days": 28,
+        "volatility_markup": 1.25
+      },
+      "eligible_count": 36,
+      "selection_passed": true,
+      "development": {
+        "initial": 500.0,
+        "ending_equity": 532.4744597289881,
+        "net_return": 0.0649489194579762,
+        "same_trade_gross_return": 0.06581740795884317,
+        "max_drawdown": -0.011260378174363539,
+        "fill_count": 36,
+        "transaction_costs": 0.43424425043344606,
+        "premium_paid": 3.8831858004850908,
+        "option_sale_value": 1.5138598482278813
+      },
+      "validation": {
+        "initial": 500.0,
+        "ending_equity": 520.2435398443583,
+        "net_return": 0.040487079688716676,
+        "same_trade_gross_return": 0.04263793183584341,
+        "max_drawdown": -0.0327839120742659,
+        "fill_count": 118,
+        "transaction_costs": 1.0754260735633754,
+        "premium_paid": 10.075600915933933,
+        "option_sale_value": 6.53816368809767
+      }
+    },
+    "drawdown_20": {
+      "selected_name": "put_trend_100_momentum_90_otm_15_coverage_50_tenor_28",
+      "selected_spec": {
+        "slow_days": 100,
+        "momentum_days": 90,
+        "strike_otm": 0.15,
+        "coverage": 0.5,
+        "tenor_days": 28,
+        "volatility_markup": 1.25
+      },
+      "eligible_count": 36,
+      "selection_passed": true,
+      "development": {
+        "initial": 500.0,
+        "ending_equity": 566.5383649575583,
+        "net_return": 0.13307672991511654,
+        "same_trade_gross_return": 0.13482748073154505,
+        "max_drawdown": -0.022409206656297087,
+        "fill_count": 36,
+        "transaction_costs": 0.8753754082141543,
+        "premium_paid": 7.961542644868791,
+        "option_sale_value": 3.083329375403596
+      },
+      "validation": {
+        "initial": 500.0,
+        "ending_equity": 540.2609260585401,
+        "net_return": 0.0805218521170803,
+        "same_trade_gross_return": 0.0848062744980489,
+        "max_drawdown": -0.06486797031354119,
+        "fill_count": 118,
+        "transaction_costs": 2.1422111904843453,
+        "premium_paid": 20.441300594555575,
+        "option_sale_value": 13.261163109359206
+      }
+    },
+    "drawdown_50": {
+      "selected_name": "put_trend_100_momentum_90_otm_15_coverage_50_tenor_28",
+      "selected_spec": {
+        "slow_days": 100,
+        "momentum_days": 90,
+        "strike_otm": 0.15,
+        "coverage": 0.5,
+        "tenor_days": 28,
+        "volatility_markup": 1.25
+      },
+      "eligible_count": 36,
+      "selection_passed": true,
+      "development": {
+        "initial": 500.0,
+        "ending_equity": 678.8259565733093,
+        "net_return": 0.3576519131466187,
+        "same_trade_gross_return": 0.36213468940387994,
+        "max_drawdown": -0.05520081758235351,
+        "fill_count": 36,
+        "transaction_costs": 2.2413881286306987,
+        "premium_paid": 21.454998806715736,
+        "option_sale_value": 8.147475702824071
+      },
+      "validation": {
+        "initial": 500.0,
+        "ending_equity": 598.1704132574251,
+        "net_return": 0.1963408265148503,
+        "same_trade_gross_return": 0.20693545840177396,
+        "max_drawdown": -0.15707998589105854,
+        "fill_count": 118,
+        "transaction_costs": 5.297315943461895,
+        "premium_paid": 53.10059495152109,
+        "option_sale_value": 34.446037645502194
+      }
+    }
+  }
+}

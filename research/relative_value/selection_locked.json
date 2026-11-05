@@ -1,0 +1,102 @@
+{
+  "protocol_sha256": "2710b2d8f31b028480b22f7015ac469d3d4be946917b3a658cd354e924cbb43a",
+  "evaluation_previously_inspected": true,
+  "tiers": {
+    "drawdown_10": {
+      "selected_name": "relative_value_60_2_0_weekly_vol_0.3",
+      "selected_spec": {
+        "lookback_days": 60,
+        "entry_z": 2.0,
+        "exit_z": 0.0,
+        "cadence": "weekly",
+        "volatility_target": 0.3
+      },
+      "eligible_count": 2,
+      "selection_passed": true,
+      "development": {
+        "initial": 500.0,
+        "ending_equity": 505.9729869405072,
+        "net_return": 0.011945973881014371,
+        "same_trade_gross_return": 0.01542208253359778,
+        "max_drawdown": -0.023308461781974765,
+        "fill_count": 34,
+        "transaction_costs": 0.8679253071542062,
+        "financing_costs": 0.8701290191374653
+      },
+      "validation": {
+        "initial": 500.0,
+        "ending_equity": 505.67091595838974,
+        "net_return": 0.01134183191677951,
+        "same_trade_gross_return": 0.030762137011823176,
+        "max_drawdown": -0.02814658926455993,
+        "fill_count": 178,
+        "transaction_costs": 2.326586880167512,
+        "financing_costs": 7.383565667354354
+      }
+    },
+    "drawdown_20": {
+      "selected_name": "relative_value_60_2_0_weekly_vol_0.3",
+      "selected_spec": {
+        "lookback_days": 60,
+        "entry_z": 2.0,
+        "exit_z": 0.0,
+        "cadence": "weekly",
+        "volatility_target": 0.3
+      },
+      "eligible_count": 2,
+      "selection_passed": true,
+      "development": {
+        "initial": 500.0,
+        "ending_equity": 511.85716745381944,
+        "net_return": 0.023714334907638968,
+        "same_trade_gross_return": 0.030702085628472764,
+        "max_drawdown": -0.04602665285615826,
+        "fill_count": 34,
+        "transaction_costs": 1.741715816186136,
+        "financing_costs": 1.7521595442308253
+      },
+      "validation": {
+        "initial": 500.0,
+        "ending_equity": 510.7930792234443,
+        "net_return": 0.021586158446888604,
+        "same_trade_gross_return": 0.06114731575915289,
+        "max_drawdown": -0.05628312826198434,
+        "fill_count": 178,
+        "transaction_costs": 4.739152251787419,
+        "financing_costs": 15.041426404344788
+      }
+    },
+    "drawdown_50": {
+      "selected_name": "relative_value_60_2_0_weekly_vol_0.3",
+      "selected_spec": {
+        "lookback_days": 60,
+        "entry_z": 2.0,
+        "exit_z": 0.0,
+        "cadence": "weekly",
+        "volatility_target": 0.3
+      },
+      "eligible_count": 2,
+      "selection_passed": true,
+      "development": {
+        "initial": 500.0,
+        "ending_equity": 528.9530511172527,
+        "net_return": 0.05790610223450532,
+        "same_trade_gross_return": 0.07563420482980221,
+        "max_drawdown": -0.11088049851709125,
+        "fill_count": 34,
+        "transaction_costs": 4.399085777372241,
+        "financing_costs": 4.464965520276217
+      },
+      "validation": {
+        "initial": 500.0,
+        "ending_equity": 522.6992511578189,
+        "net_return": 0.0453985023156378,
+        "same_trade_gross_return": 0.14961737842687883,
+        "max_drawdown": -0.140208079184173,
+        "fill_count": 178,
+        "transaction_costs": 12.507259664218168,
+        "financing_costs": 39.602178391402255
+      }
+    }
+  }
+}

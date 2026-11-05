@@ -179,3 +179,25 @@ from the same 81 trend configurations using development and validation periods,
 then evaluates the already-inspected later period. Results are available at
 `GET /api/growth/drawdown-frontier`. These drawdown values are evaluation
 budgets, not guaranteed stop levels. Neither tier has a promotion endpoint.
+
+## Hedge research configuration
+
+`trader/growth/hedges.py` contains three isolated research engines. None is
+connected to broker routing.
+
+- The BTC short overlay tests 100/150/200-day trend, 30/90/180-day momentum,
+  three negative-regime triggers and hedge fractions of 25%, 50% or 100% of the
+  tier exposure. Shorts cost 10% annualized plus 15 bp trading friction; stress
+  uses 20% carry and 30 bp friction.
+- Market-neutral relative value tests 30/60/120/180-day BTC/ETH ratio windows,
+  1.0/1.5/2.0 entry z-scores, 0/0.5 exits, daily/weekly cadence, and 20%/30%
+  volatility targets. Long and short legs have equal target notional.
+- Protective puts test 5%/10%/15% out-of-the-money strikes, 50%/100% coverage,
+  28/56-day tenor, and nine slow trend/momentum combinations. Weekly marks use
+  Black-Scholes, lagged 30-day realized volatility and a 25% volatility markup.
+  Stress raises modeled volatility another 25% and doubles trading friction.
+
+Research endpoints are read-only at `GET /api/growth/hedges`. A local result
+cannot enable shorting, margin, derivatives or options. Those instruments would
+require a separately implemented and verified broker capability, margin model,
+funding/borrow reconciliation, liquidation controls and bot-ownership ledger.

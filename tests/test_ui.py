@@ -174,6 +174,10 @@ def test_growth_research_and_forward_configuration_ui(browser_app):
             "document.querySelector('#frontier-qualification')?.textContent.includes('drawdown_20')"
         )
         assert "none" in page.locator("#frontier-qualification").inner_text()
+        page.wait_for_function(
+            "document.querySelector('#hedge-qualification')?.textContent.includes('LONG/CASH')"
+        )
+        assert "false" in page.locator("#hedge-qualification").inner_text()
         page.locator("#growth-configure").click()
         page.wait_for_function(
             "document.querySelector('#growth-forward').textContent.includes('\"active\": false')"

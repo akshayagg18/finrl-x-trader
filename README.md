@@ -39,6 +39,32 @@ percentage points of return while worsening drawdown by 22.33 percentage
 points. Both use previously inspected history and remain blocked from broker
 deployment. Reproduce with `python -m scripts.evaluate_drawdown_frontier`.
 
+### Short, market-neutral, and protective-put research
+
+The [four-track comparison](research/hedge_comparison/REPORT.md) brings three
+hedging alternatives through the same development, validation, evaluation,
+cost-stress, weekly, and independent two-month workflow as long/cash:
+
+- A BTC short overlay failed the 2024–October 2026 evaluation at every tier:
+  -0.72%, -2.18%, and -10.60% before stress.
+- BTC/ETH market-neutral relative value also failed: -1.23%, -2.79%, and
+  -9.31%; doubled carry and friction worsened the losses.
+- Synthetic protective puts reduced drawdown only slightly. The 10% tier made
+  +1.94% versus +2.84% unhedged and barely stayed positive under stress at
+  +0.28%. The 20% and 50% put tiers lost money under stress.
+
+Long/cash remains the best historical candidate at all three risk tiers. No
+track is deployment qualified. Short legs use spot prices as derivative proxies
+with 10% annual carry; puts use Black-Scholes marks from lagged realized
+volatility because historical option chains are unavailable. Reproduce with:
+
+```sh
+python -m scripts.evaluate_short_hedge
+python -m scripts.evaluate_relative_value
+python -m scripts.evaluate_put_protection
+python -m scripts.report_hedge_comparison
+```
+
 ## Cost-aware profitability research (November 2026)
 
 The repository now includes a leakage-controlled XGBoost workflow for expected-return forecasting, cost-aware execution, regime/sizing ablations, cost stress, and a constrained long-only opening-range-breakout comparison. It uses the existing frozen market snapshots and never routes orders to a broker.

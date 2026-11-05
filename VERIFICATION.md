@@ -222,3 +222,37 @@ Final regression command:
 `research/drawdown_frontier/verification_tests.txt`. New tests cover risk-profile
 weight scaling, protocol/hash integrity, both drawdown budgets, doubled-cost
 profitability, explicit non-promotion and dashboard rendering.
+
+## Four-track hedge research — 6 November 2026
+
+Three additional mechanisms were evaluated through separate locked grids at
+10%, 20% and 50% drawdown budgets. Each uses 2019–2021 development, 2022–2023
+validation, 2024–October 2026 evaluation, doubled-friction/carry stress, weekly
+statistics, and 29 independent two-month reset windows.
+
+| Track | 10% evaluation / stress / DD | 20% evaluation / stress / DD | 50% evaluation / stress / DD |
+|---|---:|---:|---:|
+| Long/cash | +2.84% / +2.31% / -9.67% | +5.04% / +3.97% / -18.54% | +7.50% / +4.79% / -40.87% |
+| BTC short hedge | -0.72% / -2.07% / -10.63% | -2.18% / -4.83% / -20.29% | -10.60% / -16.57% / -44.19% |
+| BTC/ETH relative value | -1.23% / -4.14% / -8.20% | -2.79% / -8.44% / -15.85% | -9.31% / -21.95% / -35.75% |
+| Synthetic puts | +1.94% / +0.28% / -9.50% | +3.28% / -0.02% / -18.22% | +3.58% / -4.34% / -40.18% |
+
+The short grid contains 81 configurations per tier, relative value 96, and
+protective puts 108. Short tracks charge 10% annual carry and stress it to 20%.
+The option track uses rolling Black-Scholes marks with lagged realized
+volatility because historical option-chain quotes are absent. It is synthetic
+insurance research rather than an executable options backtest.
+
+Long/cash remains the best historical track. The short and relative-value
+tracks failed evaluation. The put track's small drawdown improvement cost more
+return than it protected and failed stress above the 10% tier. Every lower 95%
+weekly-mean bound remains nonpositive. All history is inspected, no derivative
+adapter was enabled, and no external order was submitted.
+
+Final regression command:
+`PLAYWRIGHT_BROWSERS_PATH=/workspace/pw-browsers .venv/bin/pytest tests -q` —
+**98 passed, 4,971 dependency deprecation warnings in 71.76 seconds**. The log is
+`research/hedge_comparison/verification_tests.txt`. New tests verify fixed grids,
+short carry, gross-exposure bounds, equal-notional pair construction, synthetic
+put pricing/funding, locked protocol hashes, honest failed-track labels,
+non-promotion, comparison selection and dashboard rendering.

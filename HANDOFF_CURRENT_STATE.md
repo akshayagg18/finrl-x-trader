@@ -31,6 +31,16 @@ percentage points of additional drawdown produced only 2.46 percentage points
 of extra return. Both remain diagnostic and deployment-blocked. See
 `research/drawdown_frontier/REPORT.md`.
 
+Three derivative/hedge tracks were then evaluated to the same research depth.
+The BTC short overlay and BTC/ETH market-neutral strategy passed historical
+selection but lost money in the 2024–October 2026 diagnostic evaluation at all
+risk tiers. Synthetic protective puts slightly reduced drawdown but reduced
+returns more: at the 10% tier, +1.94% with -9.50% drawdown versus +2.84% and
+-9.67% for long/cash; at higher tiers the put strategy failed cost stress.
+Long/cash therefore remains the preferred historical track at every tier. No
+track is deployment qualified. Read `research/hedge_comparison/REPORT.md` and
+the three track reports before changing the research direction.
+
 ## 0. Cost-aware profitability research update — 3 November 2026
 
 A new expected-return XGBoost workflow, paper-mechanism replication, regime/sizing ablations, raw signal diagnostics, and long-only equity ORB pilot were added without changing broker routing or live controls.
@@ -61,7 +71,7 @@ This is a working self-hosted research and simulation application with an existi
 
 **There is no deployment-qualified profitable strategy. Do not enable real trading based on the existing results.** The defensive rule is positive retrospectively but fails the weekly confidence and prospective-evidence gates. Earlier regime and ML candidates lost money or failed selection. Software functionality does not establish a durable investment edge.
 
-- Latest recorded complete regression run: **91 passed**, 4,971 dependency deprecation warnings, 69.80 seconds. Evidence: [verification log](research/drawdown_frontier/verification_tests.txt).
+- Latest recorded complete regression run: **98 passed**, 4,971 dependency deprecation warnings, 71.76 seconds. Evidence: [verification log](research/hedge_comparison/verification_tests.txt).
 - No real-money orders or actual brokerage paper-account executions were submitted during development.
 - No brokerage credentials were supplied. The application starts without them.
 - Live trading defaults off. The original swing console has an explicit live activation mechanism; it is not a verified production deployment.

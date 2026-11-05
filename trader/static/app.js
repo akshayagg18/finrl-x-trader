@@ -137,3 +137,19 @@ async function refreshDrawdownFrontier(){
 }
 refreshDrawdownFrontier().catch(e=>{let host=$('frontier-qualification');if(host)host.textContent=e.message;});
 $('growth-refresh').addEventListener('click',()=>refreshDrawdownFrontier());
+
+async function refreshHedgeResearch(){
+  let host=$('hedge-research');
+  if(!host){
+    host=document.createElement('div');host.id='hedge-research';host.className='panel-inset';
+    host.innerHTML='<h3>Four-track hedge comparison</h3><p class="caption">Long/cash, BTC short hedge, BTC/ETH market-neutral relative value, and synthetic protective puts. Short and option results are modeled research rather than executable broker fills.</p><div id="hedge-summary" class="table-wrap"></div><pre id="hedge-qualification"></pre><p class="caption"><a href="/api/growth/hedges">Raw hedge research JSON</a></p>';
+    $('drawdown-frontier').insertAdjacentElement('afterend',host);
+  }
+  const r=await api('growth/hedges');
+  if(!r.comparison){$('hedge-qualification').textContent='Evaluation unavailable. Run the three hedge evaluation scripts and python -m scripts.report_hedge_comparison.';return;}
+  const rows=[];for(const [track,tiers] of Object.entries(r.comparison.tracks))for(const [tier,value] of Object.entries(tiers))rows.push({track,tier,...value});
+  table('hedge-summary',[['Track',x=>esc(x.track.replaceAll('_',' '))],['Tier',x=>esc(x.tier.replace('drawdown_',''))],['Evaluation',x=>pct(x.evaluation_return)],['Stress',x=>pct(x.stress_return)],['Drawdown',x=>pct(x.max_drawdown)],['Weekly lower 95%',x=>pct(x.weekly_lower_95)]],rows);
+  $('hedge-qualification').textContent=JSON.stringify({conclusion:r.comparison.conclusion,preferred_historical_track:r.comparison.preferred_historical_track,deployment_qualified:r.comparison.deployment_qualified,deployment_reasons:r.comparison.deployment_reasons},null,2);
+}
+refreshHedgeResearch().catch(e=>{let host=$('hedge-qualification');if(host)host.textContent=e.message;});
+$('growth-refresh').addEventListener('click',()=>refreshHedgeResearch());

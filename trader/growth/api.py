@@ -70,6 +70,25 @@ def router(db):
             for key in ("protocol", "selection_locked", "summary")
         }
 
+    @routes.get("/hedges")
+    def hedges():
+        tracks = ("short_hedge", "relative_value", "put_protection")
+        return {
+            "comparison": json.loads(
+                Path("research/hedge_comparison/summary.json").read_text()
+            )
+            if Path("research/hedge_comparison/summary.json").exists()
+            else None,
+            "tracks": {
+                name: json.loads(
+                    (Path("research") / name / "summary.json").read_text()
+                )
+                if (Path("research") / name / "summary.json").exists()
+                else None
+                for name in tracks
+            },
+        }
+
     @routes.get("/forward")
     def status():
         return forward.status(db)

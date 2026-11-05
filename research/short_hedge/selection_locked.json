@@ -1,0 +1,99 @@
+{
+  "protocol_sha256": "9b422c5d3524db6dfb5bd66417605a62b970ecd5f9056b8679dc77fe0c63dcc2",
+  "evaluation_previously_inspected": true,
+  "tiers": {
+    "drawdown_10": {
+      "selected_name": "short_hedge_trend_100_momentum_90_either_25",
+      "selected_spec": {
+        "slow_days": 100,
+        "momentum_days": 90,
+        "hedge_fraction": 0.25,
+        "trigger": "either"
+      },
+      "eligible_count": 22,
+      "selection_passed": true,
+      "development": {
+        "initial": 500.0,
+        "ending_equity": 509.0315424513769,
+        "net_return": 0.018063084902753657,
+        "same_trade_gross_return": 0.025519428827068813,
+        "max_drawdown": -0.055775680519623116,
+        "fill_count": 79,
+        "transaction_costs": 1.1478220889803534,
+        "financing_costs": 2.580349873177157
+      },
+      "validation": {
+        "initial": 500.0,
+        "ending_equity": 526.8401739018043,
+        "net_return": 0.05368034780360853,
+        "same_trade_gross_return": 0.06280904674732346,
+        "max_drawdown": -0.04385459501215938,
+        "fill_count": 124,
+        "transaction_costs": 1.501405223100626,
+        "financing_costs": 3.0629442487568275
+      }
+    },
+    "drawdown_20": {
+      "selected_name": "short_hedge_trend_100_momentum_90_either_25",
+      "selected_spec": {
+        "slow_days": 100,
+        "momentum_days": 90,
+        "hedge_fraction": 0.25,
+        "trigger": "either"
+      },
+      "eligible_count": 22,
+      "selection_passed": true,
+      "development": {
+        "initial": 500.0,
+        "ending_equity": 517.2048614308115,
+        "net_return": 0.03440972286162314,
+        "same_trade_gross_return": 0.04937013596433415,
+        "max_drawdown": -0.10870091470305476,
+        "fill_count": 79,
+        "transaction_costs": 2.293916641468784,
+        "financing_costs": 5.186289909886837
+      },
+      "validation": {
+        "initial": 500.0,
+        "ending_equity": 553.4122203687969,
+        "net_return": 0.10682444073759378,
+        "same_trade_gross_return": 0.1253303680754827,
+        "max_drawdown": -0.08627746041982975,
+        "fill_count": 123,
+        "transaction_costs": 3.0448445848754546,
+        "financing_costs": 6.208119084069094
+      }
+    },
+    "drawdown_50": {
+      "selected_name": "short_hedge_trend_100_momentum_90_either_25",
+      "selected_spec": {
+        "slow_days": 100,
+        "momentum_days": 90,
+        "hedge_fraction": 0.25,
+        "trigger": "either"
+      },
+      "eligible_count": 22,
+      "selection_passed": true,
+      "development": {
+        "initial": 500.0,
+        "ending_equity": 536.3154368484102,
+        "net_return": 0.07263087369682042,
+        "same_trade_gross_return": 0.11033568688931017,
+        "max_drawdown": -0.2516761941192005,
+        "fill_count": 79,
+        "transaction_costs": 5.716069538787916,
+        "financing_costs": 13.136337057457004
+      },
+      "validation": {
+        "initial": 500.0,
+        "ending_equity": 629.8153902242559,
+        "net_return": 0.25963078044851184,
+        "same_trade_gross_return": 0.307627340290219,
+        "max_drawdown": -0.20529996772790826,
+        "fill_count": 124,
+        "transaction_costs": 7.906842333015786,
+        "financing_costs": 16.0914375878379
+      }
+    }
+  }
+}
