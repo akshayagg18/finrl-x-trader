@@ -173,6 +173,8 @@ BTC/ETH hypothesis on public hourly history from August 2017 through October
 the base signal; random-forest and histogram-boosted models can filter entries.
 Features are lagged, labels must mature before training cutoffs, 2022 is the
 selection year, and 2023–October 2026 is opened only after selection is locked.
+The [two-month hold breakdown](research/strategy_v2/HOLD_2MONTH_REPORT.md)
+separately reports every complete January 2022–October 2026 reset window.
 
 No candidate qualified. The rule lost 1.65% in 2022 and 6.45% in the diagnostic
 final evaluation. The least-bad validation ML filter lost 1.35% in 2022; it later

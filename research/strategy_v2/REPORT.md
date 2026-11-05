@@ -62,12 +62,17 @@ filled quantities. It is cost attribution, not an executable zero-cost rerun.
 The hold row buys both assets once at the configured 30% cap and does not use
 the strategy's protective controls.
 
+The separate [two-month hold analysis](HOLD_2MONTH_REPORT.md) resets the same
+$500 allocation for every non-overlapping two-month window from January 2022
+through October 2026 and reports every window's P/L and drawdown.
+
 ## Reproduce and inspect
 
 ```sh
 python -m scripts.download_long_history
 python -m scripts.evaluate_regime_strategy
 python -m scripts.report_regime_strategy
+python -m scripts.evaluate_hold_windows
 ```
 
 The downloader records every archive URL and SHA-256 in `data/*.json` and keeps

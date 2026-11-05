@@ -169,6 +169,9 @@ Never merge these histories into one performance curve. A newly cloned repo has 
   qualification.
 - A 60%-deployed BTC/ETH hold returned +136.93% with −52.35% drawdown. It is a
   risk benchmark, not an eligible trading policy.
+- Across 29 independent two-month windows from January 2022 through October
+  2026, the same hold benchmark averaged +2.11% ($10.57) with −14.40% average
+  maximum drawdown; 15 windows gained and 14 lost. The worst window lost 33.76%.
 - No model was deployed or promoted and no real or broker-paper order was sent.
 
 | Experiment | Evidence | Outcome |
