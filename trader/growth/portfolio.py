@@ -63,6 +63,7 @@ class Portfolio(Strategy):
         self.blocked = []
         self.seen = {}
         self.clock_step = 0
+        self.stopped = set()
 
     def on_start(self):
         for i in self.ins.values():
@@ -129,11 +130,19 @@ class Portfolio(Strategy):
                 if not self.benchmark and (
                     self.halt or stop or expired or decision.get("liquidate", False)
                 ):
+                    if stop:
+                        self.stopped.add(s)
                     self.close_all_positions(i.id)
+                continue
+            if decision.get("liquidate", False):
+                # A completed regime reset permits a later fresh entry. A protective
+                # stop cannot immediately churn back into the same active regime.
+                self.stopped.discard(s)
                 continue
             if (
                 self.halt
                 or (trigger and not self.benchmark)
+                or s in self.stopped
                 or not decision.get("enter", False)
             ):
                 continue

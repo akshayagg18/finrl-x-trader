@@ -164,3 +164,33 @@ The [growth evaluation](research/growth/REPORT.md) implements longer 4/24/72-hou
 Research & backtests → Growth research shows comparison charts and the qualification reasons. Forward local simulation collects **new public quotes hourly** and persists them separately from historical replay. Configure $500 and click Start observation; the account stays cash while no model is qualified. Stop suspends observation; the global kill switch also stops it. The initial verification recorded genuine quotes with no trades. Twelve weeks of forward evidence remain a real elapsed-time requirement.
 
 Monthly research produces model versions; a forward candidate must have passed historical qualification and remain freshly validated. Missing/overdue validation or stale data stops simulation. No automatic promotion to real-money trading is implemented or implied.
+
+## Locked long-history regime experiment
+
+The [regime/ML report](research/strategy_v2/REPORT.md) evaluates a lower-turnover
+BTC/ETH hypothesis on public hourly history from August 2017 through October
+2026. Daily trend, completed-four-hour momentum, and a volatility regime produce
+the base signal; random-forest and histogram-boosted models can filter entries.
+Features are lagged, labels must mature before training cutoffs, 2022 is the
+selection year, and 2023–October 2026 is opened only after selection is locked.
+
+No candidate qualified. The rule lost 1.65% in 2022 and 6.45% in the diagnostic
+final evaluation. The least-bad validation ML filter lost 1.35% in 2022; it later
+lost 1.77% at base modeled costs and 6.08% with doubled costs, with a negative
+weekly confidence bound despite 197 completed exits. It is therefore
+research evidence, not a deployed or profitable model. Research & backtests now
+shows the result and both historical/live qualification states.
+
+Reproduce the frozen experiment with:
+
+```sh
+python -m scripts.download_long_history
+python -m scripts.evaluate_regime_strategy
+python -m scripts.report_regime_strategy
+```
+
+The download is from Binance's public archive for history length. It cannot
+verify OKX Singapore fees, eligibility, spreads, or fills. Runtime model binaries
+are excluded from Git and recreated by the evaluation. Live trading remains
+disabled and the existing forward simulator remains cash because no strategy
+passed its historical gate.

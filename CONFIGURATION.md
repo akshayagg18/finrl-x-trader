@@ -122,3 +122,24 @@ Separate `GrowthConfig`: $500 virtual capital; 60% maximum deployment; 30% per B
 Forward storage uses additive SQLite tables `growth_forward`, `growth_observations` and `growth_fills`. Existing tables and histories are unchanged. Back up the database, runtime growth-model directory and market-data snapshots together. Execution is reconstructed deterministically from the observation log; long histories take more time. Quote sampling and protective decisions are hourly, so intrahour losses and gaps are not capped by modeled stops. Failed data collection stops observation until explicitly restarted.
 
 A subsequently qualified version can be supplied through POST `/api/growth/forward/models` with `{symbol: model_id}`. Promotion validates the historical qualification gate, instrument and model age; it logs a decision-time change without resetting equity or old observations. Removing all model entries returns future decisions to cash; existing positions still follow their original expiry/stops. Model training/validation must be refreshed monthly; an overdue version stops simulation rather than being promoted automatically. No manual weekly income target changes sizing.
+
+## Long-history regime research configuration
+
+This configuration is a locked research protocol, not an operational settings
+page or a live strategy. `trader/growth/regime.py` defines eight base variants:
+20/100 or 50/200 completed-daily moving averages, 24- or 72-hour momentum from
+completed four-hour bars, and the 80th or 90th percentile rolling volatility
+ceiling. The ML entry filter has two fixed families (`boosted`, `forest`) and two
+probability thresholds (`0.55`, `0.60`). It never overrides a base-regime exit.
+
+The portfolio uses `GrowthConfig`: $500 initial capital, 60% maximum deployment,
+30% per asset, 40% reserve, 0.5% estimated risk per entry, 2% daily-loss entry
+pause, and 8% drawdown halt. Base costs are 10 bp fees plus 5 bp adverse
+execution per side. These values are explicit assumptions and are evaluated at
+1.5x and 2x; they are not editable evidence of an account tariff.
+
+`GET /api/growth/regime` returns the protocol, locked selection, and summary.
+There is deliberately no endpoint to promote this experiment: the base rule and
+ML filter both failed the 2022 selection gate. `historical_qualified` and
+`live_qualified` remain false. Protective-stop exits require the base regime to
+reset before another entry, preventing immediate stop/re-entry churn.

@@ -115,3 +115,37 @@ Qualification requires 52 complete historical weeks/100 exits plus return, drawd
 Existing broker routing, private credentials and live activation were not changed. Runtime model binaries and account databases are excluded from Git. Reproduce via `python -m scripts.evaluate_growth`; run with the existing `python -m trader serve` command. Forward quote sampling and risk monitoring are hourly; gaps can exceed stops. Full fills and deep liquidity are assumptions; fees and USDT/USD parity are unverified account-specific assumptions. Existing swing/intraday research remains accessible independently.
 
 Final regression command: `PLAYWRIGHT_BROWSERS_PATH=/workspace/pw-browsers .venv/bin/pytest tests -q` — **67 passed, 4,948 dependency deprecation warnings in 55.77 seconds**. New coverage includes hourly aggregation, label maturity/feature causality, continuous month-boundary holdings, entry limits, same-trade cost attribution, Singapore weekly boundaries, sparse-sample rejection, forward restart/deduplication, frozen settings, outages, stale quotes, qualification-gated promotion and dashboard configuration/start/stop persistence. Ruff and whitespace checks passed. Full log: `research/growth/verification_tests.txt`.
+
+## Long-history regime and ML verification — 2026-11-05
+
+The new experiment uses 80,581 genuine public hourly rows per asset from Binance
+archives (BTCUSDT and ETHUSDT, August 2017 through October 2026). Per-month URLs,
+HTTP metadata and SHA-256 hashes are retained. Reindexing exposes 170 missing
+standard hours; 43 irregular partial bars are recorded and excluded from the
+standard hourly feature grid. Incomplete daily/four-hour windows cannot become
+valid completed-bar features.
+
+The protocol was serialized and hashed before the final period was evaluated.
+All eight base rules failed the untouched 2022 gate. The selected diagnostic
+rule (`trend_20_100_mom_24_q80`) returned +11.27% in 2019–2021 and −1.65% in
+2022. The four fixed ML filters also lost in 2022; the selected diagnostic
+forest/0.60 filter returned −1.35% there.
+
+On the untouched 2023–October 2026 diagnostic interval, the rule returned
+−6.45% and triggered the 8% drawdown halt. The ML-filtered variant returned
+−1.77% at assumed costs, −6.07% at 1.5x costs, and −6.08% at doubled costs. It
+had 197 completed exits and a negative lower 95% weekly-mean bound, so it failed
+qualification. A 60%-deployed hold benchmark returned +136.93% with a −52.35%
+maximum drawdown. No research result was promoted, and no external order was
+submitted.
+
+Focused tests cover source/hash integrity, explicit gaps, feature causality,
+incomplete-window rejection, label maturity, entry-only ML filtering, protective
+stop reset, nonleveraged signals, selection-lock integrity, failed qualification,
+annual-refit history continuity, and dashboard rendering.
+
+Final regression command:
+`PLAYWRIGHT_BROWSERS_PATH=/workspace/pw-browsers .venv/bin/pytest tests -q` —
+**76 passed, 4,950 dependency deprecation warnings in 60.92 seconds**. The saved
+output is `research/strategy_v2/verification_tests.txt`. Ruff, whitespace, and
+credential-pattern checks passed.

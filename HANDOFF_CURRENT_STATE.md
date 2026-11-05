@@ -16,9 +16,9 @@ Reproduce with `.venv\Scripts\python.exe -m scripts.research_profitability`. Rea
 
 Verification for this update: 6 focused tests and 42 compatible non-native tests passed. The full suite was attempted, but this Windows host blocked `pyarrow.lib` under Application Control while collecting five Nautilus/API/UI modules; do not misstate that environmental collection failure as a complete pass.
 
-**Updated:** 3 November 2026, Asia/Singapore.
+**Updated:** 5 November 2026, Asia/Singapore.
 
-**Code baseline reviewed:** `b365174` (before this documentation-only handoff).
+**Code baseline reviewed:** `26d4851`, plus the long-history regime work in the current commit.
 
 **Repository:** https://github.com/akshayagg18/finrl-x-trader — branch `main`.
 
@@ -26,11 +26,11 @@ Verification for this update: 6 focused tests and 42 compatible non-native tests
 
 ## 1. Read this first
 
-This is a working self-hosted research and simulation application with an existing FinRL-X swing-trading console, additional NautilusTrader intraday research, ML experiments, persistent historical replay, and a newer growth/weekly-consistency workflow.
+This is a working self-hosted research and simulation application with an existing FinRL-X swing-trading console, additional NautilusTrader intraday research, ML experiments, persistent historical replay, a growth/weekly-consistency workflow, and a locked long-history regime experiment.
 
-**There is no qualified profitable strategy. Do not enable real trading based on the existing results.** The most recent selected growth policy lost **3.35%**, with **3.50% maximum drawdown** and **17 completed exits** in its continuous historical evaluation. Its same-trade gross return was also negative. Software functionality does not establish an investment edge.
+**There is no qualified profitable strategy. Do not enable real trading based on the existing results.** The latest regime rule and every ML filter failed the untouched 2022 selection gate. The diagnostic ML result also lost money in the final evaluation and under cost stress. Software functionality does not establish an investment edge.
 
-- Latest recorded complete regression run: **67 passed**, 4,948 dependency deprecation warnings, 55.77 seconds. Evidence: [verification log](research/growth/verification_tests.txt).
+- Latest recorded complete regression run: **76 passed**, 4,950 dependency deprecation warnings, 60.92 seconds. Evidence: [verification log](research/strategy_v2/verification_tests.txt).
 - No real-money orders or actual brokerage paper-account executions were submitted during development.
 - No brokerage credentials were supplied. The application starts without them.
 - Live trading defaults off. The original swing console has an explicit live activation mechanism; it is not a verified production deployment.
@@ -66,6 +66,7 @@ Persist these preferences:
 | `ff5ca1e` | Nautilus intraday research, public crypto/equity data, dashboard integration | 90 scenarios; no qualified strategy |
 | `441fda2` | RF/boosted ML, five-minute data, walk-forward study, persistent continuous historical replay, settlement and CCXT transport | 116 ML evaluations; no reliable net edge |
 | `b365174` | Longer-horizon growth models, continuous two-asset portfolio, stricter validation, weekly statistics and qualification-gated forward observation | 288 candidate trials plus six portfolio scenarios; no qualified strategy |
+| current commit | Frozen 2017–2026 hourly archive, low-turnover regime rules, optional ML entry filter, locked evaluation and dashboard evidence | Rule and all ML filters failed 2022 selection; no qualified strategy |
 
 Upstream source lives in `src/`. The original README, Docker and environment material was preserved in upstream-named files. The upstream published **19.76%** result is not a result reproduced by this installation; exact ensemble/artifact reproduction remains unavailable.
 
@@ -82,6 +83,7 @@ Upstream source lives in `src/`. The original README, Docker and environment mat
 | Intraday RF / boosted models | Working training, versions and evaluation | No model qualified; previous October data is no longer pristine holdout |
 | Continuous historical replay | Working, scheduler-driven, restartable | Accelerated historical time; not a live market feed or broker account |
 | Growth hourly research | Working, 4/24/72-hour targets | One continuous BTC/ETH virtual account, stricter selection |
+| Long-history regime/ML research | Working, reproducible download and locked evaluation | Diagnostic only; failed selection and stress gates; not connected to execution |
 | Forward local observation/simulation | Working public-quote capture and persisted modeled execution path | Defaults to cash; model use blocked by qualification; hourly risk monitoring |
 | Alpaca | Official SDK adapter implemented and mock-tested | Real paper/live credentials, permissions, fees and execution require verification |
 | IBKR | Gateway/TWS adapter implemented and mock-tested | External session/entitlements needed; whole shares; verification flag defaults false |
@@ -151,6 +153,24 @@ Never merge these histories into one performance curve. A newly cloned repo has 
 
 ## 7. Actual results — do not claim more than these show
 
+### Locked long-history regime/ML experiment (5 November 2026)
+
+- BTCUSDT and ETHUSDT public Binance hourly archives span August 2017 through
+  October 2026 with 80,581 raw rows each. The source is cross-venue research
+  data, not OKX execution evidence.
+- 2019–2021 is development, 2022 is validation, and 2023–October 2026 is the
+  final diagnostic evaluation. The protocol and selection were hash-bound
+  before the final interval.
+- The diagnostic base rule returned +11.27% in development, −1.65% in
+  validation, and −6.45% final. It failed selection.
+- The forest/0.60 entry filter returned −1.35% in validation, then −1.77% final
+  at base modeled costs and −6.08% at doubled costs. It has a negative lower
+  confidence bound despite 197 exits. It failed selection and final
+  qualification.
+- A 60%-deployed BTC/ETH hold returned +136.93% with −52.35% drawdown. It is a
+  risk benchmark, not an eligible trading policy.
+- No model was deployed or promoted and no real or broker-paper order was sent.
+
 | Experiment | Evidence | Outcome |
 |---|---|---|
 | Daily configuration search | 61 configurations, 136 runs; train 2022–23, validate 2024, later tests | Selected candidate −2.82% in 2025-10-08–2026-10-30; defaults +1.67%; SPY +13.89%; QQQ +14.51%. $1/order stress: −10.57% |
@@ -169,6 +189,7 @@ Source reports:
 - [Initial intraday](research/BACKTEST_RESULTS.md)
 - [Intraday ML](research/intraday_ml/REPORT.md)
 - [Current growth report](research/growth/REPORT.md)
+- [Long-history regime/ML report](research/strategy_v2/REPORT.md)
 
 **Previously inspected history is development evidence, not a fresh holdout.** October and other intervals have been examined repeatedly. Freeze a new protocol before collecting genuinely new observations. Zero-trade cash outcomes are not proven profitable strategies. Costs, full fills, depth, vendor revisions, survivorship and USDT/USD parity constrain interpretation.
 
@@ -233,6 +254,9 @@ python -m scripts.report_intraday
 python -m scripts.benchmark_ml
 python -m scripts.report_ml
 python -m scripts.evaluate_growth
+python -m scripts.download_long_history
+python -m scripts.evaluate_regime_strategy
+python -m scripts.report_regime_strategy
 ```
 
 Some scripts resume cached results or overwrite tracked research outputs. Use a separate checkout/output where supported before changing algorithms, data or parameters; never silently mix results from different implementations. Download scripts can replace cached vendor history; preserve the frozen snapshots and manifests first. Run from the repository root because several modules use relative paths.
@@ -251,7 +275,7 @@ In the existing development workspace, browser binaries were stored separately:
 PLAYWRIGHT_BROWSERS_PATH=/workspace/pw-browsers .venv/bin/pytest tests -q
 ```
 
-That path is environment-specific; do not copy it onto an unrelated PC. The latest **recorded** full run is 67 passing tests; this documentation task does not claim a new execution of the suite. Browser tests use isolated databases and actual Chromium. Broker calls in automated tests use mocks.
+That path is environment-specific; do not copy it onto an unrelated PC. The latest **recorded** full run is 76 passing tests in 60.92 seconds. Browser tests use isolated databases and actual Chromium. Broker calls in automated tests use mocks.
 
 ### Docker caveat discovered during this handoff
 
@@ -294,15 +318,19 @@ The last recorded forward verification account was stopped after one observation
 7. Build an audited monthly training/validation job and exact-version promotion workflow. Keep the account continuous through promotion; retain old model artifacts for rollback. Fresh validation must precede activation. Stop on stale/unvalidated versions.
 8. Improve data/cost evidence: actual eligible-account fees, spread/slippage measurements, funding/conversion costs, liquidity assumptions and sufficient intraday equity history. Equity data is currently too short for a robust comparable equity ML study.
 9. Research another model/strategy only against a predeclared new protocol. More trees, more turnover or fewer safeguards do not create an edge. Reject models that cannot outperform costs robustly; retain cash if none qualifies.
+10. Treat 2019–October 2026 as inspected for this regime family. Do not retune
+    its thresholds on the final interval and relabel that period untouched. A
+    next strategy needs a materially new predeclared hypothesis, target-venue
+    cost evidence, and a later holdout or prospective observation.
 
 ### P2 — Finish external execution only after engineering and evidence gates
 
-10. Integrate a single external-account orchestration layer for intraday/growth: dedicated account binding, bot-owned balances, settled cash, durable intents, account-level locking, partial fills, cancellation races, unknown submissions and reconciliation after restart. Existing transport methods do not supply this whole layer.
-11. Verify Singapore account eligibility, regional OKX endpoint/demo support and fees. The CCXT adapter currently uses its default OKX host; a Singapore account may require different configuration. Public global data access is not proof of local trading eligibility.
-12. Recheck broker rules when connecting. The prior research retrieved FINRA Notice 26-10, effective 4 June 2026 with phase-in through 20 October 2027; verify the particular broker's transition rather than assuming either the old $25,000 PDT rule or universal new behavior. T+1 cash restrictions remain relevant.
-13. Complete fractional equity handling and broker-specific supported order types. Verify SDK contracts with actual paper credentials supplied later; do not fabricate successful paper fills.
-14. Complete real net accounting: actual fees/commissions, delayed fee corrections, dividends, splits and statement reconciliation. Original Alpaca fill accounting does not yet attribute full account-activity fees; IBKR delayed commissions are not comprehensively revisited.
-15. Add monitoring, alerting, independent watchdogs, long-duration recovery tests and execution-quality measurement. Existing single-thread reconstruction is useful for research but must be profiled before unattended external operation.
+11. Integrate a single external-account orchestration layer for intraday/growth: dedicated account binding, bot-owned balances, settled cash, durable intents, account-level locking, partial fills, cancellation races, unknown submissions and reconciliation after restart. Existing transport methods do not supply this whole layer.
+12. Verify Singapore account eligibility, regional OKX endpoint/demo support and fees. The CCXT adapter currently uses its default OKX host; a Singapore account may require different configuration. Public global data access is not proof of local trading eligibility.
+13. Recheck broker rules when connecting. The prior research retrieved FINRA Notice 26-10, effective 4 June 2026 with phase-in through 20 October 2027; verify the particular broker's transition rather than assuming either the old $25,000 PDT rule or universal new behavior. T+1 cash restrictions remain relevant.
+14. Complete fractional equity handling and broker-specific supported order types. Verify SDK contracts with actual paper credentials supplied later; do not fabricate successful paper fills.
+15. Complete real net accounting: actual fees/commissions, delayed fee corrections, dividends, splits and statement reconciliation. Original Alpaca fill accounting does not yet attribute full account-activity fees; IBKR delayed commissions are not comprehensively revisited.
+16. Add monitoring, alerting, independent watchdogs, long-duration recovery tests and execution-quality measurement. Existing single-thread reconstruction is useful for research but must be profiled before unattended external operation.
 
 Acceptance for external readiness is a verified paper-account lifecycle with reconciliation under outages, partial fills and restarts—not merely passing mocked transport tests. Live activation must remain explicit and separate.
 

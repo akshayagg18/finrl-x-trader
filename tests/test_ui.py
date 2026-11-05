@@ -1,11 +1,13 @@
 """Real Chromium E2E, isolated SQLite, actual historical data and strategy."""
 
-import threading
 import socket
+import threading
 import time
+
 import pytest
 import uvicorn
 from playwright.sync_api import sync_playwright
+
 from trader.api import create_app
 
 
@@ -149,7 +151,7 @@ def test_intraday_continuous_replay_ui(browser_app):
 
 
 def test_growth_research_and_forward_configuration_ui(browser_app):
-    url, service = browser_app
+    url, _service = browser_app
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True, args=["--no-sandbox"])
         page = browser.new_page()
@@ -158,6 +160,10 @@ def test_growth_research_and_forward_configuration_ui(browser_app):
         page.wait_for_function(
             "document.querySelector('#growth-qualification').textContent.includes('qualified')"
         )
+        page.wait_for_function(
+            "document.querySelector('#regime-qualification')?.textContent.includes('live_qualified')"
+        )
+        assert "false" in page.locator("#regime-qualification").inner_text()
         page.locator("#growth-configure").click()
         page.wait_for_function(
             "document.querySelector('#growth-forward').textContent.includes('\"active\": false')"

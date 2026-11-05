@@ -39,6 +39,16 @@ def router(db):
             for name in ("protocol", "selection_locked", "screening", "summary")
         }
 
+    @routes.get("/regime")
+    def regime():
+        root = Path("research/strategy_v2")
+        return {
+            key: json.loads((root / f"{key}.json").read_text())
+            if (root / f"{key}.json").exists()
+            else None
+            for key in ("protocol", "selection_locked", "summary")
+        }
+
     @routes.get("/forward")
     def status():
         return forward.status(db)

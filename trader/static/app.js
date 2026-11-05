@@ -88,3 +88,20 @@ refreshGrowth().catch(e=>{$('growth-forward').textContent=e.message;});
 document.querySelector('#research').insertAdjacentHTML('beforeend','<article class="panel"><div class="panel-heading"><h3>Cost-aware profitability research</h3><span class="badge neutral">RESEARCH ONLY</span></div><p class="caption">XGBoost expected-return forecasts across 5m, 15m, 30m, 1h and 4h bars; next-open execution, validation-only thresholds, regime/sizing ablations and 1.5x/2x cost stress. Results never enable broker routing.</p><button id="profit-refresh">Refresh profitability results</button><div id="profitability-summary" class="table-wrap"></div><pre id="profitability-final"></pre><p class="caption"><a href="/api/growth/profitability">Raw experiment registry JSON</a></p></article>');
 async function refreshProfitability(){const r=await api('growth/profitability');if(!r.summary){$('profitability-final').textContent='Not run. Execute python -m scripts.research_profitability.';return;}const rows=r.summary.screening.map(x=>({name:x.name,minutes:x.interval_minutes,horizon:x.horizon_minutes,net:x.development_oos.metrics.net_return,drawdown:x.development_oos.metrics.max_drawdown,trades:x.development_oos.metrics.completed_trades,cost2:x['cost_2x'].net_return}));table('profitability-summary',[['Configuration',x=>esc(x.name)],['Bar',x=>x.minutes+'m'],['Forecast',x=>x.horizon+'m'],['Development OOS',x=>pct(x.net)],['Drawdown',x=>pct(x.drawdown)],['Trades',x=>x.trades],['2x costs',x=>pct(x.cost2)]],rows);const f=r.summary.walk_forward_folds.at(-1);$('profitability-final').textContent=JSON.stringify({conclusion:'NO QUALIFIED PROFITABLE STRATEGY FOUND',selection:r.selection_locked,final_strategy_holdout:f?.result.metrics,final_signal_counts:f?.result.signal_counts,benchmark:r.summary.final_baselines,experiment_count:r.summary.experiment_count},null,2);}
 bind('profit-refresh',refreshProfitability);refreshProfitability().catch(e=>{$('profitability-final').textContent=e.message;});
+
+async function refreshRegimeResearch(){
+  let host=$('regime-research');
+  if(!host){
+    host=document.createElement('div');host.id='regime-research';host.className='panel-inset';
+    host.innerHTML='<h3>Long-history regime strategy</h3><p class="caption">Daily trend + four-hour momentum + volatility regime, optionally filtered by ML. Binance public history is research data only and does not prove OKX execution. Selection is locked before the 2023–2026 evaluation.</p><div id="regime-summary" class="table-wrap"></div><pre id="regime-qualification"></pre>';
+    $('growth-summary').insertAdjacentElement('afterend',host);
+  }
+  const r=await api('growth/regime');
+  if(!r.summary){$('regime-qualification').textContent='Evaluation is running or unavailable. Run python -m scripts.evaluate_regime_strategy.';return;}
+  const rows=Object.entries(r.summary).map(([name,v])=>({name,...v}));
+  table('regime-summary',[['Scenario',x=>esc(x.name)],['Net',x=>pct(x.net_return)],['Same-trade gross',x=>pct(x.same_trade_gross_return)],['Drawdown',x=>pct(x.max_drawdown)],['Exits',x=>x.completed_trades]],rows);
+  const preferred=r.summary.ml_filter_base||r.summary.rule_base;
+  $('regime-qualification').textContent=JSON.stringify({historically_qualified:preferred.qualified,live_qualified:preferred.live_qualified,selection_gates:{rule:r.selection_locked.rule_passed_selection,ml_filter:r.selection_locked.filter_passed_selection},reasons:preferred.reasons,live_reasons:preferred.live_reasons,complete_weeks:preferred.complete_weeks,profitable_weeks:preferred.profitable_weeks,losing_weeks:preferred.losing_weeks,lower_95_weekly_mean:preferred.mean_weekly_return_lower_95,selection:r.selection_locked},null,2);
+}
+refreshRegimeResearch().catch(e=>{let host=$('regime-qualification');if(host)host.textContent=e.message;});
+$('growth-refresh').addEventListener('click',()=>refreshRegimeResearch());

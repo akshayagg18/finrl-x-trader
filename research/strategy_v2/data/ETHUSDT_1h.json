@@ -1,0 +1,838 @@
+{
+  "provider": "Binance public data archive",
+  "market": "ETH/USDT spot",
+  "purpose": "cross-venue long-history research only; not OKX execution evidence",
+  "interval": "1h UTC opening timestamps",
+  "requested_months": [
+    "2017-08",
+    "2026-10"
+  ],
+  "first": "2017-08-17T04:00:00+00:00",
+  "last": "2026-10-31T23:00:00+00:00",
+  "bars": 80581,
+  "missing_hours": 170,
+  "missing_examples": [
+    "2017-09-06T16:00:00+00:00",
+    "2017-09-06T17:00:00+00:00",
+    "2017-09-06T18:00:00+00:00",
+    "2017-09-06T19:00:00+00:00",
+    "2017-09-06T20:00:00+00:00",
+    "2017-09-06T21:00:00+00:00",
+    "2017-09-06T22:00:00+00:00",
+    "2018-01-04T04:00:00+00:00",
+    "2018-02-08T01:00:00+00:00",
+    "2018-02-08T02:00:00+00:00",
+    "2018-02-08T03:00:00+00:00",
+    "2018-02-08T04:00:00+00:00",
+    "2018-02-08T05:00:00+00:00",
+    "2018-02-08T06:00:00+00:00",
+    "2018-02-08T07:00:00+00:00",
+    "2018-02-08T08:00:00+00:00",
+    "2018-02-08T09:00:00+00:00",
+    "2018-02-08T10:00:00+00:00",
+    "2018-02-08T11:00:00+00:00",
+    "2018-02-08T12:00:00+00:00",
+    "2018-02-08T13:00:00+00:00",
+    "2018-02-08T14:00:00+00:00",
+    "2018-02-08T15:00:00+00:00",
+    "2018-02-08T16:00:00+00:00",
+    "2018-02-08T17:00:00+00:00",
+    "2018-02-08T18:00:00+00:00",
+    "2018-02-08T19:00:00+00:00",
+    "2018-02-08T20:00:00+00:00",
+    "2018-02-08T21:00:00+00:00",
+    "2018-02-08T22:00:00+00:00",
+    "2018-02-08T23:00:00+00:00",
+    "2018-02-09T00:00:00+00:00",
+    "2018-02-09T01:00:00+00:00",
+    "2018-02-09T02:00:00+00:00",
+    "2018-02-09T03:00:00+00:00",
+    "2018-02-09T04:00:00+00:00",
+    "2018-02-09T05:00:00+00:00",
+    "2018-02-09T06:00:00+00:00",
+    "2018-02-09T07:00:00+00:00",
+    "2018-02-09T08:00:00+00:00",
+    "2018-02-09T09:00:00+00:00",
+    "2018-02-09T10:00:00+00:00",
+    "2018-02-09T11:00:00+00:00",
+    "2018-02-09T12:00:00+00:00",
+    "2018-02-09T13:00:00+00:00",
+    "2018-02-09T14:00:00+00:00",
+    "2018-02-09T15:00:00+00:00",
+    "2018-02-09T16:00:00+00:00",
+    "2018-02-09T17:00:00+00:00",
+    "2018-02-09T18:00:00+00:00",
+    "2018-02-09T19:00:00+00:00",
+    "2018-02-09T20:00:00+00:00",
+    "2018-02-09T21:00:00+00:00",
+    "2018-02-09T22:00:00+00:00",
+    "2018-02-09T23:00:00+00:00",
+    "2018-02-10T00:00:00+00:00",
+    "2018-02-10T01:00:00+00:00",
+    "2018-02-10T02:00:00+00:00",
+    "2018-02-10T03:00:00+00:00",
+    "2018-02-10T04:00:00+00:00",
+    "2018-02-10T05:00:00+00:00",
+    "2018-02-10T06:00:00+00:00",
+    "2018-02-10T07:00:00+00:00",
+    "2018-02-10T08:00:00+00:00",
+    "2018-02-10T09:00:00+00:00",
+    "2018-02-10T10:00:00+00:00",
+    "2018-02-10T11:00:00+00:00",
+    "2018-02-10T12:00:00+00:00",
+    "2018-02-10T13:00:00+00:00",
+    "2018-02-10T14:00:00+00:00",
+    "2018-02-10T15:00:00+00:00",
+    "2018-02-10T16:00:00+00:00",
+    "2018-02-10T17:00:00+00:00",
+    "2018-02-10T18:00:00+00:00",
+    "2018-02-10T19:00:00+00:00",
+    "2018-02-10T20:00:00+00:00",
+    "2018-02-10T21:00:00+00:00",
+    "2018-02-10T22:00:00+00:00",
+    "2018-02-10T23:00:00+00:00",
+    "2018-02-11T00:00:00+00:00",
+    "2018-02-11T01:00:00+00:00",
+    "2018-02-11T02:00:00+00:00",
+    "2018-02-11T03:00:00+00:00",
+    "2018-06-26T02:00:00+00:00",
+    "2018-06-26T03:00:00+00:00",
+    "2018-06-26T04:00:00+00:00",
+    "2018-06-26T05:00:00+00:00",
+    "2018-06-26T06:00:00+00:00",
+    "2018-06-26T07:00:00+00:00",
+    "2018-06-26T08:00:00+00:00",
+    "2018-06-26T09:00:00+00:00",
+    "2018-06-26T10:00:00+00:00",
+    "2018-06-26T11:00:00+00:00",
+    "2018-06-27T13:00:00+00:00",
+    "2018-07-04T01:00:00+00:00",
+    "2018-07-04T02:00:00+00:00",
+    "2018-07-04T03:00:00+00:00",
+    "2018-07-04T04:00:00+00:00",
+    "2018-07-04T05:00:00+00:00",
+    "2018-07-04T06:00:00+00:00"
+  ],
+  "irregular_partial_bars": 43,
+  "irregular_examples": [
+    "2018-02-09T09:28:14.800000+00:00",
+    "2018-02-09T10:28:14.800000+00:00",
+    "2018-02-09T11:28:14.800000+00:00",
+    "2018-02-09T12:28:14.800000+00:00",
+    "2018-02-09T13:28:14.800000+00:00",
+    "2018-02-09T14:28:14.800000+00:00",
+    "2018-02-09T15:28:14.800000+00:00",
+    "2018-02-09T16:28:14.800000+00:00",
+    "2018-02-09T17:28:14.800000+00:00",
+    "2018-02-09T18:28:14.800000+00:00",
+    "2018-02-09T19:28:14.800000+00:00",
+    "2018-02-09T20:28:14.800000+00:00",
+    "2018-02-09T21:28:14.800000+00:00",
+    "2018-02-09T22:28:14.800000+00:00",
+    "2018-02-09T23:28:14.800000+00:00",
+    "2018-02-10T00:28:14.800000+00:00",
+    "2018-02-10T01:28:14.800000+00:00",
+    "2018-02-10T02:28:14.800000+00:00",
+    "2018-02-10T03:28:14.800000+00:00",
+    "2018-02-10T04:28:14.800000+00:00",
+    "2018-02-10T05:28:14.800000+00:00",
+    "2018-02-10T06:28:14.800000+00:00",
+    "2018-02-10T07:28:14.800000+00:00",
+    "2018-02-10T08:28:14.800000+00:00",
+    "2018-02-10T09:28:14.800000+00:00",
+    "2018-02-10T10:28:14.800000+00:00",
+    "2018-02-10T11:28:14.800000+00:00",
+    "2018-02-10T12:28:14.800000+00:00",
+    "2018-02-10T13:28:14.800000+00:00",
+    "2018-02-10T14:28:14.800000+00:00",
+    "2018-02-10T15:28:14.800000+00:00",
+    "2018-02-10T16:28:14.800000+00:00",
+    "2018-02-10T17:28:14.800000+00:00",
+    "2018-02-10T18:28:14.800000+00:00",
+    "2018-02-10T19:28:14.800000+00:00",
+    "2018-02-10T20:28:14.800000+00:00",
+    "2018-02-10T21:28:14.800000+00:00",
+    "2018-02-10T22:28:14.800000+00:00",
+    "2018-02-10T23:28:14.800000+00:00",
+    "2018-02-11T00:28:14.800000+00:00",
+    "2018-02-11T01:28:14.800000+00:00",
+    "2018-02-11T02:28:14.800000+00:00",
+    "2018-02-11T03:28:14.800000+00:00"
+  ],
+  "unavailable_months": {},
+  "acquired_at": "2026-11-04T13:17:55.683167+00:00",
+  "csv_gzip_sha256": "6771fa3adc2b991ae08a64043ecc107ee7cfd59b0e99d09db468a2c4f72b8e2c",
+  "monthly_sources": {
+    "2018-03": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2018-03.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:58 GMT",
+      "archive_sha256": "30e21e25299d62747bf2c1e72e1f2ac7a84fb42fe8dd4b18008097e7e658fbab",
+      "bars": 744
+    },
+    "2017-08": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2017-08.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:57 GMT",
+      "archive_sha256": "e8a059b1792de43a6a75780103b776782727ca4d8b4d1ad4494b42c480c5c6b7",
+      "bars": 356
+    },
+    "2018-01": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2018-01.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:57 GMT",
+      "archive_sha256": "884fb186232c8c1c8fee29dd768b77e1015e0097769f559fb63980287a3e96a1",
+      "bars": 743
+    },
+    "2018-02": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2018-02.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:57 GMT",
+      "archive_sha256": "e1fe7f0dd649f4bfc94c43e071d8c47360bdc9f6e63b8b5926c316490bb99220",
+      "bars": 640
+    },
+    "2017-11": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2017-11.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:57 GMT",
+      "archive_sha256": "6ddf8e075d3a37dc562e23256d345ee81a522cc0d5f85d377f5f27d33fc119cd",
+      "bars": 720
+    },
+    "2017-10": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2017-10.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:57 GMT",
+      "archive_sha256": "d3d589b30d621d0e31ca538ab7d24e9ef180e4f20fba11e7e07bd2cb4c30ce22",
+      "bars": 744
+    },
+    "2017-12": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2017-12.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:57 GMT",
+      "archive_sha256": "19c7f837276cb4a83bc06e8980008e1f8628af980c708c381f694297591d939e",
+      "bars": 744
+    },
+    "2017-09": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2017-09.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:57 GMT",
+      "archive_sha256": "b1856a6b94912a29aa627b5ec9c013b8a7680af28f321909dc1d8347bbedec83",
+      "bars": 713
+    },
+    "2018-04": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2018-04.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:58 GMT",
+      "archive_sha256": "517ff7fb242c9e5b4c04e0cdc9a877dd74f339d6508ecfbb03a40a9d395d9eab",
+      "bars": 720
+    },
+    "2018-05": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2018-05.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:58 GMT",
+      "archive_sha256": "96e76aad0d76259a46c6939eec7fca2f03d3257efc132314d0c7841f21590563",
+      "bars": 744
+    },
+    "2018-12": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2018-12.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:58 GMT",
+      "archive_sha256": "c879eedf9c34e514d4366a521c9270641359128168b493e5e7c1c86fdc47cccd",
+      "bars": 744
+    },
+    "2018-06": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2018-06.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:58 GMT",
+      "archive_sha256": "89ca6f4f5f3d7eda63a1e2b73e89137c84de07f64dca9f3137c0b5720a373f16",
+      "bars": 709
+    },
+    "2018-08": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2018-08.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:58 GMT",
+      "archive_sha256": "08aa5c8650555341cb9a97bb36d224a885f7f43d2639062d86dc73999ba7a8c5",
+      "bars": 744
+    },
+    "2018-11": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2018-11.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:58 GMT",
+      "archive_sha256": "c5ec22c135d03b693efc18ee5a800976eeeffa0d77c2018eb4b8001c34dbd261",
+      "bars": 713
+    },
+    "2019-03": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2019-03.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:59 GMT",
+      "archive_sha256": "00baadffa3bb44317c2b8b188da4303b486e9c06c042f6ef735755257ad246dc",
+      "bars": 738
+    },
+    "2018-07": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2018-07.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:58 GMT",
+      "archive_sha256": "52e7fc8fcd45d532b9c39c7188e7b0f23c7cd0b1fb85ab9f96a1f769e985d45e",
+      "bars": 737
+    },
+    "2018-09": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2018-09.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:58 GMT",
+      "archive_sha256": "4dc44f74cddfb7fdb4e443bfc5625ddd01a219bd05bf9b828edebb460cad24d2",
+      "bars": 720
+    },
+    "2018-10": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2018-10.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:58 GMT",
+      "archive_sha256": "cb5965743f2d34dcbc9e74c838e631d102ded65bbab6af7f9be1f1a47c1d5902",
+      "bars": 741
+    },
+    "2019-01": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2019-01.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:58 GMT",
+      "archive_sha256": "dfcb945fc3bb86dbb6695e5c043b6e55cd239c52abd7cabdaa7bafef2c9ddf1b",
+      "bars": 744
+    },
+    "2019-02": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2019-02.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:58 GMT",
+      "archive_sha256": "274f269cdb4d5e261776f36dc013dfd894e6708b3ef1716b50e8d35e9e16f6c9",
+      "bars": 672
+    },
+    "2019-05": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2019-05.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:59 GMT",
+      "archive_sha256": "147ba87d425554fe66c387c44100f6c6fbf0857d116ebbe16a5854ae5662f2c3",
+      "bars": 734
+    },
+    "2019-09": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2019-09.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:59 GMT",
+      "archive_sha256": "4c2f8e47ac294e8f10726273b5a637ed172e98711915960eb5d15e71421d1ea7",
+      "bars": 720
+    },
+    "2019-07": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2019-07.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:59 GMT",
+      "archive_sha256": "341560f517488020a87e50c379b37cc2605dbeceeb29a171d8f078186e2ed6eb",
+      "bars": 744
+    },
+    "2019-04": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2019-04.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:59 GMT",
+      "archive_sha256": "1a71dd3568ff0c875ef870f0023d2a9e7c8cdd7d7b427e373cdddb9b02909c51",
+      "bars": 720
+    },
+    "2019-11": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2019-11.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:59 GMT",
+      "archive_sha256": "222067844687455cf1f50022f906eb19eb0001e690378f3c5a12e89dd7bdc721",
+      "bars": 716
+    },
+    "2019-10": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2019-10.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:59 GMT",
+      "archive_sha256": "546117d59598496fcb3122772c2c9bf45d0c2dd7a25a9b07bd78a9cb83ad677b",
+      "bars": 744
+    },
+    "2019-06": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2019-06.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:59 GMT",
+      "archive_sha256": "3b51d2c72e8ba3891bb8631d226a5d1610ada0abc8095f7b48de539db8fcd6e0",
+      "bars": 720
+    },
+    "2020-01": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2020-01.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:59 GMT",
+      "archive_sha256": "9e0ca4d30bcb22d5c876b912b3160445d2410634d09e9584060f592c30a06402",
+      "bars": 744
+    },
+    "2019-08": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2019-08.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:59 GMT",
+      "archive_sha256": "84a769439af04f0c8413c32f9c8dcfd5a29241b8bcfb389776b296a6b4f8b6d4",
+      "bars": 736
+    },
+    "2020-04": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2020-04.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:35:00 GMT",
+      "archive_sha256": "0171b734b6131a542d79e35dc2ffbf886c1353574ef0983e95c4a8eb2856e56a",
+      "bars": 718
+    },
+    "2020-05": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2020-05.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:35:00 GMT",
+      "archive_sha256": "4a02d33138486434643a314ea561e274f95c9d93124763d15cbf18bf809ca771",
+      "bars": 744
+    },
+    "2019-12": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2019-12.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:59 GMT",
+      "archive_sha256": "c7734b09fafca18a99f4906ba33b34a37cb96b8c0f866e6b92f9e951f99f5b8d",
+      "bars": 744
+    },
+    "2020-03": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2020-03.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:35:00 GMT",
+      "archive_sha256": "2d80640a11d7de0eb052637d25aa95eb42602a927ad7c0be6d77a7689fbe93d3",
+      "bars": 743
+    },
+    "2020-09": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2020-09.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:35:00 GMT",
+      "archive_sha256": "1bbbb6fece1ff1f5ac8b42b8073686bc1e05e1cee404f453843a5cb5716d3a95",
+      "bars": 720
+    },
+    "2020-02": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2020-02.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:34:59 GMT",
+      "archive_sha256": "1cf8a5b129d16bed072c46e158b5914247007ec7e00b489880f422c80c73afbe",
+      "bars": 690
+    },
+    "2020-11": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2020-11.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:35:00 GMT",
+      "archive_sha256": "a1b583dd091363fa1375bced29f78f69889c6da219d1c136b9d0f9269a19158b",
+      "bars": 719
+    },
+    "2020-08": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2020-08.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:35:00 GMT",
+      "archive_sha256": "2b50f4e13ad28b1502cb99abb6e2d71048a46f207ecbd02aa4720ae1e451f703",
+      "bars": 744
+    },
+    "2020-10": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2020-10.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:35:00 GMT",
+      "archive_sha256": "7dac6824ff1762f704b9cd6becab4282ceada67be26f0466d378341c41db0ea2",
+      "bars": 744
+    },
+    "2020-07": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2020-07.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:35:00 GMT",
+      "archive_sha256": "3a740ceed16217e109224e01ca0ce552d241bf39045d82d29f69e61f13149ff8",
+      "bars": 744
+    },
+    "2020-06": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2020-06.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:35:00 GMT",
+      "archive_sha256": "d605f9ad1cc5556cfef7559f2d9e5cda0e55deba7f8ec03ea253bf8ec2f99d81",
+      "bars": 717
+    },
+    "2020-12": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2020-12.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:35:00 GMT",
+      "archive_sha256": "3928cbf56a66752d619eb438b92e0bc8cca2c8f0420237e5f5e81fdc19db13ea",
+      "bars": 740
+    },
+    "2021-01": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-01.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:35:00 GMT",
+      "archive_sha256": "01d6bb8175fb847a256ca1cc14dce06194a86c740d7edc951a5d2835aba9b577",
+      "bars": 744
+    },
+    "2021-03": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-03.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:35:00 GMT",
+      "archive_sha256": "64d15bc69f1788ccfa775cea47bf2f614a2ccb4eccf66257f512c8cd99d497ad",
+      "bars": 743
+    },
+    "2021-02": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-02.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:35:00 GMT",
+      "archive_sha256": "f2e871ec862f36045bfa06a05210832d6b772a101a62b18bc7acddf906083b44",
+      "bars": 671
+    },
+    "2021-04": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-04.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:35:01 GMT",
+      "archive_sha256": "299b928009158743a92860a66c75ba898243ecbdfa8ef9b346c0a7fd553bcbff",
+      "bars": 715
+    },
+    "2021-05": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-05.zip",
+      "http_last_modified": "Tue, 22 Jun 2021 11:35:01 GMT",
+      "archive_sha256": "56707e7dbceacc194a6ecd31ea2b2a75a5c5f428182e63055217188c7e47c89d",
+      "bars": 744
+    },
+    "2021-06": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-06.zip",
+      "http_last_modified": "Thu, 01 Jul 2021 06:58:14 GMT",
+      "archive_sha256": "e5244f5f095543d47d24a617c67292cf5daf95cc403407f5fff2fbd394580512",
+      "bars": 720
+    },
+    "2021-08": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-08.zip",
+      "http_last_modified": "Sat, 04 Sep 2021 12:32:31 GMT",
+      "archive_sha256": "9e390848fe76625e72b8f4eac86d405ed33c79ca9d79d9af14266c54d9d215af",
+      "bars": 740
+    },
+    "2021-07": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-07.zip",
+      "http_last_modified": "Mon, 02 Aug 2021 05:04:45 GMT",
+      "archive_sha256": "7048eb9eec2a091a3550f16870b93165eb21885ba6e217dac28682aebf248241",
+      "bars": 744
+    },
+    "2021-10": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-10.zip",
+      "http_last_modified": "Tue, 16 Nov 2021 02:05:22 GMT",
+      "archive_sha256": "332cdaac0de88dd2452c0ed2561f86e99ebba6f89d9db69b35aa9f52acafe805",
+      "bars": 744
+    },
+    "2021-12": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-12.zip",
+      "http_last_modified": "Sat, 01 Jan 2022 12:09:52 GMT",
+      "archive_sha256": "7cec67435b94112e7d1a8ec45b4d0167735102d12cb8649699aedf5018b09a80",
+      "bars": 744
+    },
+    "2022-01": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2022-01.zip",
+      "http_last_modified": "Tue, 01 Feb 2022 08:00:08 GMT",
+      "archive_sha256": "14a3875732b7e404be2522aec94b5f17fc43f81e77c0a68fdd72980ea644ef5a",
+      "bars": 744
+    },
+    "2021-11": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-11.zip",
+      "http_last_modified": "Wed, 01 Dec 2021 06:05:18 GMT",
+      "archive_sha256": "fc8093a34678bd6ce4436c411127a69f245b2d5cfa6208aee67ffda504a70664",
+      "bars": 720
+    },
+    "2021-09": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2021-09.zip",
+      "http_last_modified": "Fri, 01 Oct 2021 03:51:51 GMT",
+      "archive_sha256": "c10a61248a5c92280e35beadcfdf33220fdc0561ab1973893a4fe5a3335d3b78",
+      "bars": 718
+    },
+    "2022-03": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2022-03.zip",
+      "http_last_modified": "Fri, 02 Sep 2022 11:32:10 GMT",
+      "archive_sha256": "9af5cd5120e2942f763f0a45cec35b0a98322015d52b29884655875f8bfe361d",
+      "bars": 744
+    },
+    "2022-02": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2022-02.zip",
+      "http_last_modified": "Wed, 02 Mar 2022 00:47:44 GMT",
+      "archive_sha256": "2c155824e909de8c1f91a41bbdc2356c29f3c16944db3982a7c912ff58083eb3",
+      "bars": 672
+    },
+    "2022-08": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2022-08.zip",
+      "http_last_modified": "Thu, 01 Sep 2022 05:35:09 GMT",
+      "archive_sha256": "7792ffb44dbcd7a9964ea796ffc2dc2049b5437a5a317c07b64eb4be8aac1a13",
+      "bars": 744
+    },
+    "2022-04": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2022-04.zip",
+      "http_last_modified": "Mon, 02 May 2022 02:07:15 GMT",
+      "archive_sha256": "d47fd9d00967d87564a52cc7025960de98513f863a83018e9f9dd0eb5875df39",
+      "bars": 720
+    },
+    "2022-07": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2022-07.zip",
+      "http_last_modified": "Mon, 01 Aug 2022 08:59:18 GMT",
+      "archive_sha256": "87c81755af5e05b5b24182eed98582284b6896048d231a245581d76df669d4b4",
+      "bars": 744
+    },
+    "2022-09": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2022-09.zip",
+      "http_last_modified": "Mon, 03 Oct 2022 06:02:11 GMT",
+      "archive_sha256": "e64c3e782b8421fa035843584bff1ddcdee84ee1bcb06d6e154915855d6917c4",
+      "bars": 720
+    },
+    "2022-05": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2022-05.zip",
+      "http_last_modified": "Thu, 02 Jun 2022 05:14:08 GMT",
+      "archive_sha256": "382390f47d0660bb3dc16aaedf7901002a2293ca7a375045b08d956208c95615",
+      "bars": 744
+    },
+    "2022-10": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2022-10.zip",
+      "http_last_modified": "Thu, 03 Nov 2022 20:50:02 GMT",
+      "archive_sha256": "e0e1d08f8e089a0273e2ad62ad052b690d4082c82bf56da6f7b2c37795e2ab6f",
+      "bars": 744
+    },
+    "2022-06": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2022-06.zip",
+      "http_last_modified": "Fri, 01 Jul 2022 04:34:48 GMT",
+      "archive_sha256": "9fd8dabf04723354423f643b62b74ac5f1046e28f855c0e15d9eb68b5e49f559",
+      "bars": 720
+    },
+    "2022-11": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2022-11.zip",
+      "http_last_modified": "Fri, 02 Dec 2022 09:42:50 GMT",
+      "archive_sha256": "109c93bc5db33562650e146c9a9332ec4496dae5021cf942f5c75317c75d16eb",
+      "bars": 720
+    },
+    "2022-12": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2022-12.zip",
+      "http_last_modified": "Wed, 04 Jan 2023 05:07:59 GMT",
+      "archive_sha256": "6f704c3ed1be5ce404b5ca53e733e42b005308714218ff9e21d15e7cfb128f01",
+      "bars": 744
+    },
+    "2023-01": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2023-01.zip",
+      "http_last_modified": "Sat, 18 Feb 2023 01:03:11 GMT",
+      "archive_sha256": "6a646f674ecfa736db1e6fd0c4ebaf26594806efde851f2c7081aec533714e3d",
+      "bars": 744
+    },
+    "2023-03": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2023-03.zip",
+      "http_last_modified": "Wed, 05 Apr 2023 15:13:50 GMT",
+      "archive_sha256": "90d268be1e0d39f7411f88ca3c0f21fe110fee7ff3c1dd054555e1fea6e22d8d",
+      "bars": 743
+    },
+    "2023-05": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2023-05.zip",
+      "http_last_modified": "Tue, 06 Jun 2023 07:15:19 GMT",
+      "archive_sha256": "e03f762cd90b9a4eb6bf3499a05f4df84a71fd23f18d8b1b9c2e88eb469b0f2e",
+      "bars": 744
+    },
+    "2023-06": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2023-06.zip",
+      "http_last_modified": "Tue, 04 Jul 2023 05:49:38 GMT",
+      "archive_sha256": "7ca4b8f6f6ff04f6899fe49b68df2c7b60841dfadb4a334631491af2d192bfbf",
+      "bars": 720
+    },
+    "2023-04": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2023-04.zip",
+      "http_last_modified": "Tue, 02 May 2023 13:34:18 GMT",
+      "archive_sha256": "36598c7b9ac93706b8c9f9e6da11bc2137f605c442dab139ac35e397efcd9473",
+      "bars": 720
+    },
+    "2023-02": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2023-02.zip",
+      "http_last_modified": "Thu, 02 Mar 2023 03:44:30 GMT",
+      "archive_sha256": "c23f2ce377caba0279a932cfea93701bd02c996879293c5c395eaba06a943039",
+      "bars": 672
+    },
+    "2023-09": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2023-09.zip",
+      "http_last_modified": "Thu, 05 Oct 2023 05:45:12 GMT",
+      "archive_sha256": "3453dc6570a7193ab358e5a4c592439b4073028b1ab09412610d9409cf330219",
+      "bars": 720
+    },
+    "2023-07": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2023-07.zip",
+      "http_last_modified": "Wed, 02 Aug 2023 12:50:03 GMT",
+      "archive_sha256": "b141e7b3ec07f24756b1c5c27b562acfe06d331678a49c493a5fa2cba44eb97a",
+      "bars": 744
+    },
+    "2023-08": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2023-08.zip",
+      "http_last_modified": "Tue, 19 Sep 2023 01:45:41 GMT",
+      "archive_sha256": "25930d0ba8280ec82b879d130071582c3ee4d5a1fbe31dc34c016b2c314d3525",
+      "bars": 744
+    },
+    "2023-10": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2023-10.zip",
+      "http_last_modified": "Fri, 03 Nov 2023 09:01:23 GMT",
+      "archive_sha256": "d91229dd47c4cf53b8e326b500295a4fb9f0316faca0e2149076065bc53ae049",
+      "bars": 744
+    },
+    "2024-01": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2024-01.zip",
+      "http_last_modified": "Mon, 05 Feb 2024 12:26:08 GMT",
+      "archive_sha256": "1fdb3a8fa6b77ef30ef17ed4b71b184172ef1f812d83bd0f50bbd08e71a92057",
+      "bars": 744
+    },
+    "2024-03": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2024-03.zip",
+      "http_last_modified": "Thu, 11 Apr 2024 14:01:12 GMT",
+      "archive_sha256": "4eb16ab0c5db15e5e0d77827f5c19c215c7ce601a5501d9563b75bda7602f46e",
+      "bars": 744
+    },
+    "2024-04": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2024-04.zip",
+      "http_last_modified": "Sat, 11 May 2024 15:14:10 GMT",
+      "archive_sha256": "8b710fad720ae0bc75eaded37b3add95ca49122ae398f3f6e33e57e864da781e",
+      "bars": 720
+    },
+    "2023-12": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2023-12.zip",
+      "http_last_modified": "Wed, 10 Jan 2024 03:29:13 GMT",
+      "archive_sha256": "89ec0d0b4f4ee72f4f1c2fad52ec1d94435d525bb107ae23d6f9716c77dbc428",
+      "bars": 744
+    },
+    "2024-06": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2024-06.zip",
+      "http_last_modified": "Tue, 09 Jul 2024 04:25:11 GMT",
+      "archive_sha256": "59ee6920bd72d93d1130c89711c93ea192bbfd5f82b548dcb0448f66450f6a06",
+      "bars": 720
+    },
+    "2024-05": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2024-05.zip",
+      "http_last_modified": "Thu, 06 Jun 2024 03:21:08 GMT",
+      "archive_sha256": "0307d64f0d9ae6ff4001442a014d7b02dcbc5a003dcc36ba139f1c9695996b51",
+      "bars": 744
+    },
+    "2023-11": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2023-11.zip",
+      "http_last_modified": "Tue, 05 Dec 2023 02:48:45 GMT",
+      "archive_sha256": "2be46057e4a5b40b4b7c6bdf5b163aa22e353048e62907e730cd471fbf3a62b5",
+      "bars": 720
+    },
+    "2024-02": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2024-02.zip",
+      "http_last_modified": "Tue, 12 Mar 2024 11:00:09 GMT",
+      "archive_sha256": "f080ff288b2f7e85e78c5370a8a3258b93f85531ff96b4131c1b7889649a8ba4",
+      "bars": 696
+    },
+    "2024-10": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2024-10.zip",
+      "http_last_modified": "Wed, 06 Nov 2024 10:48:20 GMT",
+      "archive_sha256": "cbb13664485b6c9a6365da7ae23299b722ab5926a6aed516add486ef501883bc",
+      "bars": 744
+    },
+    "2024-08": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2024-08.zip",
+      "http_last_modified": "Tue, 10 Sep 2024 11:42:11 GMT",
+      "archive_sha256": "d908255a48978f6acb769c4b856a3307c58a8c19dbf2b3b7f10067245d5e8b89",
+      "bars": 744
+    },
+    "2024-07": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2024-07.zip",
+      "http_last_modified": "Thu, 08 Aug 2024 09:50:46 GMT",
+      "archive_sha256": "83181cfcc1f1e32a542e2c220cbd58acd1c550cc64ad1e2c414e47088266aa7c",
+      "bars": 744
+    },
+    "2024-12": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2024-12.zip",
+      "http_last_modified": "Wed, 08 Jan 2025 01:32:25 GMT",
+      "archive_sha256": "84312b7dc2b5c903853c78d94f587ef1d24b7960d7bd95f5bfe3afc3db006203",
+      "bars": 744
+    },
+    "2025-02": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2025-02.zip",
+      "http_last_modified": "Tue, 04 Mar 2025 10:58:50 GMT",
+      "archive_sha256": "40c2f73850422d47ca7d044959cecc39ff3416f6e3c88f30636da4a01a0b6e31",
+      "bars": 672
+    },
+    "2025-04": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2025-04.zip",
+      "http_last_modified": "Tue, 06 May 2025 11:28:11 GMT",
+      "archive_sha256": "73f39799fae1ba4ef291c6785b934a6c817426ef8ef60e1bdf42078efd27893d",
+      "bars": 720
+    },
+    "2024-09": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2024-09.zip",
+      "http_last_modified": "Tue, 15 Oct 2024 12:59:57 GMT",
+      "archive_sha256": "bfbdda97d03abac469199120ec3c2f1305e2d5947e9155ff84dbeafe33cd4a67",
+      "bars": 720
+    },
+    "2024-11": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2024-11.zip",
+      "http_last_modified": "Mon, 02 Dec 2024 18:41:18 GMT",
+      "archive_sha256": "29cd30419b86d5dff5467a7a81d43e492aaaeb3669db216ab8badaad5fe610ec",
+      "bars": 720
+    },
+    "2025-03": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2025-03.zip",
+      "http_last_modified": "Sat, 12 Apr 2025 14:15:28 GMT",
+      "archive_sha256": "dc32ecad498d19f8663633196ec84cbd480595c89aa1ae6062c0fa0b8d9bd11d",
+      "bars": 744
+    },
+    "2025-01": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2025-01.zip",
+      "http_last_modified": "Sat, 08 Feb 2025 12:45:33 GMT",
+      "archive_sha256": "f7350a6f3b51de466a0db52ba890cf296d4faeb6e84811b9606f87ad39ccf3ec",
+      "bars": 744
+    },
+    "2025-11": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2025-11.zip",
+      "http_last_modified": "Mon, 01 Dec 2025 08:36:50 GMT",
+      "archive_sha256": "3c0171cdd5eef1ece36c818ace3a07cc48e331cb9d991488a8db917bc496b78d",
+      "bars": 720
+    },
+    "2025-10": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2025-10.zip",
+      "http_last_modified": "Mon, 03 Nov 2025 09:06:51 GMT",
+      "archive_sha256": "f3668059619d772ae8f7167d82666dcc6e2f88f17e6fd66a4a8098c9cd8ba042",
+      "bars": 744
+    },
+    "2025-05": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2025-05.zip",
+      "http_last_modified": "Mon, 02 Jun 2025 08:26:23 GMT",
+      "archive_sha256": "720a319face496acff79d8e6279b9b03f31495097d555c74daa076cd66421bee",
+      "bars": 744
+    },
+    "2025-06": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2025-06.zip",
+      "http_last_modified": "Mon, 07 Jul 2025 08:12:28 GMT",
+      "archive_sha256": "780788805b48a094886590d939ef45372db2ee053aa5d464f8e135121df2b8eb",
+      "bars": 720
+    },
+    "2025-07": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2025-07.zip",
+      "http_last_modified": "Mon, 04 Aug 2025 08:40:39 GMT",
+      "archive_sha256": "d5c4c2482004a49b479ff5bfbdb885b25035ace24e5f95edd8057507718df366",
+      "bars": 744
+    },
+    "2025-08": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2025-08.zip",
+      "http_last_modified": "Mon, 01 Sep 2025 08:21:53 GMT",
+      "archive_sha256": "1ebdd24f8e1df5369518b721fdb0bfaaca9892ae71499b82783194573f804cad",
+      "bars": 744
+    },
+    "2025-09": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2025-09.zip",
+      "http_last_modified": "Mon, 06 Oct 2025 10:46:05 GMT",
+      "archive_sha256": "f83ffff284b408574a4571e83fabc5c641e20edc71818912541cc38ec7e1be43",
+      "bars": 720
+    },
+    "2026-02": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2026-02.zip",
+      "http_last_modified": "Mon, 02 Mar 2026 07:41:11 GMT",
+      "archive_sha256": "8c8c6e664688497711832add90349b8617caf7e8892f085e97fe4290989fe78b",
+      "bars": 672
+    },
+    "2026-01": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2026-01.zip",
+      "http_last_modified": "Mon, 02 Feb 2026 08:07:30 GMT",
+      "archive_sha256": "eb060da7fb1adc65c7999f7d1f4f3b004edf2335311bb32d05a86f9577c21106",
+      "bars": 744
+    },
+    "2026-04": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2026-04.zip",
+      "http_last_modified": "Mon, 04 May 2026 07:46:19 GMT",
+      "archive_sha256": "46d62ed100717d8195bce4c07a41dc7606f41abc491ca71f9bfe653d2b92bfc0",
+      "bars": 720
+    },
+    "2026-03": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2026-03.zip",
+      "http_last_modified": "Mon, 06 Apr 2026 07:56:06 GMT",
+      "archive_sha256": "0bf4dc37f2b201a8891f63dd76164742ed7d4fa24c24065a2e7709f34488ff74",
+      "bars": 744
+    },
+    "2025-12": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2025-12.zip",
+      "http_last_modified": "Mon, 05 Jan 2026 10:31:02 GMT",
+      "archive_sha256": "7a7a35ce7b9be9bafa0a00c47370acc57a48329a3289c21cb19f1185f6430fdb",
+      "bars": 744
+    },
+    "2026-06": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2026-06.zip",
+      "http_last_modified": "Mon, 06 Jul 2026 09:37:31 GMT",
+      "archive_sha256": "e24954ab4ada9dc5f6bbf9ac30275d459a5729fb522f045f627296b4ad7ee985",
+      "bars": 720
+    },
+    "2026-05": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2026-05.zip",
+      "http_last_modified": "Mon, 01 Jun 2026 07:30:41 GMT",
+      "archive_sha256": "8c4cef22ad7046183621f1a41155e91301780a3c9f377d7770763027b08e2462",
+      "bars": 744
+    },
+    "2026-07": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2026-07.zip",
+      "http_last_modified": "Mon, 03 Aug 2026 10:56:31 GMT",
+      "archive_sha256": "5e8c974c008689943b473ccc5890707d0c2cd0b7e71bdb28c0ad65a87abde338",
+      "bars": 744
+    },
+    "2026-09": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2026-09.zip",
+      "http_last_modified": "Mon, 05 Oct 2026 11:36:33 GMT",
+      "archive_sha256": "04a3deb832f99c5f4e961c28baa4c6856b1f1cc5a7d887068aafeed6a717f4ac",
+      "bars": 720
+    },
+    "2026-10": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2026-10.zip",
+      "http_last_modified": "Mon, 02 Nov 2026 11:17:03 GMT",
+      "archive_sha256": "1d89c6824d40f6a14f25df6e5a6a3e7f0710990f60c219d78b934446d44ce398",
+      "bars": 744
+    },
+    "2026-08": {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-2026-08.zip",
+      "http_last_modified": "Mon, 07 Sep 2026 11:22:22 GMT",
+      "archive_sha256": "ebac99df5b1d9c84c56ea8f7a86daf09bcb43f8fdbded0049fec5205ab977dcc",
+      "bars": 744
+    }
+  },
+  "limitations": [
+    "Current vendor archives can contain revisions and are not vintage snapshots.",
+    "Binance history cannot establish OKX Singapore fees, fills, or eligibility.",
+    "USDT is treated as USD parity in portfolio reporting."
+  ]
+}
