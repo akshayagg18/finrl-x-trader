@@ -153,3 +153,18 @@ async function refreshHedgeResearch(){
 }
 refreshHedgeResearch().catch(e=>{let host=$('hedge-qualification');if(host)host.textContent=e.message;});
 $('growth-refresh').addEventListener('click',()=>refreshHedgeResearch());
+
+async function refreshDefensiveForward(){
+  let host=$('defensive-forward-research');
+  if(!host){
+    host=document.createElement('div');host.id='defensive-forward-research';host.className='panel-inset';
+    host.innerHTML='<h3>Selected 20% candidate · forward paper</h3><p class="caption">Prospective Binance public-data observation of the frozen weekly long/cash rule. This virtual account cannot submit broker orders.</p><div class="form-grid"><label>Virtual capital<input id="defensive-forward-capital" type="number" value="500" min="1"></label><div class="button-row"><button id="defensive-forward-configure">Configure</button><button id="defensive-forward-start">Start</button><button id="defensive-forward-stop" class="danger">Stop</button></div></div><pre id="defensive-forward-status"></pre>';
+    $('hedge-research').insertAdjacentElement('afterend',host);
+    bind('defensive-forward-configure',async()=>{await api('growth/defensive-forward/configure',{capital:Number($('defensive-forward-capital').value),fee_bps:10,friction_bps:5});await refreshDefensiveForward();});
+    for(const action of ['start','stop'])bind('defensive-forward-'+action,async()=>{await api('growth/defensive-forward/'+action,{});await refreshDefensiveForward();});
+  }
+  const state=await api('growth/defensive-forward');
+  $('defensive-forward-status').textContent=JSON.stringify({mode:state.mode,candidate:state.candidate,configured:state.configured,active:state.active,risk:state.risk,observations:state.observations,decision_weeks:state.decision_weeks,equity:state.result?.ending_equity,return:state.result?.net_return,drawdown:state.result?.max_drawdown,doubled_cost_return:state.result?.doubled_cost_return,next_observation:state.next_observation,error:state.error,qualification:state.qualification,live_orders_possible:state.live_orders_possible},null,2);
+}
+refreshDefensiveForward().catch(e=>{let host=$('defensive-forward-status');if(host)host.textContent=e.message;});
+$('growth-refresh').addEventListener('click',()=>refreshDefensiveForward());

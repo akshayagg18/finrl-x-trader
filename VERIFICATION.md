@@ -256,3 +256,29 @@ Final regression command:
 short carry, gross-exposure bounds, equal-notional pair construction, synthetic
 put pricing/funding, locked protocol hashes, honest failed-track labels,
 non-promotion, comparison selection and dashboard rendering.
+
+## Selected 20% candidate forward paper — 6 November 2026
+
+Implemented an isolated persistent account for the frozen
+`trend_100_momentum_90_weekly_btc_gate` candidate with 20% per-asset and 40%
+total deployment caps. It downloads completed Binance daily history and current
+bid/ask quotes, validates continuity, freshness and spread, calculates lagged
+trend, momentum and volatility, decides once per ISO week, models fractional
+fills, persists immutable observations/fills, reconstructs on restart,
+deduplicates by day and stable fill identity, and evaluates doubled costs.
+
+The first public observation occurred at 2026-11-05 19:20 UTC, or 6 November
+03:20 Singapore time. It generated 19.0588% BTC and 13.8184% ETH targets. The
+virtual $500 account bought 0.00125101 BTC and 0.03064032 ETH, retained $335.37
+cash, incurred $0.25 modeled spread, fee and friction, and marked at $499.75.
+This is one initial cost-bearing mark, not evidence of profit persistence.
+
+Focused tests cover causal and bounded weights, cash fallback, configuration
+freeze, weekly decision deduplication, stable restart reconstruction, fill
+persistence, global kill, start prerequisites and browser controls. Live-order
+capability is hard false; no broker API is called and no promotion route exists.
+
+Final regression command:
+`PLAYWRIGHT_BROWSERS_PATH=/workspace/pw-browsers .venv/bin/pytest tests -q` —
+**102 passed, 5,066 dependency deprecation warnings in 63.91 seconds**. The log
+is `research/defensive_forward/verification_tests.txt`.

@@ -65,6 +65,30 @@ python -m scripts.evaluate_put_protection
 python -m scripts.report_hedge_comparison
 ```
 
+### Selected autonomous forward-paper candidate
+
+The application now has a persistent prospective account for the selected 20%
+long/cash candidate. It collects genuine completed Binance daily history and
+current bid/ask quotes, makes at most one decision per UTC week, simulates
+fractional fills with spread, fees and adverse execution, persists state in
+SQLite, reconstructs deterministically after restart, and tracks doubled-cost
+results. It has no broker-routing method.
+
+The first genuine observation was recorded on 6 November 2026 at 03:20
+Singapore time. It allocated 19.06% to BTC and 13.82% to ETH, retained $335.37
+cash, and marked the $500 account at $499.75 after $0.25 modeled initial costs.
+This single observation is infrastructure evidence, not performance evidence.
+Read the [forward-paper report](research/defensive_forward/REPORT.md).
+
+```sh
+python -m scripts.start_defensive_forward --db runtime/trader.db --capital 500
+python -m trader serve
+```
+
+Keep the application process running to collect future observations. The first
+12 decision weeks are a minimum evidence period; passing them still cannot
+automatically activate broker execution.
+
 ## Cost-aware profitability research (November 2026)
 
 The repository now includes a leakage-controlled XGBoost workflow for expected-return forecasting, cost-aware execution, regime/sizing ablations, cost stress, and a constrained long-only opening-range-breakout comparison. It uses the existing frozen market snapshots and never routes orders to a broker.

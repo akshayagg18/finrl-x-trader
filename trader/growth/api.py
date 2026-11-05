@@ -12,7 +12,13 @@ class ForwardRequest(BaseModel):
     models: dict[str, str] = Field(default_factory=dict)
 
 
-from . import forward
+class DefensiveForwardRequest(BaseModel):
+    capital: float = Field(500.0, gt=0, le=100000)
+    fee_bps: float = Field(10.0, ge=0, le=100)
+    friction_bps: float = Field(5.0, ge=0, le=100)
+
+
+from . import defensive_forward, forward
 
 
 def router(db):
@@ -92,6 +98,18 @@ def router(db):
     @routes.get("/forward")
     def status():
         return forward.status(db)
+
+    @routes.get("/defensive-forward")
+    def defensive_forward_status():
+        return defensive_forward.status(db)
+
+    @routes.post("/defensive-forward/configure")
+    def defensive_forward_configure(request: DefensiveForwardRequest):
+        return defensive_forward.configure(db, request.model_dump())
+
+    @routes.post("/defensive-forward/{action}")
+    def defensive_forward_control(action: str):
+        return defensive_forward.control(db, action)
 
     @routes.post("/forward/configure")
     def configure(request: ForwardRequest):

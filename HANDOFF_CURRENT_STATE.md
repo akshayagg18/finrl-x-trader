@@ -41,6 +41,16 @@ Long/cash therefore remains the preferred historical track at every tier. No
 track is deployment qualified. Read `research/hedge_comparison/REPORT.md` and
 the three track reports before changing the research direction.
 
+The selected next action is implemented: a persistent prospective forward-
+paper account for the **20% long/cash tier**. It recorded its first genuine
+Binance public observation on 6 November 2026 at 03:20 Singapore time,
+allocated 19.06% BTC and 13.82% ETH, retained $335.37 cash, and marked $499.75
+after $0.25 modeled initial transaction cost. The local runtime account remains
+active and will resume when the application scheduler runs. Its private SQLite
+state is excluded from Git; the public verification snapshot is in
+`research/defensive_forward/initial_observation.json`. One observation is not a
+track record. Broker promotion remains technically impossible from this module.
+
 ## 0. Cost-aware profitability research update — 3 November 2026
 
 A new expected-return XGBoost workflow, paper-mechanism replication, regime/sizing ablations, raw signal diagnostics, and long-only equity ORB pilot were added without changing broker routing or live controls.
@@ -71,12 +81,16 @@ This is a working self-hosted research and simulation application with an existi
 
 **There is no deployment-qualified profitable strategy. Do not enable real trading based on the existing results.** The defensive rule is positive retrospectively but fails the weekly confidence and prospective-evidence gates. Earlier regime and ML candidates lost money or failed selection. Software functionality does not establish a durable investment edge.
 
-- Latest recorded complete regression run: **98 passed**, 4,971 dependency deprecation warnings, 71.76 seconds. Evidence: [verification log](research/hedge_comparison/verification_tests.txt).
+- Latest recorded complete regression run: **102 passed**, 5,066 dependency deprecation warnings, 63.91 seconds. Evidence: [verification log](research/defensive_forward/verification_tests.txt).
 - No real-money orders or actual brokerage paper-account executions were submitted during development.
 - No brokerage credentials were supplied. The application starts without them.
 - Live trading defaults off. The original swing console has an explicit live activation mechanism; it is not a verified production deployment.
 - Intraday/growth research and simulation do **not** automatically route to real brokers. The CCXT OKX transport is not wired into autonomous intraday execution.
-- A forward public-quote check recorded **one genuine observation, $500 cash, zero fills**. The verification account was stopped. This is not a 12-week forward trial.
+- The earlier model-driven forward check recorded one genuine cash-only
+  observation and was stopped. The newly selected defensive account is a
+  separate continuous record: its first genuine observation placed two
+  simulated fills and it remains enabled in the private local database. It is
+  still only the first observation of a minimum 12-week forward trial.
 - Latest scope is **long-term net growth with more profitable weeks**, allowing overnight/multiday holdings and accepting losing weeks. It is not a promise of weekly income.
 
 This file consolidates the current state. README and VERIFICATION contain chronological updates; earlier claims that all ML, replay, settlement, or forward observation are absent are partially superseded. Do not interpret old completion checklists as current implementation status.
@@ -344,7 +358,12 @@ Restore sets kill and revokes original live activation. Explicitly inspect/recon
 
 Local-only host/origin/header checks are not remote authentication. Do not expose trading endpoints publicly. Keep credentials in backend environment variables. Use no withdrawal/transfer permission. `ALPACA_PAPER_*` and `ALPACA_LIVE_*` are separate; IBKR needs Gateway/TWS and entitlements; `OKX_DEMO_*` and `OKX_LIVE_*` are separate and `OKX_REGION_VERIFIED` defaults false.
 
-The last recorded forward verification account was stopped after one observation. No ongoing 12-week trial should be inferred. The observation record timestamp is authoritative; repository commits or elapsed wall-clock time alone are not forward evidence.
+The older model-driven verification account was stopped after one observation.
+The selected defensive account began a separate prospective record on 6
+November 2026 and remains enabled in the private local database. It collects
+observations only while the application scheduler runs. The observation record
+timestamps are authoritative; repository commits or elapsed wall-clock time
+alone are not forward evidence.
 
 ## 11. Open work and priorities
 
@@ -388,7 +407,9 @@ Acceptance for external readiness is a verified paper-account lifecycle with rec
 - Candle-based research uses synthetic **execution quote assumptions derived from real prices**, not observed historical NBBO/depth. Actual public forward quotes are a separate evidence source.
 - Replay/forward engine state is reconstructed from stored history. Runtime grows with history; no production throughput or high-availability claim has been established.
 - Configured `fees_verified` metadata alone is not proof of an actual tariff. Treat fee verification as an external evidence requirement.
-- The latest full model-driven forward path has not accumulated a qualifying trading record; the genuine forward check was cash-only.
+- The selected defensive forward path has two simulated opening fills but has
+  not accumulated a qualifying trading record. Its initial cost-bearing mark
+  is infrastructure evidence only.
 
 ## 12. Suggested first session for the next engineer/agent
 
@@ -399,4 +420,8 @@ Acceptance for external readiness is a verified paper-account lifecycle with rec
 5. Separate the research question (“is there a net edge?”) from execution engineering (“can an account operate correctly?”). Both must succeed for eventual real-money use.
 6. Update this handoff with each completed milestone, actual test outputs, data period and commit. Do not replace failing results with unsupported success claims.
 
-**Handoff status:** useful, tested research/simulation software; stricter selection correctly prevents deployment; no qualified strategy; external autonomous intraday brokerage still requires implementation and verification. The next step is evidence and operational hardening—not increasing risk to force weekly profits.
+**Handoff status:** useful, tested research/simulation software; the preferred
+20% long/cash candidate is running in isolated forward paper but remains
+unqualified for broker deployment. The next step is uninterrupted prospective
+evidence and operational hardening, while external autonomous brokerage still
+requires implementation and credentialed verification.

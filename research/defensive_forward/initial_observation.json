@@ -1,0 +1,131 @@
+{
+  "mode": "prospective forward paper",
+  "candidate": "trend_100_momentum_90_weekly_btc_gate",
+  "risk": {
+    "per_asset": 0.2,
+    "deployment": 0.4,
+    "minimum_cash": 0.6,
+    "volatility_target": 0.3,
+    "drawdown_budget": 0.2
+  },
+  "config": {
+    "capital": 500.0,
+    "fee_bps": 10.0,
+    "friction_bps": 5.0
+  },
+  "observations": [
+    {
+      "day": "2026-11-05",
+      "received": "2026-11-05T19:20:51.919546+00:00",
+      "body": {
+        "provider": "Binance public spot",
+        "quotes": {
+          "BTC-USDT": {
+            "bid": 76173.82,
+            "ask": 76173.83
+          },
+          "ETH-USDT": {
+            "bid": 2254.94,
+            "ask": 2254.95
+          }
+        },
+        "weights": {
+          "BTC-USDT": 0.19058821426082972,
+          "ETH-USDT": 0.138184487707407
+        },
+        "features": {
+          "BTC-USDT": {
+            "completed_close": 80504.01,
+            "trend": 0.04720162937393657,
+            "momentum": 0.25154682705152887,
+            "volatility": 0.3148148495577325
+          },
+          "ETH-USDT": {
+            "completed_close": 2424.61,
+            "trend": 0.028077125904074407,
+            "momentum": 0.27336274355338497,
+            "volatility": 0.4342021379928296
+          }
+        },
+        "decision_week": "2026-W45",
+        "candidate": "trend_100_momentum_90_weekly_btc_gate"
+      }
+    }
+  ],
+  "result": {
+    "initial": 500.0,
+    "ending_equity": 499.75317858442423,
+    "net_return": -0.0004936428311514973,
+    "max_drawdown": -0.0004936428311514973,
+    "cash": 335.3668276003059,
+    "positions": {
+      "BTC-USDT": 0.0012510085600981025,
+      "ETH-USDT": 0.030640323313297444
+    },
+    "fills": [
+      {
+        "day": "2026-11-05",
+        "symbol": "BTC-USDT",
+        "side": "BUY",
+        "quantity": 0.0012510085600981025,
+        "price": 76211.916915,
+        "notional": 95.34176044215036,
+        "fee": 0.09534176044215036,
+        "reason": "weekly target rebalance"
+      },
+      {
+        "day": "2026-11-05",
+        "symbol": "ETH-USDT",
+        "side": "BUY",
+        "quantity": 0.030640323313297444,
+        "price": 2256.0774749999996,
+        "notional": 69.12694325384771,
+        "fee": 0.06912694325384772,
+        "reason": "weekly target rebalance"
+      }
+    ],
+    "completed_trades": 0,
+    "transaction_costs": 0.24682141557572873,
+    "points": [
+      {
+        "timestamp": "2026-11-05T19:20:51.919546+00:00",
+        "equity": 499.75317858442423,
+        "cash": 335.3668276003059
+      }
+    ],
+    "doubled_cost_return": -0.0009872955220051605
+  },
+  "qualification": {
+    "qualified": false,
+    "reasons": [
+      "Insufficient complete weeks",
+      "Insufficient completed trades",
+      "Nonpositive net return",
+      "Doubled-cost robustness not established",
+      "Positive lower 95% block-bootstrap bound not established"
+    ],
+    "net_return": -0.0004936428311514973,
+    "max_drawdown": -0.0004936428311514973,
+    "complete_weeks": 0,
+    "profitable_weeks": 0,
+    "losing_weeks": 0,
+    "flat_weeks": 0,
+    "profitable_week_fraction": null,
+    "median_week": null,
+    "worst_week": null,
+    "longest_losing_streak": 0,
+    "longest_underwater_observations": 1,
+    "mean_weekly_return_lower_95": null,
+    "completed_trades": 0,
+    "weeks": {
+      "2026-11-02": -0.0004936428311514973
+    },
+    "partial_weeks_excluded_from_statistics": 1,
+    "decision_weeks": 1,
+    "prospective_gate_complete": false,
+    "broker_promotion_allowed": false
+  },
+  "live_orders_possible": false,
+  "broker_orders_submitted": 0,
+  "boundary": "Public-data local simulation only; this export is not broker paper or real-money performance"
+}

@@ -201,3 +201,26 @@ Research endpoints are read-only at `GET /api/growth/hedges`. A local result
 cannot enable shorting, margin, derivatives or options. Those instruments would
 require a separately implemented and verified broker capability, margin model,
 funding/borrow reconciliation, liquidation controls and bot-ownership ledger.
+
+## Selected defensive forward-paper account
+
+`trader/growth/defensive_forward.py` freezes the 20% research candidate for new
+prospective observations: 100-day BTC trend, 90-day BTC momentum, weekly UTC
+cadence with restart catch-up, 20% per-asset cap, 40% deployment cap, 60%
+minimum cash and a 30% annualized volatility target. Only capital and modeled
+fee/friction inputs are configurable. Configuration freezes permanently after
+the first observation so losses cannot be reset by changing parameters.
+
+The subsystem stores `defensive_forward`, `defensive_forward_observations` and
+`defensive_forward_fills` tables in the selected SQLite database. Stable fill
+hashes and deterministic reconstruction prevent duplicate virtual orders after
+restart. The central scheduler checks daily when
+`defensive_forward_enabled=true`; the global kill switch stops it. A failure in
+network access, history validation, ordering or calculations stops observation
+and writes a sanitized audit event.
+
+Endpoints: `GET /api/growth/defensive-forward`, POST `/configure`, and POST
+`/{start|stop}` under that prefix. The dashboard exposes the same controls. Run
+`python -m scripts.start_defensive_forward` to configure, start and collect one
+observation. This is local public-data simulation. `live_orders_possible` is
+always false and there is no promotion endpoint.

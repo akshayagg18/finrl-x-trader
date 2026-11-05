@@ -1,5 +1,6 @@
-from datetime import datetime, timezone
 import threading
+from datetime import UTC, datetime
+
 import pandas as pd
 import pandas_market_calendars as mcal
 
@@ -11,7 +12,7 @@ def schedule(start, end):
 
 
 def is_open(at=None):
-    at = pd.Timestamp(at or datetime.now(timezone.utc))
+    at = pd.Timestamp(at or datetime.now(UTC))
     days = schedule(at.date(), at.date())
     return bool(
         len(days) and days.iloc[0].market_open <= at < days.iloc[0].market_close
@@ -19,7 +20,7 @@ def is_open(at=None):
 
 
 def next_operation(minutes=15, at=None):
-    at = pd.Timestamp(at or datetime.now(timezone.utc))
+    at = pd.Timestamp(at or datetime.now(UTC))
     days = schedule(at.date(), (at + pd.Timedelta(days=14)).date())
     for _, row in days.iterrows():
         due = row.market_open + pd.Timedelta(minutes=minutes)
@@ -41,6 +42,11 @@ class Scheduler:
         self.thread.start()
 
     def tick(self, at=None):
+        if self.service.db.state("defensive_forward_enabled", False):
+            from .growth.defensive_forward import tick as defensive_forward_tick
+
+            defensive_forward_tick(self.service.db)
+
         if self.service.db.state("growth_forward_enabled", False):
             from .growth.forward import tick as forward_tick
             forward_tick(self.service.db)
@@ -54,7 +60,7 @@ class Scheduler:
         db = self.service.db
         if not db.state("automation", False) or db.state("kill", False):
             return
-        at = pd.Timestamp(at or datetime.now(timezone.utc))
+        at = pd.Timestamp(at or datetime.now(UTC))
         if not is_open(at):
             db.set_state(
                 "next_operation",
@@ -80,7 +86,7 @@ class Scheduler:
                 "next_operation",
                 (at + pd.Timedelta(seconds=s.automation.monitor_seconds)).isoformat(),
             )
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001 -- audit and continue scheduler
             db.event(
                 self.service.scope(),
                 "scheduler_error",
@@ -94,7 +100,7 @@ class Scheduler:
         while not self.stop_event.is_set():
             try:
                 self.tick()
-            except Exception as exc:
+            except Exception as exc:  # noqa: BLE001 -- scheduler must remain alive
                 self.service.db.event(
                     "system", "scheduler_error", {"error": type(exc).__name__}
                 )
