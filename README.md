@@ -25,6 +25,20 @@ credentials:
 python -m scripts.evaluate_defensive_trend
 ```
 
+### 20% and 50% drawdown frontier
+
+The follow-up [drawdown-frontier report](research/drawdown_frontier/REPORT.md)
+tests 162 tier/configuration combinations. The 20% tier allows up to 20% per
+asset and 40% total exposure; it returned +5.04% in the 2024–October 2026
+diagnostic evaluation with -18.54% drawdown, or +3.97% with doubled costs. The
+50% tier allows up to 50% per asset and 100% total exposure; it returned +7.50%
+with -40.87% drawdown, or +4.79% with doubled costs.
+
+The 50% tier is not preferred: compared with the 20% tier, it added only 2.46
+percentage points of return while worsening drawdown by 22.33 percentage
+points. Both use previously inspected history and remain blocked from broker
+deployment. Reproduce with `python -m scripts.evaluate_drawdown_frontier`.
+
 ## Cost-aware profitability research (November 2026)
 
 The repository now includes a leakage-controlled XGBoost workflow for expected-return forecasting, cost-aware execution, regime/sizing ablations, cost stress, and a constrained long-only opening-range-breakout comparison. It uses the existing frozen market snapshots and never routes orders to a broker.

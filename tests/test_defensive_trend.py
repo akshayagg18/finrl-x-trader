@@ -6,6 +6,7 @@ import pandas as pd
 
 from trader.db import dumps
 from trader.growth.defensive import (
+    DefensiveRisk,
     DefensiveSpec,
     defensive_features,
     rebalance_due,
@@ -62,6 +63,27 @@ def test_weights_respect_caps_and_btc_gate():
     assert target_weights(timestamp, features, SELECTED) == {
         "BTC-USDT": 0.0,
         "ETH-USDT": 0.0,
+    }
+
+
+def test_higher_risk_profile_scales_weights_without_leverage():
+    timestamp = pd.Timestamp("2026-11-02", tz="UTC")
+    features = {
+        symbol: pd.DataFrame(
+            {"trend": [0.1], "momentum": [0.1], "volatility": [0.15]},
+            index=[timestamp],
+        )
+        for symbol in ("BTC-USDT", "ETH-USDT")
+    }
+    moderate = DefensiveRisk(per_asset_cap=0.2, max_deployment=0.4)
+    aggressive = DefensiveRisk(per_asset_cap=0.5, max_deployment=1.0)
+    assert target_weights(timestamp, features, SELECTED, moderate) == {
+        "BTC-USDT": 0.2,
+        "ETH-USDT": 0.2,
+    }
+    assert target_weights(timestamp, features, SELECTED, aggressive) == {
+        "BTC-USDT": 0.5,
+        "ETH-USDT": 0.5,
     }
 
 

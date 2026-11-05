@@ -165,3 +165,17 @@ These are research constants rather than active broker settings. There is no
 promotion or execution endpoint for this candidate. Historical profitability
 does not bypass the prospective paper, verified-cost and execution-readiness
 requirements.
+
+## Drawdown frontier research configuration
+
+`DefensiveRisk` makes the research exposure limits explicit without changing
+active broker settings. The 20% diagnostic tier uses 20% per-asset and 40%
+total-deployment caps; the 50% tier uses 50% per-asset and 100% total-deployment
+caps. Both retain the 30% annualized volatility target, long-only behavior and
+15 bp base / 30 bp stress transaction-cost assumptions.
+
+Run `python -m scripts.evaluate_drawdown_frontier`. The script selects each tier
+from the same 81 trend configurations using development and validation periods,
+then evaluates the already-inspected later period. Results are available at
+`GET /api/growth/drawdown-frontier`. These drawdown values are evaluation
+budgets, not guaranteed stop levels. Neither tier has a promotion endpoint.

@@ -170,6 +170,10 @@ def test_growth_research_and_forward_configuration_ui(browser_app):
         assert "not deployment qualified" in page.locator(
             "#defensive-qualification"
         ).inner_text().lower()
+        page.wait_for_function(
+            "document.querySelector('#frontier-qualification')?.textContent.includes('drawdown_20')"
+        )
+        assert "none" in page.locator("#frontier-qualification").inner_text()
         page.locator("#growth-configure").click()
         page.wait_for_function(
             "document.querySelector('#growth-forward').textContent.includes('\"active\": false')"

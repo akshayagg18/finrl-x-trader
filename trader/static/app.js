@@ -121,3 +121,19 @@ async function refreshDefensiveResearch(){
 }
 refreshDefensiveResearch().catch(e=>{let host=$('defensive-qualification');if(host)host.textContent=e.message;});
 $('growth-refresh').addEventListener('click',()=>refreshDefensiveResearch());
+
+async function refreshDrawdownFrontier(){
+  let host=$('drawdown-frontier');
+  if(!host){
+    host=document.createElement('div');host.id='drawdown-frontier';host.className='panel-inset';
+    host.innerHTML='<h3>20%–50% drawdown frontier</h3><p class="caption">Diagnostic exposure scaling on already-inspected history. A drawdown budget is an evaluation threshold and cannot cap future losses.</p><div id="frontier-summary" class="table-wrap"></div><pre id="frontier-qualification"></pre><p class="caption"><a href="/api/growth/drawdown-frontier">Raw frontier research JSON</a></p>';
+    $('defensive-research').insertAdjacentElement('afterend',host);
+  }
+  const r=await api('growth/drawdown-frontier');
+  if(!r.summary){$('frontier-qualification').textContent='Evaluation unavailable. Run python -m scripts.evaluate_drawdown_frontier.';return;}
+  const rows=Object.entries(r.summary.tiers).map(([name,tier])=>({name,...tier,eval:tier.periods.evaluation,stress:tier.periods.evaluation_cost_2x,passive:tier.passive_evaluation}));
+  table('frontier-summary',[['Tier',x=>esc(x.name.replaceAll('_',' '))],['Max exposure',x=>pct(x.risk.max_deployment)],['Evaluation',x=>pct(x.eval.net_return)],['Drawdown',x=>pct(x.eval.max_drawdown)],['2x cost',x=>pct(x.stress.net_return)],['Passive return',x=>pct(x.passive.net_return)],['Passive drawdown',x=>pct(x.passive.max_drawdown)]],rows);
+  $('frontier-qualification').textContent=JSON.stringify({conclusion:r.summary.conclusion,preference:r.summary.preference,deployment_reasons:r.summary.deployment_reasons,tiers:Object.fromEntries(rows.map(x=>[x.name,{selected:x.selected_name,within_budget:x.within_budget,historically_profitable:x.historically_profitable,deployment_qualified:x.deployment_qualified,two_month_windows:x.two_month_windows}]))},null,2);
+}
+refreshDrawdownFrontier().catch(e=>{let host=$('frontier-qualification');if(host)host.textContent=e.message;});
+$('growth-refresh').addEventListener('click',()=>refreshDrawdownFrontier());

@@ -1,0 +1,66 @@
+{
+  "protocol_sha256": "a288debe52688fcc42f19b24f89cd729ce521c1c22fc9e0cc45e0883bca486b0",
+  "evaluation_previously_inspected": true,
+  "tiers": {
+    "drawdown_20": {
+      "selected_name": "trend_100_momentum_90_weekly_btc_gate",
+      "selected_spec": {
+        "slow_days": 100,
+        "momentum_days": 90,
+        "cadence": "weekly",
+        "mode": "btc_gate"
+      },
+      "eligible_count": 14,
+      "development": {
+        "initial": 500.0,
+        "ending_equity": 571.6920105105366,
+        "net_return": 0.14338402102107328,
+        "same_trade_gross_return": 0.1451043989149312,
+        "max_drawdown": -0.024469749641977012,
+        "fill_count": 20,
+        "sell_count": 13,
+        "transaction_costs": 0.8601889469289559
+      },
+      "validation": {
+        "initial": 500.0,
+        "ending_equity": 547.2377915235069,
+        "net_return": 0.09447558304701364,
+        "same_trade_gross_return": 0.09867261458136567,
+        "max_drawdown": -0.06492859657833505,
+        "fill_count": 61,
+        "sell_count": 31,
+        "transaction_costs": 2.0985157671759427
+      }
+    },
+    "drawdown_50": {
+      "selected_name": "trend_100_momentum_90_weekly_btc_gate",
+      "selected_spec": {
+        "slow_days": 100,
+        "momentum_days": 90,
+        "cadence": "weekly",
+        "mode": "btc_gate"
+      },
+      "eligible_count": 14,
+      "development": {
+        "initial": 500.0,
+        "ending_equity": 693.9284990707052,
+        "net_return": 0.3878569981414104,
+        "same_trade_gross_return": 0.39226887073764605,
+        "max_drawdown": -0.0601831298090818,
+        "fill_count": 20,
+        "sell_count": 13,
+        "transaction_costs": 2.20593629811771
+      },
+      "validation": {
+        "initial": 500.0,
+        "ending_equity": 617.0477443756084,
+        "net_return": 0.23409548875121677,
+        "same_trade_gross_return": 0.24451463105148896,
+        "max_drawdown": -0.1572752116325561,
+        "fill_count": 62,
+        "sell_count": 31,
+        "transaction_costs": 5.209571150136059
+      }
+    }
+  }
+}

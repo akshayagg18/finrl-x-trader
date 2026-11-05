@@ -16,6 +16,29 @@ VOLATILITY_TARGET = 0.30
 
 
 @dataclass(frozen=True)
+class DefensiveRisk:
+    per_asset_cap: float = PER_ASSET_CAP
+    max_deployment: float = MAX_DEPLOYMENT
+    volatility_target: float = VOLATILITY_TARGET
+
+    def __post_init__(self) -> None:
+        if not 0 < self.per_asset_cap <= 1:
+            raise ValueError("Per-asset cap must be in (0, 1]")
+        if not 0 < self.max_deployment <= 1:
+            raise ValueError("Maximum deployment must be in (0, 1]")
+        if self.per_asset_cap > self.max_deployment:
+            raise ValueError("Per-asset cap cannot exceed maximum deployment")
+        if not 0 < self.volatility_target <= 2:
+            raise ValueError("Volatility target must be in (0, 2]")
+
+    def as_dict(self) -> dict:
+        return asdict(self)
+
+
+DEFAULT_RISK = DefensiveRisk()
+
+
+@dataclass(frozen=True)
 class DefensiveSpec:
     slow_days: int
     momentum_days: int
@@ -85,6 +108,7 @@ def target_weights(
     timestamp: pd.Timestamp,
     features: dict[str, pd.DataFrame],
     spec: DefensiveSpec,
+    risk: DefensiveRisk = DEFAULT_RISK,
 ) -> dict[str, float]:
     eligible = [
         symbol
@@ -117,10 +141,15 @@ def target_weights(
             result[symbol] = 0.0
         else:
             result[symbol] = float(
-                min(PER_ASSET_CAP, PER_ASSET_CAP * VOLATILITY_TARGET / volatility)
+                min(
+                    risk.per_asset_cap,
+                    risk.per_asset_cap * risk.volatility_target / volatility,
+                )
             )
-    if sum(result.values()) > MAX_DEPLOYMENT + 1e-12:
-        raise ValueError("Defensive target exceeds deployment cap")
+    total = sum(result.values())
+    if total > risk.max_deployment:
+        scale = risk.max_deployment / total
+        result = {symbol: weight * scale for symbol, weight in result.items()}
     return result
 
 
@@ -141,6 +170,7 @@ def simulate(
     *,
     initial: float = INITIAL_CAPITAL,
     cost_bps: float = 15.0,
+    risk: DefensiveRisk = DEFAULT_RISK,
 ) -> dict:
     """Execute lagged targets at daily opens with adverse proportional costs."""
 
@@ -172,7 +202,7 @@ def simulate(
         }
         equity = cash + sum(quantity[s] * prices[s] for s in SYMBOLS)
         if rebalance_due(timestamp, spec.cadence):
-            weights = target_weights(timestamp, features, spec)
+            weights = target_weights(timestamp, features, spec, risk)
             decisions.append(
                 {
                     "timestamp": timestamp.isoformat(),
@@ -246,6 +276,7 @@ def simulate(
     )
     return {
         "spec": spec.as_dict(),
+        "risk": risk.as_dict(),
         "start": start_at.isoformat(),
         "end": end_at.isoformat(),
         "initial": initial,

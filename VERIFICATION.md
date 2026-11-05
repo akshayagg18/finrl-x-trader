@@ -191,3 +191,34 @@ Final regression command:
 feature causality, stable calendar cadence, allocation caps, BTC gating, cost
 monotonicity, protocol hashing and explicit deployment blocking. The browser
 test verifies that the dashboard renders the historical and deployment states.
+
+## 20%–50% drawdown frontier — 6 November 2026
+
+The requested frontier evaluated 162 tier/configuration combinations using the
+same causal feature and next-open execution rules. Both tiers selected
+`trend_100_momentum_90_weekly_btc_gate` from development and validation.
+
+| Tier | Development | Validation | Evaluation | 2x costs | Evaluation drawdown |
+|---|---:|---:|---:|---:|---:|
+| 20% budget | +14.34% | +9.45% | +5.04% | +3.97% | -18.54% |
+| 50% budget | +38.79% | +23.41% | +7.50% | +4.79% | -40.87% |
+
+The 20% tier's same-allocation passive comparator returned +16.41% with -36.58%
+drawdown. The 50% tier passive comparator returned +41.02% with -58.53%
+drawdown, breaching that budget. Across 29 independent two-month windows, the
+20% tier averaged +0.41% ($2.04) with -2.44% average drawdown; the 50% tier
+averaged +1.14% ($5.72) with -5.93% average drawdown. Both had 10 positive, 9
+negative and 10 flat windows.
+
+The 50% tier added 2.46 percentage points of evaluation return over the 20%
+tier while worsening drawdown by 22.33 percentage points. It is not the
+preferred risk tradeoff. Both weekly lower confidence bounds remained negative,
+all periods were already inspected, and no external execution evidence was
+collected. No tier is deployment qualified.
+
+Final regression command:
+`PLAYWRIGHT_BROWSERS_PATH=/workspace/pw-browsers .venv/bin/pytest tests -q` —
+**91 passed, 4,971 dependency deprecation warnings in 69.80 seconds**. The log is
+`research/drawdown_frontier/verification_tests.txt`. New tests cover risk-profile
+weight scaling, protocol/hash integrity, both drawdown budgets, doubled-cost
+profitability, explicit non-promotion and dashboard rendering.

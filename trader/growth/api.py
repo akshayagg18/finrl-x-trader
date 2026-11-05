@@ -60,6 +60,16 @@ def router(db):
             for key in ("protocol", "selection_locked", "summary")
         }
 
+    @routes.get("/drawdown-frontier")
+    def drawdown_frontier():
+        root = Path("research/drawdown_frontier")
+        return {
+            key: json.loads((root / f"{key}.json").read_text())
+            if (root / f"{key}.json").exists()
+            else None
+            for key in ("protocol", "selection_locked", "summary")
+        }
+
     @routes.get("/forward")
     def status():
         return forward.status(db)

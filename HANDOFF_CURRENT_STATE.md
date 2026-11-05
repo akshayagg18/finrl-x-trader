@@ -1,6 +1,6 @@
 # FinRL-X Trader — handoff and current state
 
-## Latest update — defensive trend candidate, 5 November 2026
+## Latest update — defensive trend and risk frontier, 6 November 2026
 
 A fixed 81-configuration search found one validation-ranked rule that remained
 positive in every chronological partition and under doubled modeled costs while
@@ -22,6 +22,14 @@ bound is negative, and the final interval was viewed during exploratory work.
 It needs a newly elapsed 12-week paper observation and target-account execution
 evidence. Code and locked artifacts are in `trader/growth/defensive.py`,
 `scripts/evaluate_defensive_trend.py`, and `research/defensive_trend/`.
+
+The follow-up risk frontier also tested 20% and 50% drawdown budgets. The 20%
+tier returned +5.04% in the 2024–October 2026 diagnostic period with -18.54%
+drawdown; the 50% tier returned +7.50% with -40.87% drawdown. Doubled-cost
+returns were +3.97% and +4.79%. The 50% tier is not preferred because 22.33
+percentage points of additional drawdown produced only 2.46 percentage points
+of extra return. Both remain diagnostic and deployment-blocked. See
+`research/drawdown_frontier/REPORT.md`.
 
 ## 0. Cost-aware profitability research update — 3 November 2026
 
@@ -53,7 +61,7 @@ This is a working self-hosted research and simulation application with an existi
 
 **There is no deployment-qualified profitable strategy. Do not enable real trading based on the existing results.** The defensive rule is positive retrospectively but fails the weekly confidence and prospective-evidence gates. Earlier regime and ML candidates lost money or failed selection. Software functionality does not establish a durable investment edge.
 
-- Latest recorded complete regression run: **88 passed**, 4,971 dependency deprecation warnings, 61.50 seconds. Evidence: [verification log](research/defensive_trend/verification_tests.txt).
+- Latest recorded complete regression run: **91 passed**, 4,971 dependency deprecation warnings, 69.80 seconds. Evidence: [verification log](research/drawdown_frontier/verification_tests.txt).
 - No real-money orders or actual brokerage paper-account executions were submitted during development.
 - No brokerage credentials were supplied. The application starts without them.
 - Live trading defaults off. The original swing console has an explicit live activation mechanism; it is not a verified production deployment.
