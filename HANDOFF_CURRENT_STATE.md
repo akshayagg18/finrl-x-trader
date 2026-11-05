@@ -18,7 +18,7 @@ Verification for this update: 6 focused tests and 42 compatible non-native tests
 
 **Updated:** 5 November 2026, Asia/Singapore.
 
-**Code baseline reviewed:** `26d4851`, plus the long-history regime work in the current commit.
+**Code baseline reviewed:** `c5a28b7`.
 
 **Repository:** https://github.com/akshayagg18/finrl-x-trader — branch `main`.
 
@@ -66,7 +66,7 @@ Persist these preferences:
 | `ff5ca1e` | Nautilus intraday research, public crypto/equity data, dashboard integration | 90 scenarios; no qualified strategy |
 | `441fda2` | RF/boosted ML, five-minute data, walk-forward study, persistent continuous historical replay, settlement and CCXT transport | 116 ML evaluations; no reliable net edge |
 | `b365174` | Longer-horizon growth models, continuous two-asset portfolio, stricter validation, weekly statistics and qualification-gated forward observation | 288 candidate trials plus six portfolio scenarios; no qualified strategy |
-| current commit | Frozen 2017–2026 hourly archive, low-turnover regime rules, optional ML entry filter, locked evaluation and dashboard evidence | Rule and all ML filters failed 2022 selection; no qualified strategy |
+| `c5a28b7` | Frozen 2017–2026 hourly archive, low-turnover regime rules, optional ML entry filter, locked evaluation and dashboard evidence | Rule and all ML filters failed 2022 selection; no qualified strategy |
 
 Upstream source lives in `src/`. The original README, Docker and environment material was preserved in upstream-named files. The upstream published **19.76%** result is not a result reproduced by this installation; exact ensemble/artifact reproduction remains unavailable.
 
