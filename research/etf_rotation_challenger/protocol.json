@@ -1,0 +1,67 @@
+{
+  "protocol_version": 1,
+  "declared_at": "2026-11-06 Asia/Singapore",
+  "status": "predeclared before downloading or evaluating this research snapshot",
+  "question": "Can a low-turnover liquid ETF rotation strategy improve net return over the selected 20% BTC/ETH long-cash candidate while keeping observed drawdown inside 20%?",
+  "initial_capital": 500.0,
+  "universe": ["SPY", "QQQ", "IWM", "GLD", "TLT"],
+  "cash_proxy_for_signal": "SHY",
+  "instrument_scope": "long-only unleveraged US-listed ETFs; fractional research quantities",
+  "data": {
+    "source": "Yahoo chart API daily adjusted OHLCV snapshot with per-file provenance and SHA-256",
+    "download_after_protocol_commit": true,
+    "warmup_start": "2017-01-01",
+    "completed_bars_only": true,
+    "known_limits": [
+      "Yahoo history can be revised and is not a certified point-in-time feed",
+      "The fixed present-day ETF universe has selection bias",
+      "Adjusted prices approximate total-return research units and are not executable quotes"
+    ]
+  },
+  "partitions": {
+    "development": ["2018-01-01", "2020-12-31"],
+    "validation": ["2021-01-01", "2023-12-29"],
+    "evaluation": ["2024-01-02", "2026-10-30"]
+  },
+  "signal": {
+    "cadence": "monthly, decide from completed prior-session close and execute at next session open",
+    "eligible": "positive trailing momentum, price above lagged simple moving average, and momentum greater than SHY over the same lookback",
+    "ranking": "descending trailing momentum among eligible risk ETFs",
+    "lookback_trading_days": [126, 252],
+    "trend_sma_days": [150, 200],
+    "top_n": [1, 2],
+    "annualized_volatility_targets": [0.15, 0.25],
+    "grid_size": 16
+  },
+  "portfolio": {
+    "maximum_weight_per_asset": 0.2,
+    "maximum_total_deployment": 0.4,
+    "minimum_cash": 0.6,
+    "weighting": "inverse trailing 30-session volatility, scaled to the configured target and capped",
+    "cash_interest": 0.0,
+    "shorting": false,
+    "leverage": false
+  },
+  "execution": {
+    "base_one_way_cost_bps": 15.0,
+    "stress_one_way_cost_bps": 30.0,
+    "minimum_order_notional": 1.0,
+    "fractional_shares": true,
+    "sell_before_buy": true,
+    "no_lookahead": "features through t-1 close; fills at t open"
+  },
+  "selection": {
+    "eligibility": "positive development and validation returns under base and doubled costs; maximum drawdown no worse than -20% in development and validation; at least 8 fills in each partition",
+    "ranking": "highest minimum calendar-year validation return, then validation return, then smaller absolute validation drawdown",
+    "lock_before_evaluation": true,
+    "no_evaluation_retuning": true
+  },
+  "reporting": [
+    "development, validation, evaluation and doubled-cost results",
+    "calendar-year and independent two-month windows",
+    "SPY, equal-weight universe and 40%-deployed passive comparators",
+    "turnover, costs, drawdown and weekly statistics",
+    "all trials including failures and exact selected configuration"
+  ],
+  "qualification_boundary": "This retrospective experiment can nominate a separate challenger for prospective paper observation. It cannot replace, reset, combine with, or activate broker routing for the frozen defensive account."
+}
