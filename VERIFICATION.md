@@ -343,3 +343,22 @@ Final regression command:
 **108 passed, 5,066 dependency deprecation warnings in 64.31 seconds**. The
 complete output is retained in
 `research/long_cash_deepening/verification_tests.txt`.
+
+## Always-on forward-paper host
+
+The Ubuntu deployment runs under an unprivileged `finrl` system account, binds
+the dashboard to server localhost, restarts after process/server failure and
+stores writable state only under `/opt/finrl-x-trader/runtime`. The watchdog
+retries connection and HTTP timeout classes while preserving intentional Stop,
+global kill and non-network safety failures. Daily backups use SQLite's backup
+API rather than copying a live WAL database and retain 30 local copies.
+
+Automated tests cover intentional stop/global-kill behavior, transient-only
+recovery, audit logging, backup integrity and rotation. Actual provider
+provisioning, uptime, billing and external network reliability require the
+user's chosen cloud account and cannot be verified from this repository.
+
+Final regression command:
+`PLAYWRIGHT_BROWSERS_PATH=/workspace/pw-browsers .venv/bin/pytest tests -q` —
+**111 passed, 5,078 dependency deprecation warnings in 63.42 seconds**. The
+complete output is retained in `deploy/verification_tests.txt`.

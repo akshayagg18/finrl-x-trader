@@ -1,0 +1,10 @@
+[Unit]
+Description=Back up FinRL-X forward paper daily
+
+[Timer]
+OnCalendar=*-*-* 03:15:00 UTC
+Persistent=true
+RandomizedDelaySec=10min
+
+[Install]
+WantedBy=timers.target

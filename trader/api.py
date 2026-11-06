@@ -1,20 +1,22 @@
-import os
-import json
 import csv
 import io
-from pathlib import Path
+import json
+import os
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import FileResponse, Response, JSONResponse
-from fastapi.staticfiles import StaticFiles
+from pathlib import Path
+
 from dotenv import load_dotenv
-from .service import Service
-from .config import Settings, PRESETS
-from .db import now, dumps
-from .strategies import CATALOG
-from .brokers import create_broker, MissingCredentials
-from .scheduler import Scheduler
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import FileResponse, JSONResponse, Response
+from fastapi.staticfiles import StaticFiles
+
 from .backtest import run_backtest
+from .brokers import MissingCredentials, create_broker
+from .config import PRESETS, Settings
+from .db import dumps, now
+from .scheduler import Scheduler
+from .service import Service
+from .strategies import CATALOG
 
 load_dotenv()
 ROOT = Path(__file__).resolve().parents[1]
@@ -41,8 +43,12 @@ def create_app(path=None, with_scheduler=True):
             raise
     else:
         app.include_router(intraday_router(service.db))
-        from .growth.api import router as growth_router
-        app.include_router(growth_router(service.db))
+
+    # Growth/forward-paper routes use the core application dependencies and do
+    # not depend on optional NautilusTrader intraday support.
+    from .growth.api import router as growth_router
+
+    app.include_router(growth_router(service.db))
 
     @app.middleware("http")
     async def local_guard(request: Request, call_next):
@@ -69,9 +75,9 @@ def create_app(path=None, with_scheduler=True):
                 )
         try:
             r = await call_next(request)
-        except Exception as exc:
-            from .risk import RiskBlocked
+        except Exception as exc:  # noqa: BLE001 -- sanitize all API failures
             from .data import DataError
+            from .risk import RiskBlocked
 
             safe = (
                 str(exc)
@@ -91,8 +97,8 @@ def create_app(path=None, with_scheduler=True):
 
     @app.exception_handler(Exception)
     async def error_handler(request, exc):
-        from .risk import RiskBlocked
         from .data import DataError
+        from .risk import RiskBlocked
 
         safe = (
             str(exc)
@@ -219,7 +225,7 @@ def create_app(path=None, with_scheduler=True):
                     "execution_ready": False,
                     "note": "Connection test is read-only; identity, dedicated ownership, activation and final risk checks still required.",
                 }
-            except Exception as exc:
+            except Exception as exc:  # noqa: BLE001 -- adapter errors are sanitized
                 result = {
                     "status": "unavailable",
                     "reason": str(exc)

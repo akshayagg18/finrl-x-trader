@@ -1,0 +1,18 @@
+[Unit]
+Description=FinRL-X forward-paper public-data watchdog
+Wants=network-online.target
+After=network-online.target finrl-forward.service
+
+[Service]
+Type=oneshot
+User=finrl
+Group=finrl
+WorkingDirectory=/opt/finrl-x-trader
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/opt/finrl-x-trader/.venv/bin/python -m scripts.forward_watchdog --db /opt/finrl-x-trader/runtime/trader.db --capital 500
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/finrl-x-trader/runtime

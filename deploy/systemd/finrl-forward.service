@@ -1,0 +1,25 @@
+[Unit]
+Description=FinRL-X credential-free forward-paper dashboard and scheduler
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=finrl
+Group=finrl
+WorkingDirectory=/opt/finrl-x-trader
+Environment=PYTHONUNBUFFERED=1
+Environment=TRADER_DB=/opt/finrl-x-trader/runtime/trader.db
+ExecStart=/opt/finrl-x-trader/.venv/bin/python -m trader --db /opt/finrl-x-trader/runtime/trader.db serve --port 8765
+Restart=always
+RestartSec=10
+TimeoutStopSec=20
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/finrl-x-trader/runtime
+
+[Install]
+WantedBy=multi-user.target
