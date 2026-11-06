@@ -1,0 +1,6 @@
+{
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/SHY",
+  "downloaded_at": "2026-11-06T01:32:26.580906+00:00",
+  "sha256": "616cfb711171b466bfc105205c6920273b95c19f259f1453b1524815e416ba07",
+  "adjustment": "raw OHLCV, Yahoo historical revisions possible"
+}

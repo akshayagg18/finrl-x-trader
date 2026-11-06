@@ -1,0 +1,6 @@
+{
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/QQQ",
+  "downloaded_at": "2026-11-06T01:32:26.313468+00:00",
+  "sha256": "54edba28af4ccf694208f0a3685fca3cf471c022504fd0f4ce96ebb37a6d8048",
+  "adjustment": "raw OHLCV, Yahoo historical revisions possible"
+}

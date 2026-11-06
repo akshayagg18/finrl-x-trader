@@ -1,0 +1,6 @@
+{
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/TLT",
+  "downloaded_at": "2026-11-06T01:32:27.066927+00:00",
+  "sha256": "1288b8a72a9a275262e03c2fc45dd64fe232eb5412b5c0c9dda60284bbbf42fa",
+  "adjustment": "raw OHLCV, Yahoo historical revisions possible"
+}

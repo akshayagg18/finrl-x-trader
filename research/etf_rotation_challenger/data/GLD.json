@@ -1,0 +1,6 @@
+{
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/GLD",
+  "downloaded_at": "2026-11-06T01:32:25.675528+00:00",
+  "sha256": "eec88d7cd500b3d6e8f62b15257bc1b5ec10194fd9eee7040c0c77dc7657979e",
+  "adjustment": "raw OHLCV, Yahoo historical revisions possible"
+}

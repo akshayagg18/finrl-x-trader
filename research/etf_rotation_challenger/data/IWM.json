@@ -1,0 +1,6 @@
+{
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/IWM",
+  "downloaded_at": "2026-11-06T01:32:25.998249+00:00",
+  "sha256": "895aa1401970b389300602067bdfed5aad3a5ab6e3230053739fc5e62d1ffd86",
+  "adjustment": "raw OHLCV, Yahoo historical revisions possible"
+}

@@ -1,0 +1,6 @@
+{
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/SPY",
+  "downloaded_at": "2026-11-06T01:32:26.834974+00:00",
+  "sha256": "dfcebb1a46aceb66d6f0723c10079294ba7012735164156340d498e002973dd8",
+  "adjustment": "raw OHLCV, Yahoo historical revisions possible"
+}
