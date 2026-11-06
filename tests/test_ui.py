@@ -183,6 +183,12 @@ def test_growth_research_and_forward_configuration_ui(browser_app):
         )
         assert "0.225" in page.locator("#etf-challenger-decision").inner_text()
         page.wait_for_function(
+            "document.querySelector('#long-cash-decision')?.textContent.includes('separate prospective challenger warranted')"
+        )
+        assert "majority_btc_gate_weekly_vol40" in page.locator(
+            "#long-cash-decision"
+        ).inner_text()
+        page.wait_for_function(
             "document.querySelector('#defensive-forward-status')?.textContent.includes('prospective forward paper')"
         )
         page.locator("#defensive-forward-configure").click()

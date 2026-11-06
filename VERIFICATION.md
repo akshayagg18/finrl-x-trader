@@ -310,3 +310,36 @@ Final regression command:
 **105 passed, 5,066 dependency deprecation warnings in 64.23 seconds**. The
 complete output is retained in
 `research/etf_rotation_challenger/verification_tests.txt`.
+
+## Long/cash deepening — 6 November 2026
+
+Commit `df50053` fixed a 63-configuration BTC/ETH slow-signal ensemble grid and
+a 16-profile ETF exposure grid before evaluation. Commit `eba512e` locked both
+development/validation selections, protocol/data hashes and
+`evaluation_opened=false` before opening the previously inspected diagnostic
+partition.
+
+The selected crypto ensemble returned +27.40% with -12.39% drawdown, compared
+with +5.04% and -18.54% for the frozen 20% candidate. It returned +23.48% under
+60 bp one-way costs and +20.14% with fills delayed one day. Its 29 independent
+two-month resets contained 11 gains, 8 losses and 10 flat windows, averaging
++1.26% or $6.29. The 2026 calendar reset lost 5.79%, and the lower 95% weekly
+mean bound remained negative at -0.104%.
+
+The selected ETF extension returned +25.20% with -5.35% drawdown, versus
++22.55% and -4.60% for the frozen ETF candidate. It remained +22.21% under
+60 bp one-way costs, +23.23% with a three-session delay, and profitable after
+removing each ETF individually. The 28 two-month resets contained 17 gains,
+8 losses and 3 flat windows, averaging +0.69% or $3.46. The 40%-SPY/cash
+comparator returned +26.06% with -8.77% drawdown.
+
+Complete signal decisions, fills, equity paths, trial grids, window results and
+hash-bound locks are stored under `research/long_cash_deepening`. These remain
+retrospective diagnostics because all historical partitions were previously
+inspected. No forward account was reset and no broker order was submitted.
+
+Final regression command:
+`PLAYWRIGHT_BROWSERS_PATH=/workspace/pw-browsers .venv/bin/pytest tests -q` —
+**108 passed, 5,066 dependency deprecation warnings in 64.31 seconds**. The
+complete output is retained in
+`research/long_cash_deepening/verification_tests.txt`.

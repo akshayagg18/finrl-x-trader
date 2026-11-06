@@ -511,10 +511,9 @@ def simulate_etf(
 
 
 def _brief(result: dict) -> dict:
-    return {
+    brief = {
         key: result[key]
         for key in (
-            "name",
             "initial",
             "ending_equity",
             "net_return",
@@ -524,6 +523,8 @@ def _brief(result: dict) -> dict:
             "transaction_costs",
         )
     }
+    brief["name"] = result.get("name") or result.get("spec")
+    return brief
 
 
 def _calendar_years(simulator, data, spec, start: str, end: str) -> dict[str, float]:
@@ -802,6 +803,24 @@ def _evaluate_crypto(protocol: dict, protocol_hash: str) -> dict:
     weekly = weekly_report(
         evaluation["points"], CAPITAL, evaluation["sell_count"], cost_4x["net_return"] > 0
     )
+    (OUT / "crypto_evaluation_detail.json").write_text(
+        dumps(
+            {
+                "selected": spec.name,
+                "evaluation": {
+                    key: evaluation[key]
+                    for key in ("points", "fills", "decisions")
+                },
+                "cost_4x": {
+                    key: cost_4x[key] for key in ("points", "fills", "decisions")
+                },
+                "delay_1_day": {
+                    key: delay[key] for key in ("points", "fills", "decisions")
+                },
+            }
+        )
+        + "\n"
+    )
     stronger = (
         evaluation["net_return"] > frozen["net_return"]
         and evaluation["max_drawdown"] >= -0.20
@@ -858,6 +877,24 @@ def _evaluate_etf(protocol: dict, protocol_hash: str) -> dict:
     pd.DataFrame(windows).to_csv(OUT / "etf_two_month_windows.csv", index=False)
     weekly = weekly_report(
         evaluation["points"], CAPITAL, evaluation["sell_count"], cost_4x["net_return"] > 0
+    )
+    (OUT / "etf_evaluation_detail.json").write_text(
+        dumps(
+            {
+                "selected": spec.name,
+                "evaluation": {
+                    key: evaluation[key]
+                    for key in ("points", "fills", "decisions")
+                },
+                "cost_4x": {
+                    key: cost_4x[key] for key in ("points", "fills", "decisions")
+                },
+                "delay_3_sessions": {
+                    key: delay_3[key] for key in ("points", "fills", "decisions")
+                },
+            }
+        )
+        + "\n"
     )
     removal_positive = all(row["net_return"] > 0 for row in removals.values())
     stronger = (
@@ -929,6 +966,11 @@ def _write_report(summary: dict) -> None:
                 f"{cw['losing']} losing, {cw['flat']} flat; average "
                 f"{cw['average_return']:.2%} (${cw['average_profit_usd']:.2f})."
             ),
+            f"Calendar-year resets: {crypto['calendar_years']}.",
+            (
+                "Lower 95% weekly-mean bound: "
+                f"{crypto['weekly']['mean_weekly_return_lower_95']:.3%}."
+            ),
             f"Decision: **{crypto['decision']}**.",
             "",
             "## ETF long/cash",
@@ -962,6 +1004,16 @@ def _write_report(summary: dict) -> None:
                 f"{ew['losing']} losing, {ew['flat']} flat; average "
                 f"{ew['average_return']:.2%} (${ew['average_profit_usd']:.2f})."
             ),
+            (
+                f"The 40%-SPY/cash comparison returned "
+                f"{etf['spy_40']['net_return']:.2%} with "
+                f"{etf['spy_40']['max_drawdown']:.2%} drawdown."
+            ),
+            f"Calendar-year resets: {etf['calendar_years']}.",
+            (
+                "Lower 95% weekly-mean bound: "
+                f"{etf['weekly']['mean_weekly_return_lower_95']:.3%}."
+            ),
             f"All single-asset removal tests remained profitable: **{etf['all_asset_removals_positive']}**.",
             f"Decision: **{etf['decision']}**.",
             "",
@@ -987,6 +1039,12 @@ def evaluate() -> dict:
         "broker_orders_submitted": 0,
     }
     (OUT / "summary.json").write_text(dumps(summary) + "\n")
+    summary_hash = hashlib.sha256((OUT / "summary.json").read_bytes()).hexdigest()
+    for name in ("crypto", "etf"):
+        path = OUT / f"{name}_selection_locked.json"
+        lock = json.loads(path.read_text())
+        lock["evaluation_summary_sha256"] = summary_hash
+        path.write_text(dumps(lock) + "\n")
     _write_report(summary)
     return summary
 

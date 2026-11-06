@@ -236,3 +236,9 @@ The ETF rotation challenger is a separate read-only research artifact under
 `research/etf_rotation_challenger`. Its dashboard endpoint is
 `GET /api/growth/etf-challenger`. There are no configure, activation or broker
 execution endpoints for that challenger.
+
+The deeper crypto and ETF long/cash results are exposed read-only at
+`GET /api/growth/long-cash-deepening`. The endpoint reads locked artifacts from
+`research/long_cash_deepening`; it has no mutation, configuration, promotion or
+broker-routing operation. The running defensive-forward configuration is not
+changed by either extension.

@@ -133,6 +133,31 @@ is retrospective and is displayed read-only in the dashboard. It cannot reset,
 replace or route orders from the existing forward account. It warrants a
 separate prospective comparison after operational quote handling is completed.
 
+### Deeper long/cash research on both tracks
+
+The next experiment stayed inside long-only holdings plus cash. Its protocol
+was committed before evaluating 63 crypto ensemble configurations and 16 ETF
+exposure profiles; both development/validation choices were committed before
+the already-inspected diagnostic evaluation was opened.
+
+- The selected crypto ensemble votes across 100/150/200-day trends and
+  30/90/180-day momentum, uses the weekly BTC gate, retains 20% per-asset and
+  40% total caps, and targets 40% annualized volatility. Its January 2024–October
+  2026 diagnostic return was **+27.40%** with **-12.39%** drawdown, versus
+  +5.04% and -18.54% for the frozen candidate. Four-times costs returned
+  +23.48%; a one-day execution delay returned +20.14%. It lost 5.79% in the
+  2026 calendar reset and still has a negative weekly confidence bound.
+- The selected ETF extension kept 20% per-asset and 40% total caps while moving
+  the volatility target from 15% to 20%. It returned **+25.20%** with **-5.35%**
+  drawdown, versus +22.55% and -4.60% for the first ETF candidate. Four-times
+  costs returned +22.21%; a three-session delay returned +23.23%; every
+  single-ETF removal remained profitable. It still trailed 40%-SPY/cash's
+  +26.06% raw return, while SPY drawdown was worse at -8.77%.
+
+Both qualify only as separate prospective challengers. The existing BTC/ETH
+forward record stays frozen and unchanged. Read the
+[full long/cash deepening report](research/long_cash_deepening/REPORT.md).
+
 ## Cost-aware profitability research (November 2026)
 
 The repository now includes a leakage-controlled XGBoost workflow for expected-return forecasting, cost-aware execution, regime/sizing ablations, cost stress, and a constrained long-only opening-range-breakout comparison. It uses the existing frozen market snapshots and never routes orders to a broker.

@@ -62,6 +62,17 @@ while taking roughly half its -8.77% drawdown. The result warrants an isolated
 prospective challenger, not replacement of the running BTC/ETH account. See
 `research/etf_rotation_challenger/REPORT.md`.
 
+The user clarified that research should continue inside long/cash for both
+tracks. Commit `df50053` predeclared the two extensions and commit `eba512e`
+locked selections before diagnostic evaluation. The crypto slow-signal ensemble
+returned +27.40% in the 2024–October 2026 diagnostic with -12.39% drawdown,
+remaining +23.48% at four-times cost and +20.14% with a one-day delay. The ETF
+volatility-target extension returned +25.20% with -5.35% drawdown, +22.21% at
+four-times cost and +23.23% with a three-session delay. Both beat their frozen
+track, but crypto lost 5.79% in the 2026 calendar reset and retains a negative
+weekly confidence bound; ETF still trailed 40%-SPY/cash raw return. Both are
+prospective challengers only. See `research/long_cash_deepening/REPORT.md`.
+
 ## 0. Cost-aware profitability research update — 3 November 2026
 
 A new expected-return XGBoost workflow, paper-mechanism replication, regime/sizing ablations, raw signal diagnostics, and long-only equity ORB pilot were added without changing broker routing or live controls.
@@ -92,7 +103,7 @@ This is a working self-hosted research and simulation application with an existi
 
 **There is no deployment-qualified profitable strategy. Do not enable real trading based on the existing results.** The defensive rule is positive retrospectively but fails the weekly confidence and prospective-evidence gates. Earlier regime and ML candidates lost money or failed selection. Software functionality does not establish a durable investment edge.
 
-- Latest recorded complete regression run: **105 passed**, 5,066 dependency deprecation warnings, 64.23 seconds. Evidence: [verification log](research/etf_rotation_challenger/verification_tests.txt).
+- Latest recorded complete regression run: **108 passed**, 5,066 dependency deprecation warnings, 64.31 seconds. Evidence: [verification log](research/long_cash_deepening/verification_tests.txt).
 - No real-money orders or actual brokerage paper-account executions were submitted during development.
 - No brokerage credentials were supplied. The application starts without them.
 - Live trading defaults off. The original swing console has an explicit live activation mechanism; it is not a verified production deployment.

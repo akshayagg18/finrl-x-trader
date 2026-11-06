@@ -170,12 +170,28 @@ async function refreshEtfChallenger(){
 refreshEtfChallenger().catch(e=>{let host=$('etf-challenger-decision');if(host)host.textContent=e.message;});
 $('growth-refresh').addEventListener('click',()=>refreshEtfChallenger());
 
+async function refreshLongCashDeepening(){
+  let host=$('long-cash-deepening');
+  if(!host){
+    host=document.createElement('div');host.id='long-cash-deepening';host.className='panel-inset';
+    host.innerHTML='<h3>Long/cash track deepening</h3><p class="caption">Locked slow-signal crypto ensemble and ETF exposure extension. All results remain retrospective research and cannot route orders.</p><div id="long-cash-summary" class="table-wrap"></div><pre id="long-cash-decision"></pre><p class="caption"><a href="/api/growth/long-cash-deepening">Raw locked extension JSON</a></p>';
+    $('etf-challenger').insertAdjacentElement('afterend',host);
+  }
+  const r=await api('growth/long-cash-deepening');
+  if(!r.summary){$('long-cash-decision').textContent='Evaluation unavailable. Run the staged long/cash deepening evaluation.';return;}
+  const rows=[];for(const track of ['crypto','etf'])for(const scenario of ['evaluation','cost_4x',track==='crypto'?'delay_1_day':'delay_3_sessions','frozen_comparison'])rows.push({track,scenario,...r.summary[track][scenario]});
+  table('long-cash-summary',[['Track',x=>esc(x.track)],['Scenario',x=>esc(x.scenario.replaceAll('_',' '))],['Net',x=>pct(x.net_return)],['Drawdown',x=>pct(x.max_drawdown)],['Ending',x=>money(x.ending_equity)],['Fills',x=>x.fill_count]],rows);
+  $('long-cash-decision').textContent=JSON.stringify({crypto:{selected:r.summary.crypto.selected,years:r.summary.crypto.calendar_years,two_month_windows:r.summary.crypto.two_month_windows,weekly_lower_95:r.summary.crypto.weekly.mean_weekly_return_lower_95,decision:r.summary.crypto.decision},etf:{selected:r.summary.etf.selected,years:r.summary.etf.calendar_years,two_month_windows:r.summary.etf.two_month_windows,weekly_lower_95:r.summary.etf.weekly.mean_weekly_return_lower_95,asset_removals:r.summary.etf.asset_removals,spy_40:r.summary.etf.spy_40,decision:r.summary.etf.decision},broker_orders_submitted:r.summary.broker_orders_submitted},null,2);
+}
+refreshLongCashDeepening().catch(e=>{let host=$('long-cash-decision');if(host)host.textContent=e.message;});
+$('growth-refresh').addEventListener('click',()=>refreshLongCashDeepening());
+
 async function refreshDefensiveForward(){
   let host=$('defensive-forward-research');
   if(!host){
     host=document.createElement('div');host.id='defensive-forward-research';host.className='panel-inset';
     host.innerHTML='<h3>Selected 20% candidate · forward paper</h3><p class="caption">Prospective Binance public-data observation of the frozen weekly long/cash rule. This virtual account cannot submit broker orders.</p><div class="form-grid"><label>Virtual capital<input id="defensive-forward-capital" type="number" value="500" min="1"></label><div class="button-row"><button id="defensive-forward-configure">Configure</button><button id="defensive-forward-start">Start</button><button id="defensive-forward-stop" class="danger">Stop</button></div></div><pre id="defensive-forward-status"></pre>';
-    ($('etf-challenger')||$('hedge-research')).insertAdjacentElement('afterend',host);
+    ($('long-cash-deepening')||$('etf-challenger')||$('hedge-research')).insertAdjacentElement('afterend',host);
     bind('defensive-forward-configure',async()=>{await api('growth/defensive-forward/configure',{capital:Number($('defensive-forward-capital').value),fee_bps:10,friction_bps:5});await refreshDefensiveForward();});
     for(const action of ['start','stop'])bind('defensive-forward-'+action,async()=>{await api('growth/defensive-forward/'+action,{});await refreshDefensiveForward();});
   }

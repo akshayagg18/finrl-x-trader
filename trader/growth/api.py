@@ -106,6 +106,22 @@ def router(db):
             for key in ("protocol", "selection_locked", "summary")
         }
 
+    @routes.get("/long-cash-deepening")
+    def long_cash_deepening():
+        """Locked crypto/ETF extension evidence; no execution capability."""
+        root = Path("research/long_cash_deepening")
+        return {
+            key: json.loads((root / f"{key}.json").read_text())
+            if (root / f"{key}.json").exists()
+            else None
+            for key in (
+                "protocol",
+                "crypto_selection_locked",
+                "etf_selection_locked",
+                "summary",
+            )
+        }
+
     @routes.get("/forward")
     def status():
         return forward.status(db)
