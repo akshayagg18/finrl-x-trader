@@ -1,0 +1,93 @@
+{
+  "protocol_version": 1,
+  "declared_at": "2026-11-06 Asia/Singapore",
+  "status": "predeclared before evaluating either extension grid",
+  "scope": "long-only spot or unleveraged ETF holdings plus cash; no shorting, options, leverage, margin, derivatives or broker routing",
+  "contamination": "All historical partitions have been inspected by earlier strategy families. These are diagnostic robustness and improvement experiments, not pristine holdouts or proof of future profitability.",
+  "capital": 500.0,
+  "crypto_long_cash": {
+    "universe": ["BTC-USDT", "ETH-USDT"],
+    "data": "existing immutable Binance public hourly archive, aggregated to complete UTC days",
+    "partitions": {
+      "development": ["2019-01-01", "2021-12-31 23:00:00+00:00"],
+      "validation": ["2022-01-01", "2023-12-31 23:00:00+00:00"],
+      "diagnostic_evaluation": ["2024-01-01", "2026-10-31 23:00:00+00:00"]
+    },
+    "signals": {
+      "trend_windows_days": [100, 150, 200],
+      "momentum_windows_days": [30, 90, 180],
+      "positive_vote_threshold": 4,
+      "mechanisms": [
+        "majority_btc_gate",
+        "majority_each",
+        "unanimous_btc_gate",
+        "best_majority",
+        "score_each",
+        "majority_btc_gate_brake",
+        "majority_each_brake"
+      ],
+      "cadences": ["weekly", "biweekly", "monthly"],
+      "annualized_volatility_targets": [0.2, 0.3, 0.4],
+      "grid_size": 63
+    },
+    "portfolio": {
+      "maximum_weight_per_asset": 0.2,
+      "maximum_total_deployment": 0.4,
+      "minimum_cash": 0.6,
+      "drawdown_brake_variants": "halve targets after 5% strategy drawdown and target cash after 10%, evaluated only in mechanism names ending _brake"
+    },
+    "execution": {
+      "base_one_way_cost_bps": 15.0,
+      "selection_stress_cost_bps": 30.0,
+      "evaluation_cost_stresses_bps": [30.0, 60.0],
+      "evaluation_delay_stress_days": 1,
+      "fractional_units": true,
+      "decision": "completed prior closes only",
+      "fill": "later UTC daily open"
+    },
+    "selection": "require positive development and validation base and 30bp-cost returns, drawdown no worse than -20% and at least 8 fills in each; rank highest minimum validation calendar-year return, then validation return, then smaller drawdown",
+    "comparison": "frozen trend_100_momentum_90_weekly_btc_gate with 20% per asset and 40% total"
+  },
+  "etf_long_cash": {
+    "universe": ["SPY", "QQQ", "IWM", "GLD", "TLT"],
+    "cash_hurdle": "SHY",
+    "data": "exact committed Yahoo snapshot and hashes from the ETF rotation challenger",
+    "partitions": {
+      "development": ["2018-01-01", "2020-12-31"],
+      "validation": ["2021-01-01", "2023-12-29"],
+      "diagnostic_evaluation": ["2024-01-02", "2026-10-30"]
+    },
+    "fixed_signal": {
+      "momentum_days": 252,
+      "trend_sma_days": 200,
+      "top_n": 2,
+      "cadence": "monthly"
+    },
+    "exposure_profiles": [
+      {"maximum_weight_per_asset": 0.2, "maximum_total_deployment": 0.4},
+      {"maximum_weight_per_asset": 0.25, "maximum_total_deployment": 0.5},
+      {"maximum_weight_per_asset": 0.3, "maximum_total_deployment": 0.6},
+      {"maximum_weight_per_asset": 0.4, "maximum_total_deployment": 0.8}
+    ],
+    "annualized_volatility_targets": [0.1, 0.15, 0.2, 0.25],
+    "grid_size": 16,
+    "execution": {
+      "base_one_way_cost_bps": 15.0,
+      "selection_stress_cost_bps": 30.0,
+      "evaluation_cost_stresses_bps": [30.0, 60.0],
+      "evaluation_delay_stress_sessions": [1, 3],
+      "minimum_order_stresses_usd": [1.0, 10.0],
+      "fractional_shares": true
+    },
+    "selection": "require positive development and validation base and 30bp-cost returns, drawdown no worse than -20%, minimum validation calendar-year return above -10%, and at least 8 fills in each; rank validation return divided by absolute drawdown, then minimum validation year, then return",
+    "robustness": [
+      "remove each risk ETF one at a time and rerank the remaining eligible set",
+      "one- and three-session delayed execution",
+      "30bp and 60bp one-way costs",
+      "$10 minimum order",
+      "40%-deployed and selected-exposure SPY/cash comparators"
+    ],
+    "comparison": "locked mom252_sma200_top2_vol15 at 20% per asset and 40% total"
+  },
+  "promotion_rule": "An extension may be called historically stronger only if it beats its frozen track's diagnostic evaluation return, remains within 20% drawdown, stays positive at 60bp one-way costs and under the declared delay stress, and does not depend on one indispensable asset. It may enter separate prospective paper observation but cannot replace either frozen account from retrospective evidence."
+}
