@@ -95,6 +95,17 @@ def router(db):
             },
         }
 
+    @routes.get("/etf-challenger")
+    def etf_challenger():
+        """Read-only locked challenger evidence; never executes the strategy."""
+        root = Path("research/etf_rotation_challenger")
+        return {
+            key: json.loads((root / f"{key}.json").read_text())
+            if (root / f"{key}.json").exists()
+            else None
+            for key in ("protocol", "selection_locked", "summary")
+        }
+
     @routes.get("/forward")
     def status():
         return forward.status(db)

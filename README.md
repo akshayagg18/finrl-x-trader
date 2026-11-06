@@ -89,6 +89,50 @@ Keep the application process running to collect future observations. The first
 12 decision weeks are a minimum evidence period; passing them still cannot
 automatically activate broker execution.
 
+On Windows, the included launcher activates the frozen account and starts the
+dashboard/scheduler in one step after the virtual environment is installed:
+
+```powershell
+.\scripts\start_12_week_forward.ps1
+```
+
+On Linux or macOS, run `./scripts/start_12_week_forward.sh`. Leave the process
+running. Closing it pauses data collection without erasing the account; running
+the launcher again resumes the same SQLite record. The dashboard **Stop** button
+marks the account inactive and therefore requires an explicit Start to resume.
+Inspect it without changing state with:
+
+```sh
+python -m scripts.forward_status --db runtime/trader.db
+```
+
+If started on 6 November 2026 Singapore time and kept running, the first 12
+complete Monday-to-Sunday evidence weeks end on 31 January 2027; the earliest
+12-week assessment is therefore around 1 February 2027. Missed or invalid
+observations are retained as operating evidence and are not silently backfilled
+as contemporaneous quotes.
+
+### Predeclared ETF rotation challenger
+
+A separate 16-configuration experiment was declared and committed before its
+dedicated Yahoo snapshot was downloaded. Development (2018–2020) and validation
+(2021–2023) selected `mom252_sma200_top2_vol15` before evaluation was opened.
+It rotates monthly among SPY, QQQ, IWM, GLD and TLT, using SHY as the cash hurdle,
+with the same 20% per-asset and 40% total caps.
+
+The locked January 2024–30 October 2026 evaluation returned **22.55%** after
+modeled costs with **-4.60%** maximum drawdown; doubled costs returned 21.57%.
+Independent two-month resets from January 2022 were 17 profitable, 8 losing and
+3 flat, averaging +0.64% or $3.22. A 40%-SPY comparator returned 26.06% with
+-8.77% drawdown, while the equal ETF basket returned 20.85% with -5.72%
+drawdown. The challenger therefore improves the diversified comparison and the
+selected BTC/ETH candidate historically, but does not beat SPY's raw return.
+
+Read [the locked report](research/etf_rotation_challenger/REPORT.md). The result
+is retrospective and is displayed read-only in the dashboard. It cannot reset,
+replace or route orders from the existing forward account. It warrants a
+separate prospective comparison after operational quote handling is completed.
+
 ## Cost-aware profitability research (November 2026)
 
 The repository now includes a leakage-controlled XGBoost workflow for expected-return forecasting, cost-aware execution, regime/sizing ablations, cost stress, and a constrained long-only opening-range-breakout comparison. It uses the existing frozen market snapshots and never routes orders to a broker.

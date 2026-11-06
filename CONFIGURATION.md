@@ -224,3 +224,15 @@ Endpoints: `GET /api/growth/defensive-forward`, POST `/configure`, and POST
 `python -m scripts.start_defensive_forward` to configure, start and collect one
 observation. This is local public-data simulation. `live_orders_possible` is
 always false and there is no promotion endpoint.
+
+For an unattended local start after installing dependencies, use
+`scripts/start_12_week_forward.ps1` on Windows or
+`scripts/start_12_week_forward.sh` on Linux/macOS. These launchers preserve and
+resume `runtime/trader.db`; they do not create a fresh account on restart.
+`python -m scripts.forward_status --db runtime/trader.db` is a read-only health
+check and exits nonzero when the account is unconfigured, inactive or blocked.
+
+The ETF rotation challenger is a separate read-only research artifact under
+`research/etf_rotation_challenger`. Its dashboard endpoint is
+`GET /api/growth/etf-challenger`. There are no configure, activation or broker
+execution endpoints for that challenger.

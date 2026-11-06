@@ -51,6 +51,17 @@ state is excluded from Git; the public verification snapshot is in
 `research/defensive_forward/initial_observation.json`. One observation is not a
 track record. Broker promotion remains technically impossible from this module.
 
+A materially different ETF challenger was then predeclared in commit `bd96c52`
+before downloading its dedicated data, and its development/validation winner
+was locked in commit `05f3bda` before evaluation. Monthly 252-session momentum,
+a 200-session trend filter, top-two selection and 15% volatility target returned
+22.55% from January 2024 through 30 October 2026 after modeled costs, with
+-4.60% drawdown; doubled costs returned 21.57%. It beat the 40%-deployed equal
+ETF basket (+20.85%, -5.72% drawdown) but trailed 40%-SPY's +26.06% raw return
+while taking roughly half its -8.77% drawdown. The result warrants an isolated
+prospective challenger, not replacement of the running BTC/ETH account. See
+`research/etf_rotation_challenger/REPORT.md`.
+
 ## 0. Cost-aware profitability research update — 3 November 2026
 
 A new expected-return XGBoost workflow, paper-mechanism replication, regime/sizing ablations, raw signal diagnostics, and long-only equity ORB pilot were added without changing broker routing or live controls.
@@ -81,7 +92,7 @@ This is a working self-hosted research and simulation application with an existi
 
 **There is no deployment-qualified profitable strategy. Do not enable real trading based on the existing results.** The defensive rule is positive retrospectively but fails the weekly confidence and prospective-evidence gates. Earlier regime and ML candidates lost money or failed selection. Software functionality does not establish a durable investment edge.
 
-- Latest recorded complete regression run: **102 passed**, 5,066 dependency deprecation warnings, 63.91 seconds. Evidence: [verification log](research/defensive_forward/verification_tests.txt).
+- Latest recorded complete regression run: **105 passed**, 5,066 dependency deprecation warnings, 64.23 seconds. Evidence: [verification log](research/etf_rotation_challenger/verification_tests.txt).
 - No real-money orders or actual brokerage paper-account executions were submitted during development.
 - No brokerage credentials were supplied. The application starts without them.
 - Live trading defaults off. The original swing console has an explicit live activation mechanism; it is not a verified production deployment.

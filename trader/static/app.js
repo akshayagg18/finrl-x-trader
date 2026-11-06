@@ -154,12 +154,28 @@ async function refreshHedgeResearch(){
 refreshHedgeResearch().catch(e=>{let host=$('hedge-qualification');if(host)host.textContent=e.message;});
 $('growth-refresh').addEventListener('click',()=>refreshHedgeResearch());
 
+async function refreshEtfChallenger(){
+  let host=$('etf-challenger');
+  if(!host){
+    host=document.createElement('div');host.id='etf-challenger';host.className='panel-inset';
+    host.innerHTML='<h3>ETF rotation challenger</h3><p class="caption">Predeclared monthly rotation across SPY, QQQ, IWM, GLD and TLT, capped at 20% per asset and 40% total. Historical evidence only; broker routing is disabled.</p><div id="etf-challenger-summary" class="table-wrap"></div><pre id="etf-challenger-decision"></pre><p class="caption"><a href="/api/growth/etf-challenger">Raw locked challenger JSON</a></p>';
+    $('hedge-research').insertAdjacentElement('afterend',host);
+  }
+  const r=await api('growth/etf-challenger');
+  if(!r.summary){$('etf-challenger-decision').textContent='Evaluation unavailable. Run the staged ETF rotation evaluation.';return;}
+  const rows=Object.entries(r.summary.periods).map(([name,value])=>({name,...value}));
+  table('etf-challenger-summary',[['Partition',x=>esc(x.name.replaceAll('_',' '))],['Net',x=>pct(x.net_return)],['Ending value',x=>money(x.ending_equity)],['Drawdown',x=>pct(x.max_drawdown)],['Fills',x=>x.fill_count],['Costs',x=>money(x.transaction_costs)]],rows);
+  $('etf-challenger-decision').textContent=JSON.stringify({outcome:r.summary.outcome,selected:r.summary.selected_spec,eligible_configurations:r.summary.eligible_count,evaluation:r.summary.periods.evaluation,evaluation_years:r.summary.evaluation_calendar_year_returns,two_month_windows:r.summary.two_month_summary,weekly_evaluation:{profitable:r.summary.weekly_evaluation.profitable_weeks,losing:r.summary.weekly_evaluation.losing_weeks,lower_95:r.summary.weekly_evaluation.mean_weekly_return_lower_95},benchmarks:r.summary.benchmarks,broker_orders_submitted:r.summary.broker_orders_submitted},null,2);
+}
+refreshEtfChallenger().catch(e=>{let host=$('etf-challenger-decision');if(host)host.textContent=e.message;});
+$('growth-refresh').addEventListener('click',()=>refreshEtfChallenger());
+
 async function refreshDefensiveForward(){
   let host=$('defensive-forward-research');
   if(!host){
     host=document.createElement('div');host.id='defensive-forward-research';host.className='panel-inset';
     host.innerHTML='<h3>Selected 20% candidate · forward paper</h3><p class="caption">Prospective Binance public-data observation of the frozen weekly long/cash rule. This virtual account cannot submit broker orders.</p><div class="form-grid"><label>Virtual capital<input id="defensive-forward-capital" type="number" value="500" min="1"></label><div class="button-row"><button id="defensive-forward-configure">Configure</button><button id="defensive-forward-start">Start</button><button id="defensive-forward-stop" class="danger">Stop</button></div></div><pre id="defensive-forward-status"></pre>';
-    $('hedge-research').insertAdjacentElement('afterend',host);
+    ($('etf-challenger')||$('hedge-research')).insertAdjacentElement('afterend',host);
     bind('defensive-forward-configure',async()=>{await api('growth/defensive-forward/configure',{capital:Number($('defensive-forward-capital').value),fee_bps:10,friction_bps:5});await refreshDefensiveForward();});
     for(const action of ['start','stop'])bind('defensive-forward-'+action,async()=>{await api('growth/defensive-forward/'+action,{});await refreshDefensiveForward();});
   }

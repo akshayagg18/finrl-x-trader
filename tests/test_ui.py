@@ -179,6 +179,10 @@ def test_growth_research_and_forward_configuration_ui(browser_app):
         )
         assert "false" in page.locator("#hedge-qualification").inner_text()
         page.wait_for_function(
+            "document.querySelector('#etf-challenger-decision')?.textContent.includes('historically stronger challenger')"
+        )
+        assert "0.225" in page.locator("#etf-challenger-decision").inner_text()
+        page.wait_for_function(
             "document.querySelector('#defensive-forward-status')?.textContent.includes('prospective forward paper')"
         )
         page.locator("#defensive-forward-configure").click()

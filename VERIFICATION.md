@@ -282,3 +282,31 @@ Final regression command:
 `PLAYWRIGHT_BROWSERS_PATH=/workspace/pw-browsers .venv/bin/pytest tests -q` —
 **102 passed, 5,066 dependency deprecation warnings in 63.91 seconds**. The log
 is `research/defensive_forward/verification_tests.txt`.
+
+## Predeclared ETF rotation challenger — 6 November 2026
+
+Commit `bd96c52` fixed the universe, 16-configuration grid, partitions, costs,
+risk limits and selection rule before its dedicated Yahoo snapshot was
+downloaded. Commit `05f3bda` then locked the exact data hashes and selected
+`mom252_sma200_top2_vol15` using development and validation only, with
+`evaluation_opened=false`.
+
+Opening the locked 2024–30 October 2026 evaluation produced +22.55% net return,
+-4.60% maximum drawdown and +21.57% under doubled modeled costs. All three
+evaluation calendar years were positive when reset independently. The 28
+two-month resets contained 17 gains, 8 losses and 3 flat windows. The lower 95%
+block-bootstrap bound on the evaluation mean weekly return was +0.065%.
+
+The same-start 40%-SPY comparator returned +26.06% with -8.77% drawdown; the
+40%-deployed equal ETF basket returned +20.85% with -5.72% drawdown. Thus the
+challenger did not beat SPY's raw return. Data hashes, the protocol hash,
+selection evidence, all trials, fills, decisions and equity points are retained
+under `research/etf_rotation_challenger`. Adjusted Yahoo history is revisable
+and has fixed-universe bias. No broker order was submitted, and the read-only
+dashboard endpoint cannot activate the strategy.
+
+Final regression command:
+`PLAYWRIGHT_BROWSERS_PATH=/workspace/pw-browsers .venv/bin/pytest tests -q` —
+**105 passed, 5,066 dependency deprecation warnings in 64.23 seconds**. The
+complete output is retained in
+`research/etf_rotation_challenger/verification_tests.txt`.
