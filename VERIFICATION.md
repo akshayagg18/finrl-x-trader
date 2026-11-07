@@ -376,3 +376,22 @@ The state branch is public because the repository is public. It contains only
 public market quotes, virtual positions and audit events. Scheduled execution
 and branch-write permissions require GitHub Actions to remain enabled and must
 be checked through an actual workflow run.
+
+Actual workflow run `42358045092` succeeded and created
+`forward-paper-state` commit `3f2874d` with one observation, one decision week,
+$500 ending virtual equity, no error and `live_orders_possible=false`. The
+closed BTC gate produced no trade. A second independent runner,
+`42358101487`, restored the database and completed successfully while leaving
+both counts at one and creating no redundant state commit. This verifies
+cross-run persistence and same-day idempotency.
+
+Two earlier setup runs failed before state persistence because their snapshot
+command imported dependencies outside the minimal environment. They created no
+authoritative branch state. The final workflow uses SQLite's backup API
+directly; the failure history remains visible in GitHub Actions.
+
+Final regression command:
+`PLAYWRIGHT_BROWSERS_PATH=/workspace/pw-browsers .venv/bin/pytest tests -q` —
+**113 passed, 5,078 dependency deprecation warnings in 61.38 seconds**. The
+complete output is retained in
+`research/github_forward/verification_tests.txt`.

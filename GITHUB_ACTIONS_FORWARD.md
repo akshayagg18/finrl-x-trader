@@ -36,6 +36,11 @@ The first successful run creates the state branch. Healthy status contains:
 }
 ```
 
+The workflow is already active. The first authoritative run on 7 November 2026
+created one observation and correctly held $500 cash because the BTC gate was
+closed. A second same-day run restored the database without duplicating the
+observation.
+
 ## Inspect progress without leaving the laptop on
 
 Open this public status file in a browser:

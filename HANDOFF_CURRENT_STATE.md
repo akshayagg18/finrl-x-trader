@@ -90,6 +90,12 @@ module has no broker route. GitHub cron timing/availability is not guaranteed;
 missing runs remain visible and extend qualification. See
 `GITHUB_ACTIONS_FORWARD.md`.
 
+The workflow is operational. Run `42358045092` created the authoritative state
+branch with one genuine observation, $500 cash, no trade, no error and live
+orders hard-disabled. Run `42358101487` restored that branch on a separate
+runner and correctly did not duplicate the same-day observation. The cron is
+now the active 12-week host; no laptop process is required.
+
 ## 0. Cost-aware profitability research update — 3 November 2026
 
 A new expected-return XGBoost workflow, paper-mechanism replication, regime/sizing ablations, raw signal diagnostics, and long-only equity ORB pilot were added without changing broker routing or live controls.
@@ -120,7 +126,7 @@ This is a working self-hosted research and simulation application with an existi
 
 **There is no deployment-qualified profitable strategy. Do not enable real trading based on the existing results.** The defensive rule is positive retrospectively but fails the weekly confidence and prospective-evidence gates. Earlier regime and ML candidates lost money or failed selection. Software functionality does not establish a durable investment edge.
 
-- Latest recorded complete regression run: **111 passed**, 5,078 dependency deprecation warnings, 63.42 seconds. Evidence: [verification log](deploy/verification_tests.txt).
+- Latest recorded complete regression run: **113 passed**, 5,078 dependency deprecation warnings, 61.38 seconds. Evidence: [verification log](research/github_forward/verification_tests.txt).
 - No real-money orders or actual brokerage paper-account executions were submitted during development.
 - No brokerage credentials were supplied. The application starts without them.
 - Live trading defaults off. The original swing console has an explicit live activation mechanism; it is not a verified production deployment.

@@ -119,6 +119,12 @@ state branch, and shuts down. No laptop or server remains powered. The
 [Ubuntu systemd deployment](FORWARD_HOSTING.md) remains available when exact
 host control is worth paying for.
 
+The free workflow is active as of 7 November 2026. Its first authoritative run
+persisted one genuine public-data observation with $500 cash, no trade, no
+error and live-order capability disabled. A second same-day runner restored the
+database and correctly kept the observation count at one. Inspect the current
+[public paper status](https://github.com/akshayagg18/finrl-x-trader/blob/forward-paper-state/status.json).
+
 ### Predeclared ETF rotation challenger
 
 A separate 16-configuration experiment was declared and committed before its
