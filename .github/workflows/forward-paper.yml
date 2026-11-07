@@ -98,7 +98,10 @@ jobs:
         run: |
           set -euo pipefail
           rm -f /tmp/trader.db /tmp/status.json
-          python -m trader --db runtime/trader.db backup /tmp/trader.db
+          python - <<'PY'
+          from trader.db import DB
+          DB("runtime/trader.db").backup("/tmp/trader.db")
+          PY
           python -m scripts.forward_status \
             --db runtime/trader.db > /tmp/status.json || true
 

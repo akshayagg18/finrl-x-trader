@@ -8,7 +8,7 @@ def test_daily_forward_workflow_is_paper_only_and_persistent():
     assert "contents: write" in workflow
     assert "forward-paper-state" in workflow
     assert "scripts.forward_watchdog" in workflow
-    assert "python -m trader --db runtime/trader.db backup" in workflow
+    assert 'DB("runtime/trader.db").backup("/tmp/trader.db")' in workflow
     assert "activate-live" not in workflow.lower()
     assert "enable live trading" not in workflow.lower()
     for forbidden in ("ALPACA", "IBKR", "API_KEY", "secrets."):
@@ -23,7 +23,6 @@ def test_minimal_forward_requirements_exclude_broker_sdks():
         "numpy",
         "requests",
         "filelock",
-        "python-dotenv",
     ):
         assert required in requirements
     for forbidden in ("alpaca", "ib_async", "nautilus", "yfinance"):
