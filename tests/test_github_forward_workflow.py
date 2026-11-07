@@ -17,7 +17,14 @@ def test_daily_forward_workflow_is_paper_only_and_persistent():
 
 def test_minimal_forward_requirements_exclude_broker_sdks():
     requirements = Path("requirements-forward.txt").read_text().lower()
-    for required in ("pydantic", "pandas", "numpy", "requests", "filelock"):
+    for required in (
+        "pydantic",
+        "pandas",
+        "numpy",
+        "requests",
+        "filelock",
+        "python-dotenv",
+    ):
         assert required in requirements
     for forbidden in ("alpaca", "ib_async", "nautilus", "yfinance"):
         assert forbidden not in requirements
