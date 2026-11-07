@@ -81,6 +81,15 @@ creation, private SSH tunneling, health checks and off-host backup. The watchdog
 does not override an intentional Stop, global kill, stale-data block or
 calculation failure.
 
+For a zero-hosting-cost path, `.github/workflows/forward-paper.yml` runs the
+credential-free observation daily at approximately 08:20 Singapore time and
+persists a consistent SQLite snapshot plus public status to the dedicated
+`forward-paper-state` branch. Manual workflow choices support observe, explicit
+start and intentional stop. The public state contains no credentials and the
+module has no broker route. GitHub cron timing/availability is not guaranteed;
+missing runs remain visible and extend qualification. See
+`GITHUB_ACTIONS_FORWARD.md`.
+
 ## 0. Cost-aware profitability research update — 3 November 2026
 
 A new expected-return XGBoost workflow, paper-mechanism replication, regime/sizing ablations, raw signal diagnostics, and long-only equity ORB pilot were added without changing broker routing or live controls.

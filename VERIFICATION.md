@@ -362,3 +362,17 @@ Final regression command:
 `PLAYWRIGHT_BROWSERS_PATH=/workspace/pw-browsers .venv/bin/pytest tests -q` —
 **111 passed, 5,078 dependency deprecation warnings in 63.42 seconds**. The
 complete output is retained in `deploy/verification_tests.txt`.
+
+## Free scheduled GitHub forward paper
+
+The default-branch workflow uses Python 3.12 and a minimal dependency set, has
+an explicit daily Singapore-morning schedule plus manual observe/start/stop,
+restores only the dedicated paper database, takes a consistent SQLite backup,
+and appends the result to `forward-paper-state`. The workflow contains no broker
+SDK, secret reference or live-order path. Contents-write permission is limited
+to state persistence.
+
+The state branch is public because the repository is public. It contains only
+public market quotes, virtual positions and audit events. Scheduled execution
+and branch-write permissions require GitHub Actions to remain enabled and must
+be checked through an actual workflow run.

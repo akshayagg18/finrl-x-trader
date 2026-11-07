@@ -1,0 +1,136 @@
+name: Daily forward paper observation
+
+on:
+  schedule:
+    # 08:20 Singapore time. GitHub may start scheduled jobs later than this.
+    - cron: "20 0 * * *"
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Observe, explicitly start, or intentionally stop the paper account
+        required: true
+        default: observe
+        type: choice
+        options:
+          - observe
+          - start
+          - stop
+
+permissions:
+  contents: write
+
+concurrency:
+  group: forward-paper-state
+  cancel-in-progress: false
+
+jobs:
+  observe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      STATE_BRANCH: forward-paper-state
+      OPERATION: ${{ inputs.operation || 'observe' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-forward.txt
+
+      - name: Install minimal forward-paper dependencies
+        run: python -m pip install -r requirements-forward.txt
+
+      - name: Restore persistent paper state
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p runtime
+          if git ls-remote --exit-code --heads origin "$STATE_BRANCH" >/dev/null 2>&1; then
+            git fetch --depth=1 origin "$STATE_BRANCH"
+            git show FETCH_HEAD:trader.db > runtime/trader.db
+          fi
+
+      - name: Run requested paper operation
+        id: paper
+        shell: bash
+        run: |
+          set -euo pipefail
+          exit_code=0
+          case "$OPERATION" in
+            stop)
+              python - <<'PY'
+          from trader.db import DB
+          from trader.growth.defensive_forward import control, status
+          db = DB("runtime/trader.db")
+          if status(db).get("configured"):
+              control(db, "stop")
+          PY
+              ;;
+            start)
+              python -m scripts.start_defensive_forward \
+                --db runtime/trader.db --capital 500 --defer-observation
+              set +e
+              python -m scripts.forward_watchdog \
+                --db runtime/trader.db --capital 500
+              exit_code=$?
+              set -e
+              ;;
+            observe)
+              set +e
+              python -m scripts.forward_watchdog \
+                --db runtime/trader.db --capital 500
+              exit_code=$?
+              set -e
+              ;;
+            *)
+              echo "Unsupported operation: $OPERATION" >&2
+              exit 2
+              ;;
+          esac
+          echo "exit_code=$exit_code" >> "$GITHUB_OUTPUT"
+
+      - name: Create consistent public paper snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f /tmp/trader.db /tmp/status.json
+          python -m trader --db runtime/trader.db backup /tmp/trader.db
+          python -m scripts.forward_status \
+            --db runtime/trader.db > /tmp/status.json || true
+
+      - name: Persist state branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "finrl-forward-paper[bot]"
+          git config user.email "finrl-forward-paper[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin "$STATE_BRANCH" >/dev/null 2>&1; then
+            git fetch --depth=1 origin "$STATE_BRANCH"
+            git switch --detach FETCH_HEAD
+          else
+            git switch --orphan "$STATE_BRANCH"
+            git rm -rf . >/dev/null 2>&1 || true
+          fi
+          cp /tmp/trader.db trader.db
+          cp /tmp/status.json status.json
+          cat > README.md <<'EOF'
+          # Forward-paper state
+
+          This branch is written only by the scheduled credential-free paper
+          workflow. `status.json` is safe to inspect publicly. `trader.db`
+          contains simulated positions, public quotes and audit events only.
+          It must never contain broker credentials and cannot submit live orders.
+          EOF
+          git add trader.db status.json README.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Record forward paper ${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+            git push origin HEAD:"$STATE_BRANCH"
+          fi
+
+      - name: Surface observation failure after preserving state
+        if: steps.paper.outputs.exit_code != '0'
+        run: exit "${{ steps.paper.outputs.exit_code }}"

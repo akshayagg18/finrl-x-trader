@@ -112,11 +112,12 @@ complete Monday-to-Sunday evidence weeks end on 31 January 2027; the earliest
 observations are retained as operating evidence and are not silently backfilled
 as contemporaneous quotes.
 
-A laptop is not the recommended 12-week host. Use the Ubuntu systemd
-deployment in [FORWARD_HOSTING.md](FORWARD_HOSTING.md) for an always-on VPS. It
-survives logout/reboot, retries only transient public-data failures, respects an
-intentional stop/global kill, creates daily SQLite backups, and keeps the
-dashboard private behind an SSH tunnel.
+A laptop is not the recommended 12-week host. The no-cost default is the
+[scheduled GitHub Actions forward paper](GITHUB_ACTIONS_FORWARD.md): a runner
+wakes daily, advances the credential-free account, persists SQLite to a public
+state branch, and shuts down. No laptop or server remains powered. The
+[Ubuntu systemd deployment](FORWARD_HOSTING.md) remains available when exact
+host control is worth paying for.
 
 ### Predeclared ETF rotation challenger
 
