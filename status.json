@@ -1,0 +1,44 @@
+{
+  "mode": "prospective forward paper",
+  "candidate": "trend_100_momentum_90_weekly_btc_gate",
+  "configured": true,
+  "active": true,
+  "observations": 1,
+  "decision_weeks": 1,
+  "ending_equity": 500.0,
+  "net_return": 0.0,
+  "max_drawdown": 0.0,
+  "next_observation": "2026-11-08T00:05:00+00:00",
+  "error": null,
+  "qualification": {
+    "qualified": false,
+    "reasons": [
+      "Insufficient complete weeks",
+      "Insufficient completed trades",
+      "Nonpositive net return",
+      "Doubled-cost robustness not established",
+      "Positive lower 95% block-bootstrap bound not established"
+    ],
+    "net_return": 0.0,
+    "max_drawdown": 0.0,
+    "complete_weeks": 0,
+    "profitable_weeks": 0,
+    "losing_weeks": 0,
+    "flat_weeks": 0,
+    "profitable_week_fraction": null,
+    "median_week": null,
+    "worst_week": null,
+    "longest_losing_streak": 0,
+    "longest_underwater_observations": 0,
+    "mean_weekly_return_lower_95": null,
+    "completed_trades": 0,
+    "weeks": {
+      "2026-11-02": 0.0
+    },
+    "partial_weeks_excluded_from_statistics": 1,
+    "decision_weeks": 1,
+    "prospective_gate_complete": false,
+    "broker_promotion_allowed": false
+  },
+  "live_orders_possible": false
+}
