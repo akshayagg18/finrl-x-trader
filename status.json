@@ -3,12 +3,12 @@
   "candidate": "trend_100_momentum_90_weekly_btc_gate",
   "configured": true,
   "active": true,
-  "observations": 2,
-  "decision_weeks": 1,
+  "observations": 3,
+  "decision_weeks": 2,
   "ending_equity": 500.0,
   "net_return": 0.0,
   "max_drawdown": 0.0,
-  "next_observation": "2026-11-09T00:05:00+00:00",
+  "next_observation": "2026-11-10T00:05:00+00:00",
   "error": null,
   "qualification": {
     "qualified": false,
@@ -33,10 +33,11 @@
     "mean_weekly_return_lower_95": null,
     "completed_trades": 0,
     "weeks": {
-      "2026-11-02": 0.0
+      "2026-11-02": 0.0,
+      "2026-11-09": 0.0
     },
-    "partial_weeks_excluded_from_statistics": 1,
-    "decision_weeks": 1,
+    "partial_weeks_excluded_from_statistics": 2,
+    "decision_weeks": 2,
     "prospective_gate_complete": false,
     "broker_promotion_allowed": false
   },
